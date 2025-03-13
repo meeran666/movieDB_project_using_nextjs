@@ -1,0 +1,1459 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "abreviation_table": {
+      "name": "abreviation_table",
+      "columns": {
+        "original_language": {
+          "autoincrement": false,
+          "name": "original_language",
+          "type": "varchar(70)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "language_code": {
+          "autoincrement": false,
+          "name": "language_code",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "abreviation_table_original_language": {
+          "name": "abreviation_table_original_language",
+          "columns": [
+            "original_language"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "another_join_table": {
+      "name": "another_join_table",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryTitle": {
+          "autoincrement": false,
+          "name": "primaryTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdult": {
+          "autoincrement": false,
+          "name": "isAdult",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startYear": {
+          "autoincrement": false,
+          "name": "startYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtimeMinutes": {
+          "autoincrement": false,
+          "name": "runtimeMinutes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "autoincrement": false,
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "autoincrement": false,
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nconst": {
+          "autoincrement": false,
+          "name": "nconst",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Action": {
+          "autoincrement": false,
+          "name": "Action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Science_Fiction": {
+          "autoincrement": false,
+          "name": "Science_Fiction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Adventure": {
+          "autoincrement": false,
+          "name": "Adventure",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drama": {
+          "autoincrement": false,
+          "name": "Drama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Crime": {
+          "autoincrement": false,
+          "name": "Crime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Thriller": {
+          "autoincrement": false,
+          "name": "Thriller",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fantasy": {
+          "autoincrement": false,
+          "name": "Fantasy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Comedy": {
+          "autoincrement": false,
+          "name": "Comedy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Romance": {
+          "autoincrement": false,
+          "name": "Romance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Western": {
+          "autoincrement": false,
+          "name": "Western",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Mystery": {
+          "autoincrement": false,
+          "name": "Mystery",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "War": {
+          "autoincrement": false,
+          "name": "War",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Animation": {
+          "autoincrement": false,
+          "name": "Animation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Family": {
+          "autoincrement": false,
+          "name": "Family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Horror": {
+          "autoincrement": false,
+          "name": "Horror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Music": {
+          "autoincrement": false,
+          "name": "Music",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "History": {
+          "autoincrement": false,
+          "name": "History",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TV_Movie": {
+          "autoincrement": false,
+          "name": "TV_Movie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Documentary": {
+          "autoincrement": false,
+          "name": "Documentary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "filter_join_table": {
+      "name": "filter_join_table",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryTitle": {
+          "autoincrement": false,
+          "name": "primaryTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdult": {
+          "autoincrement": false,
+          "name": "isAdult",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startYear": {
+          "autoincrement": false,
+          "name": "startYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtimeMinutes": {
+          "autoincrement": false,
+          "name": "runtimeMinutes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "autoincrement": false,
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "autoincrement": false,
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nconst": {
+          "autoincrement": false,
+          "name": "nconst",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryName": {
+          "autoincrement": false,
+          "name": "primaryName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birthYear": {
+          "autoincrement": false,
+          "name": "birthYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Action": {
+          "autoincrement": false,
+          "name": "Action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Science_Fiction": {
+          "autoincrement": false,
+          "name": "Science_Fiction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Adventure": {
+          "autoincrement": false,
+          "name": "Adventure",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drama": {
+          "autoincrement": false,
+          "name": "Drama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Crime": {
+          "autoincrement": false,
+          "name": "Crime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Thriller": {
+          "autoincrement": false,
+          "name": "Thriller",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fantasy": {
+          "autoincrement": false,
+          "name": "Fantasy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Comedy": {
+          "autoincrement": false,
+          "name": "Comedy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Romance": {
+          "autoincrement": false,
+          "name": "Romance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Western": {
+          "autoincrement": false,
+          "name": "Western",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Mystery": {
+          "autoincrement": false,
+          "name": "Mystery",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "War": {
+          "autoincrement": false,
+          "name": "War",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Animation": {
+          "autoincrement": false,
+          "name": "Animation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Family": {
+          "autoincrement": false,
+          "name": "Family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Horror": {
+          "autoincrement": false,
+          "name": "Horror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Music": {
+          "autoincrement": false,
+          "name": "Music",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "History": {
+          "autoincrement": false,
+          "name": "History",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TV_Movie": {
+          "autoincrement": false,
+          "name": "TV_Movie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Documentary": {
+          "autoincrement": false,
+          "name": "Documentary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "genre_table": {
+      "name": "genre_table",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Action": {
+          "autoincrement": false,
+          "name": "Action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Science_Fiction": {
+          "autoincrement": false,
+          "name": "Science_Fiction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Adventure": {
+          "autoincrement": false,
+          "name": "Adventure",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drama": {
+          "autoincrement": false,
+          "name": "Drama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Crime": {
+          "autoincrement": false,
+          "name": "Crime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Thriller": {
+          "autoincrement": false,
+          "name": "Thriller",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fantasy": {
+          "autoincrement": false,
+          "name": "Fantasy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Comedy": {
+          "autoincrement": false,
+          "name": "Comedy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Romance": {
+          "autoincrement": false,
+          "name": "Romance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Western": {
+          "autoincrement": false,
+          "name": "Western",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Mystery": {
+          "autoincrement": false,
+          "name": "Mystery",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "War": {
+          "autoincrement": false,
+          "name": "War",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Animation": {
+          "autoincrement": false,
+          "name": "Animation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Family": {
+          "autoincrement": false,
+          "name": "Family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Horror": {
+          "autoincrement": false,
+          "name": "Horror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Music": {
+          "autoincrement": false,
+          "name": "Music",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "History": {
+          "autoincrement": false,
+          "name": "History",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TV_Movie": {
+          "autoincrement": false,
+          "name": "TV_Movie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Documentary": {
+          "autoincrement": false,
+          "name": "Documentary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "genre_table_id": {
+          "name": "genre_table_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "join_table": {
+      "name": "join_table",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryTitle": {
+          "autoincrement": false,
+          "name": "primaryTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdult": {
+          "autoincrement": false,
+          "name": "isAdult",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startYear": {
+          "autoincrement": false,
+          "name": "startYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtimeMinutes": {
+          "autoincrement": false,
+          "name": "runtimeMinutes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "autoincrement": false,
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "autoincrement": false,
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Action": {
+          "autoincrement": false,
+          "name": "Action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Science_Fiction": {
+          "autoincrement": false,
+          "name": "Science_Fiction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Adventure": {
+          "autoincrement": false,
+          "name": "Adventure",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drama": {
+          "autoincrement": false,
+          "name": "Drama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Crime": {
+          "autoincrement": false,
+          "name": "Crime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Thriller": {
+          "autoincrement": false,
+          "name": "Thriller",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fantasy": {
+          "autoincrement": false,
+          "name": "Fantasy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Comedy": {
+          "autoincrement": false,
+          "name": "Comedy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Romance": {
+          "autoincrement": false,
+          "name": "Romance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Western": {
+          "autoincrement": false,
+          "name": "Western",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Mystery": {
+          "autoincrement": false,
+          "name": "Mystery",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "War": {
+          "autoincrement": false,
+          "name": "War",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Animation": {
+          "autoincrement": false,
+          "name": "Animation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Family": {
+          "autoincrement": false,
+          "name": "Family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Horror": {
+          "autoincrement": false,
+          "name": "Horror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Music": {
+          "autoincrement": false,
+          "name": "Music",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "History": {
+          "autoincrement": false,
+          "name": "History",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TV_Movie": {
+          "autoincrement": false,
+          "name": "TV_Movie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Documentary": {
+          "autoincrement": false,
+          "name": "Documentary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "main_table": {
+      "name": "main_table",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vote_average": {
+          "autoincrement": false,
+          "name": "vote_average",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vote_count": {
+          "autoincrement": false,
+          "name": "vote_count",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "autoincrement": false,
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "release_date": {
+          "autoincrement": false,
+          "name": "release_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "autoincrement": false,
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtime": {
+          "autoincrement": false,
+          "name": "runtime",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adult": {
+          "autoincrement": false,
+          "name": "adult",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "backdrop_path": {
+          "autoincrement": false,
+          "name": "backdrop_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "autoincrement": false,
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "homepage": {
+          "autoincrement": false,
+          "name": "homepage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language_code": {
+          "autoincrement": false,
+          "name": "language_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_title": {
+          "autoincrement": false,
+          "name": "original_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "overview": {
+          "autoincrement": false,
+          "name": "overview",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "popularity": {
+          "autoincrement": false,
+          "name": "popularity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "poster_path": {
+          "autoincrement": false,
+          "name": "poster_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tagline": {
+          "autoincrement": false,
+          "name": "tagline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "production_companies": {
+          "autoincrement": false,
+          "name": "production_companies",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "production_countries": {
+          "autoincrement": false,
+          "name": "production_countries",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spoken_languages": {
+          "autoincrement": false,
+          "name": "spoken_languages",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keywords": {
+          "autoincrement": false,
+          "name": "keywords",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "main_table_id": {
+          "name": "main_table_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {
+        "title_index": {
+          "name": "title_index",
+          "columns": [
+            "title"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "name_basics": {
+      "name": "name_basics",
+      "columns": {
+        "nconst": {
+          "autoincrement": false,
+          "name": "nconst",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "primaryName": {
+          "autoincrement": false,
+          "name": "primaryName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birthYear": {
+          "autoincrement": false,
+          "name": "birthYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deathYear": {
+          "autoincrement": false,
+          "name": "deathYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryProfession": {
+          "autoincrement": false,
+          "name": "primaryProfession",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "knownForTitles": {
+          "autoincrement": false,
+          "name": "knownForTitles",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "name_basics_nconst": {
+          "name": "name_basics_nconst",
+          "columns": [
+            "nconst"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "title_basics": {
+      "name": "title_basics",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "titleType": {
+          "autoincrement": false,
+          "name": "titleType",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryTitle": {
+          "autoincrement": false,
+          "name": "primaryTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "originalTitle": {
+          "autoincrement": false,
+          "name": "originalTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdult": {
+          "autoincrement": false,
+          "name": "isAdult",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startYear": {
+          "autoincrement": false,
+          "name": "startYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "endYear": {
+          "autoincrement": false,
+          "name": "endYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtimeMinutes": {
+          "autoincrement": false,
+          "name": "runtimeMinutes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "genres": {
+          "autoincrement": false,
+          "name": "genres",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "title_basics_imdb_id": {
+          "name": "title_basics_imdb_id",
+          "columns": [
+            "imdb_id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "title_crew": {
+      "name": "title_crew",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "directors": {
+          "autoincrement": false,
+          "name": "directors",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "writers": {
+          "autoincrement": false,
+          "name": "writers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "title_crew_imdb_id": {
+          "name": "title_crew_imdb_id",
+          "columns": [
+            "imdb_id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "title_principals": {
+      "name": "title_principals",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordering": {
+          "autoincrement": false,
+          "name": "ordering",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nconst": {
+          "autoincrement": false,
+          "name": "nconst",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "job": {
+          "autoincrement": false,
+          "name": "job",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "characters": {
+          "autoincrement": false,
+          "name": "characters",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "total_join_table": {
+      "name": "total_join_table",
+      "columns": {
+        "imdb_id": {
+          "autoincrement": false,
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryTitle": {
+          "autoincrement": false,
+          "name": "primaryTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isAdult": {
+          "autoincrement": false,
+          "name": "isAdult",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startYear": {
+          "autoincrement": false,
+          "name": "startYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtimeMinutes": {
+          "autoincrement": false,
+          "name": "runtimeMinutes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "autoincrement": false,
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "autoincrement": false,
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nconst": {
+          "autoincrement": false,
+          "name": "nconst",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primaryName": {
+          "autoincrement": false,
+          "name": "primaryName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birthYear": {
+          "autoincrement": false,
+          "name": "birthYear",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Action": {
+          "autoincrement": false,
+          "name": "Action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Science_Fiction": {
+          "autoincrement": false,
+          "name": "Science_Fiction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Adventure": {
+          "autoincrement": false,
+          "name": "Adventure",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Drama": {
+          "autoincrement": false,
+          "name": "Drama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Crime": {
+          "autoincrement": false,
+          "name": "Crime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Thriller": {
+          "autoincrement": false,
+          "name": "Thriller",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Fantasy": {
+          "autoincrement": false,
+          "name": "Fantasy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Comedy": {
+          "autoincrement": false,
+          "name": "Comedy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Romance": {
+          "autoincrement": false,
+          "name": "Romance",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Western": {
+          "autoincrement": false,
+          "name": "Western",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Mystery": {
+          "autoincrement": false,
+          "name": "Mystery",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "War": {
+          "autoincrement": false,
+          "name": "War",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Animation": {
+          "autoincrement": false,
+          "name": "Animation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Family": {
+          "autoincrement": false,
+          "name": "Family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Horror": {
+          "autoincrement": false,
+          "name": "Horror",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Music": {
+          "autoincrement": false,
+          "name": "Music",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "History": {
+          "autoincrement": false,
+          "name": "History",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TV_Movie": {
+          "autoincrement": false,
+          "name": "TV_Movie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Documentary": {
+          "autoincrement": false,
+          "name": "Documentary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

@@ -1,0 +1,16 @@
+import 'dotenv/config'
+import { defineConfig } from 'drizzle-kit'
+export default defineConfig({
+  out: './src/drizzle/migrations',
+  schema: './src/drizzle/schema.ts',
+  dialect: 'mysql',
+  dbCredentials: {
+    host: process.env.DB_HOST ?? '172.23.226.7',
+    user: process.env.DB_USER ?? 'meeran',
+    port: parseInt(process.env.DB_PORT ?? '33066'),
+    database: process.env.DB_NAME ?? 'movie_db',
+    password: process.env.DB_PASSWORD ?? 'password',
+  },
+  verbose: true,
+  strict: true,
+})
