@@ -92,7 +92,7 @@ async function search_exact_id(id: number): Promise<AllType[]> {
         productionCountries: mainTable.productionCountries,
         spokenLanguages: mainTable.spokenLanguages,
         keywords: mainTable.keywords,
-        originalLanguage: abreviationTable.originalLanguage,
+        originalLanguage: abbreviationTable.originalLanguage,
         action: genreTable.action,
         scienceFiction: genreTable.scienceFiction,
         adventure: genreTable.adventure,
@@ -114,7 +114,7 @@ async function search_exact_id(id: number): Promise<AllType[]> {
         documentary: genreTable.documentary,
       })
       .from(mainTable)
-      .innerJoin(abreviationTable, eq(mainTable.languageCode, abreviationTable.languageCode))
+      .innerJoin(abbreviationTable, eq(mainTable.languageCode, abbreviationTable.languageCode))
       .innerJoin(genreTable, eq(mainTable.id, genreTable.id))
       .where(eq(mainTable.id, id))
       .execute()
