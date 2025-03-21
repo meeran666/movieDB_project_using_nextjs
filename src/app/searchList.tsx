@@ -1,10 +1,15 @@
 'use client'
-import list_styles from '../../styles/searchlist.module.css'
+import list_styles from '@/styles/searchlist.module.css'
 import { useState, useEffect } from 'react'
-type Component={
-  index:
+import { MovieListType } from './api/types'
+type Component = {
+  index: number
+  date: string
+  title: string | null
+  id: number
+  isMobile: boolean
 }
-function Component({ index, date, title, id, isMobile }) {
+function Component({ index, date, title, id, isMobile }: Component) {
   return (
     <a className={list_styles.row + ' ' + list_styles.disable_hover} href={`/movieDetail?id=${id}`}>
       <div className={list_styles.first_inside_div}>{index}</div>
@@ -13,8 +18,14 @@ function Component({ index, date, title, id, isMobile }) {
     </a>
   )
 }
-export default function SearchList({ rowdata, rowdate }) {
-  const [isMobile, setIsMobile] = useState(false)
+export default function SearchList({
+  rowdata,
+  rowdate,
+}: {
+  rowdata: MovieListType[]
+  rowdate: string[]
+}) {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -25,14 +36,14 @@ export default function SearchList({ rowdata, rowdate }) {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  let components = []
+  const components = []
   for (let i = 0; i < rowdata.length; i++) {
     components.push(
       <Component
         key={i}
         index={i + 1}
-        title={rowdata[i].title}
         date={rowdate[i]}
+        title={rowdata[i].title}
         id={rowdata[i].id}
         isMobile={isMobile}
       />,

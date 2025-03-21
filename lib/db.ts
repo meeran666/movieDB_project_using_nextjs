@@ -1,15 +1,11 @@
 import * as schema from '@/src/drizzle/schema.ts'
 import { drizzle, MySql2Database } from 'drizzle-orm/mysql2'
 import { createConnection, Connection } from 'mysql2/promise'
-let isConnected: boolean = false
 const db:
   | (MySql2Database<typeof schema> & {
       $client: Connection
     })
   | null = null
-// let connection = null
-console.log('isConnected')
-console.log(isConnected)
 
 type createConnectionArgs = {
   host: string
@@ -31,8 +27,6 @@ export default async function getDatabaseConection(): Promise<
     $client: Connection
   }
 > {
-  console.log('isConnected')
-  console.log(isConnected)
   let connection: Connection | null = null
 
   if (db != null) return db

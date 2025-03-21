@@ -1,16 +1,23 @@
 'use client'
 import searchbar_styles from '@/styles/searchbar.module.css'
-import { useState } from 'react'
-// import SearchList from './searchList.tsx'
+import { FormEvent, useState } from 'react'
+import type { WrappedMovieListType } from '@/src/app/api/types.ts'
+import SearchList from './searchList.tsx'
+
 function SpaceBoard() {
   return <div className={searchbar_styles.spaceboard}></div>
 }
+function isApiResponse(data: unknown): data is WrappedMovieListType {
+  return (
+    typeof data === 'object' && data !== null && 'rowdata' in data && Array.isArray(data.rowdata)
+  )
+}
 
 export default function SearchBox() {
-  const [search, setSearch] = useState('')
-  const [result, setResult] = useState(null)
+  const [search, setSearch] = useState<string>('')
+  const [result, setResult] = useState<WrappedMovieListType | null>(null)
 
-  const handleClick = async (event: MouseEvent) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       //request send with data
@@ -21,13 +28,19 @@ export default function SearchBox() {
         },
         body: JSON.stringify({ data: { search } }),
       })
+
       //response result
       const data: unknown = await response.json()
-      setResult(data)
-      if (response.ok) {
-        // setIsresult(true)
+      if (isApiResponse(data)) {
+        console.log('Fetched movies')
+        setResult(data)
       } else {
-        console.error(result.message)
+        console.error('Invalid API response structure')
+      }
+      if (response.ok) {
+        console.log('ok response')
+      } else {
+        console.error('bad response')
       }
     } catch (error) {
       console.error('Error adding data:', error)
@@ -36,7 +49,7 @@ export default function SearchBox() {
   return (
     <>
       <div className={searchbar_styles.blank_box}>
-        <form className={searchbar_styles.form}>
+        <form className={searchbar_styles.form} onSubmit={handleSubmit}>
           <label htmlFor="title">Search Movie:</label>
           <br />
           <div className={searchbar_styles.search_bar}>
@@ -47,9 +60,7 @@ export default function SearchBox() {
               value={search}
               placeholder="search movie"
             />
-            <button type="submit" onClick={handleClick}>
-              Search
-            </button>
+            <button type="button">Search</button>
           </div>
         </form>
       </div>
