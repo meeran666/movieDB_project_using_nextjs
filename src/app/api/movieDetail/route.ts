@@ -1,5 +1,5 @@
 import getDatabaseConection from '@/lib/db.ts'
-import { abreviationTable, genreTable, mainTable } from '@/src/drizzle/schema'
+import { abbreviationTable, genreTable, mainTable } from '@/src/drizzle/schema'
 import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { AllType } from '../types'
