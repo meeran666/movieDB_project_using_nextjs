@@ -6,29 +6,6 @@ CREATE TABLE "table_name1" (
 	"column_name_2" integer
 );
 --> statement-breakpoint
-CREATE TABLE "genre_table" (
-	"id" integer PRIMARY KEY NOT NULL,
-	"action" text,
-	"science_fiction" text,
-	"adventure" text,
-	"drama" text,
-	"crime" text,
-	"thriller" text,
-	"fantasy" text,
-	"comedy" text,
-	"romance" text,
-	"western" text,
-	"mystery" text,
-	"war" text,
-	"animation" text,
-	"family" text,
-	"horror" text,
-	"music" text,
-	"history" text,
-	"tv_movie" text,
-	"documentary" text
-);
---> statement-breakpoint
 CREATE TABLE "main_table" (
 	"id" integer PRIMARY KEY NOT NULL,
 	"title" varchar(512),
@@ -59,5 +36,29 @@ CREATE TABLE "abbreviation_table" (
 	"original_language" varchar(70) PRIMARY KEY NOT NULL,
 	"language_code" varchar(16)
 );
-
+--> statement-breakpoint
+CREATE TABLE "genre_table" (
+	"id" integer PRIMARY KEY NOT NULL,
+	"action" boolean,
+	"science_fiction" boolean,
+	"adventure" boolean,
+	"drama" boolean,
+	"crime" boolean,
+	"thriller" boolean,
+	"fantasy" boolean,
+	"comedy" boolean,
+	"romance" boolean,
+	"western" boolean,
+	"mystery" boolean,
+	"war" boolean,
+	"animation" boolean,
+	"family" boolean,
+	"horror" boolean,
+	"music" boolean,
+	"history" boolean,
+	"tv_movie" boolean,
+	"documentary" boolean
+);
+--> statement-breakpoint
+CREATE INDEX "title_btree" ON "main_table" USING btree ("title" text_ops);
 */

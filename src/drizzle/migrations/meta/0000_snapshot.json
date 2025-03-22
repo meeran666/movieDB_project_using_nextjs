@@ -29,139 +29,6 @@
       "policies": {},
       "isRLSEnabled": false
     },
-    "public.genre_table": {
-      "name": "genre_table",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "action": {
-          "name": "action",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "science_fiction": {
-          "name": "science_fiction",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "adventure": {
-          "name": "adventure",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "drama": {
-          "name": "drama",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "crime": {
-          "name": "crime",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "thriller": {
-          "name": "thriller",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "fantasy": {
-          "name": "fantasy",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "comedy": {
-          "name": "comedy",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "romance": {
-          "name": "romance",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "western": {
-          "name": "western",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "mystery": {
-          "name": "mystery",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "war": {
-          "name": "war",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "animation": {
-          "name": "animation",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "family": {
-          "name": "family",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "horror": {
-          "name": "horror",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "music": {
-          "name": "music",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "history": {
-          "name": "history",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "tv_movie": {
-          "name": "tv_movie",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "documentary": {
-          "name": "documentary",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {},
-      "policies": {},
-      "isRLSEnabled": false
-    },
     "public.main_table": {
       "name": "main_table",
       "schema": "",
@@ -305,7 +172,24 @@
           "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "title_btree": {
+          "name": "title_btree",
+          "columns": [
+            {
+              "expression": "title",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
@@ -326,6 +210,139 @@
         "language_code": {
           "name": "language_code",
           "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
+    "public.genre_table": {
+      "name": "genre_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "action": {
+          "name": "action",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "science_fiction": {
+          "name": "science_fiction",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adventure": {
+          "name": "adventure",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drama": {
+          "name": "drama",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "crime": {
+          "name": "crime",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thriller": {
+          "name": "thriller",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fantasy": {
+          "name": "fantasy",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comedy": {
+          "name": "comedy",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "romance": {
+          "name": "romance",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "western": {
+          "name": "western",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mystery": {
+          "name": "mystery",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "war": {
+          "name": "war",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "animation": {
+          "name": "animation",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family": {
+          "name": "family",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "horror": {
+          "name": "horror",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "music": {
+          "name": "music",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "history": {
+          "name": "history",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tv_movie": {
+          "name": "tv_movie",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "documentary": {
+          "name": "documentary",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": false
         }

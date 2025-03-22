@@ -5,61 +5,61 @@ import { NextResponse } from 'next/server'
 import { AllType } from '../types'
 function genre_str_create(arr: AllType): string {
   const result: string[] = []
-  if (arr.action === '1') {
+  if (arr.action === true) {
     result.push('Action')
   }
-  if (arr.scienceFiction === '1') {
+  if (arr.scienceFiction === true) {
     result.push('Science Fiction')
   }
-  if (arr.adventure === '1') {
+  if (arr.adventure === true) {
     result.push('Adventure')
   }
-  if (arr.drama === '1') {
+  if (arr.drama === true) {
     result.push('Drama')
   }
-  if (arr.crime === '1') {
+  if (arr.crime === true) {
     result.push('Crime')
   }
-  if (arr.thriller === '1') {
+  if (arr.thriller === true) {
     result.push('Thriller')
   }
-  if (arr.fantasy === '1') {
+  if (arr.fantasy === true) {
     result.push('Fantasy')
   }
-  if (arr.comedy === '1') {
+  if (arr.comedy === true) {
     result.push('Comedy')
   }
-  if (arr.romance === '1') {
+  if (arr.romance === true) {
     result.push('Romance')
   }
-  if (arr.western === '1') {
+  if (arr.western === true) {
     result.push('Western')
   }
-  if (arr.mystery === '1') {
+  if (arr.mystery === true) {
     result.push('Mystery')
   }
-  if (arr.war === '1') {
+  if (arr.war === true) {
     result.push('War')
   }
-  if (arr.animation === '1') {
+  if (arr.animation === true) {
     result.push('Animation')
   }
-  if (arr.family === '1') {
+  if (arr.family === true) {
     result.push('Family')
   }
-  if (arr.horror === '1') {
+  if (arr.horror === true) {
     result.push('Horror')
   }
-  if (arr.music === '1') {
+  if (arr.music === true) {
     result.push('Music')
   }
-  if (arr.history === '1') {
+  if (arr.history === true) {
     result.push('History')
   }
-  if (arr.tvMovie === '1') {
+  if (arr.tvMovie === true) {
     result.push('TV Movie')
   }
-  if (arr.documentary === '1') {
+  if (arr.documentary === true) {
     result.push('Documentary')
   }
   return result.join('/')

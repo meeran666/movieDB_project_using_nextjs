@@ -1,4 +1,4 @@
-import { pgTable, integer, text, varchar, bigint, boolean } from "drizzle-orm/pg-core"
+import { pgTable, integer, index, varchar, text, bigint, boolean } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 
@@ -6,29 +6,6 @@ import { sql } from "drizzle-orm"
 export const tableName1 = pgTable("table_name1", {
 	columnName1: integer("column_name_1"),
 	columnName2: integer("column_name_2"),
-});
-
-export const genreTable = pgTable("genre_table", {
-	id: integer().primaryKey().notNull(),
-	action: text(),
-	scienceFiction: text("science_fiction"),
-	adventure: text(),
-	drama: text(),
-	crime: text(),
-	thriller: text(),
-	fantasy: text(),
-	comedy: text(),
-	romance: text(),
-	western: text(),
-	mystery: text(),
-	war: text(),
-	animation: text(),
-	family: text(),
-	horror: text(),
-	music: text(),
-	history: text(),
-	tvMovie: text("tv_movie"),
-	documentary: text(),
 });
 
 export const mainTable = pgTable("main_table", {
@@ -57,9 +34,34 @@ export const mainTable = pgTable("main_table", {
 	productionCountries: text("production_countries"),
 	spokenLanguages: text("spoken_languages"),
 	keywords: text(),
-});
+}, (table) => [
+	index("title_btree").using("btree", table.title.asc().nullsLast().op("text_ops")),
+]);
 
 export const abbreviationTable = pgTable("abbreviation_table", {
 	originalLanguage: varchar("original_language", { length: 70 }).primaryKey().notNull(),
 	languageCode: varchar("language_code", { length: 16 }),
+});
+
+export const genreTable = pgTable("genre_table", {
+	id: integer().primaryKey().notNull(),
+	action: boolean(),
+	scienceFiction: boolean("science_fiction"),
+	adventure: boolean(),
+	drama: boolean(),
+	crime: boolean(),
+	thriller: boolean(),
+	fantasy: boolean(),
+	comedy: boolean(),
+	romance: boolean(),
+	western: boolean(),
+	mystery: boolean(),
+	war: boolean(),
+	animation: boolean(),
+	family: boolean(),
+	horror: boolean(),
+	music: boolean(),
+	history: boolean(),
+	tvMovie: boolean("tv_movie"),
+	documentary: boolean(),
 });

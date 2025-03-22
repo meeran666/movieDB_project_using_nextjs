@@ -1,0 +1,28 @@
+services:
+  app:
+    image: nextjs_movieapp:0.0.1
+    container_name: nextjs_movieapp
+    # build:
+    #   context: .
+    # dockerfile: Dockerfile
+    ports:
+      - '3005:3000'
+    depends_on:
+      - db
+    # volumes:
+    #   - .:/home/node/app
+    command: ['npm', 'run', 'start']
+    env_file: 'prod.env'
+  db:
+    image: mysql_moviedb:latest
+    container_name: mysql_moviedb
+    env_file: 'db.env'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # ports:
+    #   - '5500:3306'
+networks:
+  docker_network:
+    driver: bridge
+volumes:
+  mysql_data:
