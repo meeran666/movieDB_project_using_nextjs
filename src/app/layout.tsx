@@ -10,11 +10,13 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
   const [isMobile, setIsMobile] = useState(false)
   const sidebarRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLDivElement | null>(null)
-
+  console.log('DAShboard')
+  debugger
   const handleHambergerButtonClick = () => {
     setIsHambergerMenuOpen(!isHambergerMenuOpen)
   }
   useEffect(() => {
+    debugger
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 780)
     }
@@ -37,7 +39,11 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
   // }, [isHambergerMenuOpen])
 
   useEffect(() => {
+    console.log('useeffect')
+    debugger
+
     const handleClickOutside = (event: MouseEvent) => {
+      console.log('inside window')
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node) &&
@@ -61,7 +67,7 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
       window.removeEventListener('click', handleClickOutside)
     }
   }, [isHambergerMenuOpen])
-
+  debugger
   return (
     <html lang="en">
       <body>

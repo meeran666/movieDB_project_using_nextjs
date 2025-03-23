@@ -76,7 +76,7 @@ function DetailContainer({
       <div className={detailStyles.title}>{detail.title}</div>
       {detail.releaseDate != null ? <div className={detailStyles.release_date}>{date}</div> : null}
       <div className={detailStyles.genre}>{genre}</div>
-      <div className={detailStyles.adult}>{detail.adult == 0 ? 'PG' : ' Adult'}</div>
+      <div className={detailStyles.adult}>{detail.adult == false ? 'PG' : ' Adult'}</div>
       {isMobile ? null : <SecondGroup detail={detail} />}
     </div>
   )

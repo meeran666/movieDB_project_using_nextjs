@@ -1,7 +1,7 @@
 import getDatabaseConection from '@/lib/db.ts'
 import { mainTable } from '@/src/drizzle/schema.ts'
 import type { MovieListType } from '@/src/app/api/types'
-import { ilike } from 'drizzle-orm'
+import { and, ilike, isNotNull } from 'drizzle-orm'
 import { NextRequest, NextResponse } from 'next/server'
 async function search_contain(title: string | null, limit: number): Promise<MovieListType[]> {
   const t = '%' + title + '%'
@@ -11,11 +11,9 @@ async function search_contain(title: string | null, limit: number): Promise<Movi
     result = await db
       .select()
       .from(mainTable)
-      .where(ilike(mainTable.title, t))
+      .where(and(ilike(mainTable.title, t), isNotNull(mainTable.releaseDate)))
       .limit(limit)
       .execute()
-    console.log('result4')
-    console.log(result)
   } catch (error) {
     console.log(error)
   }

@@ -1,4 +1,3 @@
-import * as schema from '@/src/drizzle/schema.ts'
 import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres'
 // import { createConnection, Connection } from 'mysql2/promise'
 import pg from 'pg'
@@ -33,13 +32,15 @@ export default async function getDatabaseConection(): Promise<
 
   if (db != null) return db
   try {
+    console.log('yoda')
     client = new Client({
       host: process.env.DB_HOST ?? '172.17.0.1',
-      user: process.env.DB_USER ?? 'meeran',
-      port: parseInt(process.env.DB_PORT ?? '33066'),
-      database: process.env.DB_NAME ?? 'movie_db',
-      password: process.env.DB_PASSWORD ?? 'password',
+      user: process.env.POSTGRES_USER ?? 'meeran',
+      port: parseInt(process.env.POSTGRES_PORT ?? '33066'),
+      database: process.env.POSTGRES_DB ?? 'movie_db',
+      password: process.env.POSTGRES_PASSWORD ?? 'password',
     })
+
     await client.connect()
     console.log('connected with sqlserver')
     db = drizzle({ client: client })

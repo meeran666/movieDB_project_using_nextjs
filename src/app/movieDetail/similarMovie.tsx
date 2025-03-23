@@ -8,9 +8,6 @@ function Poster({
   posterpath: string | null
   postertitle: string | null
 }) {
-  console.log('posterpath91')
-  console.log(posterpath)
-
   const poster = posterpath ? (
     <Image
       alt="similarBoxPoster"
@@ -27,8 +24,7 @@ function Poster({
 
 function SimilarMovie({ posterDetail }: { posterDetail: PosterDetailType[] }) {
   const container = []
-  console.log('posterDetail.length')
-  console.log(posterDetail)
+
   for (let i = 0; i < posterDetail.length; i++) {
     const poster = (
       <a
@@ -40,8 +36,7 @@ function SimilarMovie({ posterDetail }: { posterDetail: PosterDetailType[] }) {
       </a>
     )
     container.push(poster)
-    console.log('poster')
-    console.log(poster)
+ 
   }
 
   return <div className={similarMovieStyles.similar_movie}>{container}</div>

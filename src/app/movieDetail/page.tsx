@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react'
 import Detail from './detail.tsx'
 import { PosterDetailType, WrappedAllType, WrappedPosterDetailType } from '../api/types.ts'
 function isApiResponseofData1(data1: unknown): data1 is WrappedAllType {
-  console.log(typeof data1 === 'object' && data1 !== null && 'detail' in data1)
   return typeof data1 === 'object' && data1 !== null && 'detail' in data1
 }
 function isApiResponseofData2(data2: unknown): data2 is WrappedPosterDetailType {
@@ -20,7 +19,6 @@ function DetailLayout() {
   const [posterDetail, setPosterDetail] = useState<PosterDetailType[] | null>(null)
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
-
 
   useEffect(() => {
     const fetchData = async () => {

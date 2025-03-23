@@ -1,4 +1,4 @@
-import { abreviationTable, genreTable, mainTable } from '@/src/drizzle/schema.ts'
+import { abbreviationTable, genreTable, mainTable } from '@/src/drizzle/schema.ts'
 type MovieListType = typeof mainTable.$inferSelect
 type WrappedMovieListType = {
   rowdata: MovieListType[]
@@ -6,7 +6,7 @@ type WrappedMovieListType = {
 }
 type AllType = typeof genreTable.$inferSelect &
   typeof mainTable.$inferSelect &
-  typeof abreviationTable.$inferSelect
+  typeof abbreviationTable.$inferSelect
 
 type WrappedAllType = {
   detail: AllType

@@ -18,6 +18,7 @@ export default function SearchBox() {
   const [result, setResult] = useState<WrappedMovieListType | null>(null)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    console.log('inside submit')
     event.preventDefault()
     try {
       //request send with data
@@ -31,6 +32,8 @@ export default function SearchBox() {
 
       //response result
       const data: unknown = await response.json()
+      console.log('data')
+      console.log(data)
       if (isApiResponse(data)) {
         console.log('Fetched movies')
         setResult(data)

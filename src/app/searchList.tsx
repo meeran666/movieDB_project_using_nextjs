@@ -22,8 +22,8 @@ export default function SearchList({
   rowdata,
   rowdate,
 }: {
-  rowdata: MovieListType[]
   rowdate: string[]
+  rowdata: MovieListType[]
 }) {
   const [isMobile, setIsMobile] = useState<boolean>(false)
 

@@ -1,7 +1,7 @@
 import getDatabaseConection from '@/lib/db.ts'
 import { abbreviationTable, genreTable, mainTable } from '@/src/drizzle/schema'
 import { eq } from 'drizzle-orm'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { AllType } from '../types'
 function genre_str_create(arr: AllType): string {
   const result: string[] = []
@@ -125,7 +125,7 @@ async function search_exact_id(id: number): Promise<AllType[]> {
     throw err
   }
 }
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const url = new URL(request.url)
   const searchParams = new URLSearchParams(url.search)
   const id = searchParams.get('id')

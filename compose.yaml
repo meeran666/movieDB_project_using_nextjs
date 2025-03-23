@@ -1,6 +1,6 @@
 services:
   app:
-    image: nextjs_movieapp:0.0.1
+    image: nextjs_movieapp_image:0.0.1
     container_name: nextjs_movieapp
     # build:
     #   context: .
@@ -9,20 +9,20 @@ services:
       - '3005:3000'
     depends_on:
       - db
-    # volumes:
-    #   - .:/home/node/app
-    command: ['npm', 'run', 'start']
+    command: ['bun', 'server.js']
     env_file: 'prod.env'
   db:
-    image: mysql_moviedb:latest
-    container_name: mysql_moviedb
-    env_file: 'db.env'
+    image: postgres:latest
+    container_name: pg_moviedb
+    env_file: 'dbcontainer.env'
     volumes:
-      - mysql_data:/var/lib/mysql
-    # ports:
-    #   - '5500:3306'
+      - ~/pg_moviedb_backup.sql:/docker-entrypoint-initdb.d/pg_moviedb_backup.sql
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - '5500:5432'
 networks:
   docker_network:
     driver: bridge
 volumes:
-  mysql_data:
+  pg_data:
+    name: movieapp_data
