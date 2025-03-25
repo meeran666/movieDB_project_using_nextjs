@@ -23,19 +23,6 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // useEffect(() => {
-  //   if (isHambergerMenuOpen) {
-  //     setTimeout(() => {
-  //       window.addEventListener('click', handleClickOutside)
-  //     }, 0)
-  //   } else {
-  //     console.log('no')
-  //     window.removeEventListener('click', handleHambergerButtonClick)
-  //   }
-
-  //   return () => window.removeEventListener('click', handleHambergerButtonClick)
-  // }, [isHambergerMenuOpen])
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       console.log('inside window')
