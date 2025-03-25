@@ -4,19 +4,17 @@ import Footer from './fotter'
 import navbarStyles from '@/styles/navbar.module.css'
 import '@/styles/globals.css'
 import React, { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 
 export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const [isHambergerMenuOpen, setIsHambergerMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const sidebarRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLDivElement | null>(null)
-  console.log('DAShboard')
-  debugger
   const handleHambergerButtonClick = () => {
     setIsHambergerMenuOpen(!isHambergerMenuOpen)
   }
   useEffect(() => {
-    debugger
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 780)
     }
@@ -39,9 +37,6 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
   // }, [isHambergerMenuOpen])
 
   useEffect(() => {
-    console.log('useeffect')
-    debugger
-
     const handleClickOutside = (event: MouseEvent) => {
       console.log('inside window')
       if (
@@ -67,7 +62,6 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
       window.removeEventListener('click', handleClickOutside)
     }
   }, [isHambergerMenuOpen])
-  debugger
   return (
     <html lang="en">
       <body>
@@ -83,7 +77,7 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
             className={`${navbarStyles.hamberger_menu} ${
               isHambergerMenuOpen ? navbarStyles.hamberger_menu_open : ''
             }`}>
-            <a href={'/'}> Browse Movie </a>
+            <Link href={'/'}> Browse Movie </Link>
             <a> About </a>
           </div>
         ) : null}

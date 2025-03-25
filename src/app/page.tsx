@@ -63,7 +63,7 @@ export default function SearchBox() {
               value={search}
               placeholder="search movie"
             />
-            <button type="button">Search</button>
+            <button type="submit">Search</button>
           </div>
         </form>
       </div>

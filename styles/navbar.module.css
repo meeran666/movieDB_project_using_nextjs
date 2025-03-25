@@ -7,23 +7,16 @@
   width: 8rem;
   top: 3rem;
   right: 0;
-  background-color: azure;
+  background-color: rgb(15, 45, 95);
   /* transition: transform 3s ease-in-out; */
 }
 .hamberger_menu * {
   padding-bottom: 1rem;
   text-decoration: none;
   display: block;
+  color: rgb(201, 155, 227);
 }
-.hamberger_menu_open {
-  /* transform: translateX(-100%); */
-}
-/* .hamberger_menu {
-  transform: translateX(100%);
-}
-.hamberger_menu.hamberger_menu_open {
-  transform: translateX(0); 
-} */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -31,7 +24,6 @@
   gap: 0.3rem;
   padding-left: 4vw;
   padding-right: 3.7vw;
-  /* width: calc(100vw - (100vw - 100%)); */
   width: 100dvw;
   height: 4rem;
   background-color: rgb(29, 29, 29);
@@ -49,13 +41,12 @@
   flex-grow: 1;
 }
 #logo {
-  color: rgb(127, 190, 87);
   width: auto;
   height: 2.1rem;
 }
 .site_name {
   font-size: 35px;
-  color: rgb(127, 190, 87);
+  color: rgb(92, 87, 190);
 }
 .nav_buttons * {
   padding-inline: 10px;
@@ -97,13 +88,6 @@
   .site_name {
     font-size: 1.7rem;
   }
-  /* .browse_movie {
-    font-size: 15px;
-  }
-
-  .about {
-    font-size: 15px;
-  } */
 }
 
 .about:hover {

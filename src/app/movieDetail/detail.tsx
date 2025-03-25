@@ -141,13 +141,15 @@ export default function Detail({
               display: 'flex',
               justifyContent: 'center',
             }}>
-            <Image
-              width="300"
-              height="400"
-              alt="backgroundImage"
-              className={detailStyles.background_img}
-              src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
-            />
+            {detail.posterPath ? (
+              <Image
+                width="300"
+                height="400"
+                alt="backgroundImage"
+                className={detailStyles.background_img}
+                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
+              />
+            ) : null}
           </div>
           <div className={detailStyles.container}>
             <FirstContainer detail={detail} genre={genre} date={date} isMobile={isMobile} />

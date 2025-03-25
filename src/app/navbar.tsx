@@ -13,7 +13,7 @@ type MobileComponentProp = ButtonProp & {
 type NavbarProp = MobileComponentProp & {
   isMobile: boolean
 }
-function CrossButton({ onHambergerClick, buttonref }: ButtonProp) {
+function HamButton({ onHambergerClick, buttonref }: ButtonProp) {
   return (
     <div className={navbar_styles.hamberger_button} onClick={onHambergerClick} ref={buttonref}>
       <div></div>
@@ -22,7 +22,7 @@ function CrossButton({ onHambergerClick, buttonref }: ButtonProp) {
     </div>
   )
 }
-function HamButton({ onHambergerClick, buttonref }: ButtonProp) {
+function CrossButton({ onHambergerClick, buttonref }: ButtonProp) {
   return (
     <>
       <div
@@ -33,7 +33,6 @@ function HamButton({ onHambergerClick, buttonref }: ButtonProp) {
           height: '1.5rem',
           position: 'relative',
         }}>
-        <button onClick={onHambergerClick}></button>
         <div
           className={navbar_styles.cross_line}
           style={{
@@ -52,9 +51,9 @@ function MobileComponent({ onHambergerClick, isHambergerMenu, buttonref }: Mobil
   return (
     <>
       {isHambergerMenu ? (
-        <HamButton onHambergerClick={onHambergerClick} buttonref={buttonref} />
-      ) : (
         <CrossButton onHambergerClick={onHambergerClick} buttonref={buttonref} />
+      ) : (
+        <HamButton onHambergerClick={onHambergerClick} buttonref={buttonref} />
       )}
     </>
   )
@@ -62,11 +61,9 @@ function MobileComponent({ onHambergerClick, isHambergerMenu, buttonref }: Mobil
 function DesktopComponent() {
   return (
     <div className={navbar_styles.nav_buttons}>
-      <Link
-        className={navbar_styles.browse_movie + ' ' + navbar_styles.hover_effect_cyan}
-        href={'/'}>
+      <a className={navbar_styles.browse_movie + ' ' + navbar_styles.hover_effect_cyan} href={'/'}>
         Browse movie
-      </Link>
+      </a>
       <div className={navbar_styles.about + ' ' + navbar_styles.hover_effect_cyan}>About</div>
     </div>
   )
