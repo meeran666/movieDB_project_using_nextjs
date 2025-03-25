@@ -1,10 +1,10 @@
 'use client'
 import navbar_styles from '@/styles/navbar.module.css'
 import Logo from '@/public/logo.svg'
-import { Ref } from 'react'
+import { RefObject } from 'react'
 type ButtonProp = {
   onHambergerClick: () => void
-  buttonref: Ref<HTMLDivElement> | undefined
+  buttonref: RefObject<HTMLDivElement | null>
 }
 type MobileComponentProp = ButtonProp & {
   isHambergerMenu: boolean
@@ -73,6 +73,7 @@ export default function Navbar({
   isMobile,
   buttonref,
 }: NavbarProp) {
+  
   return (
     <>
       <div className={navbar_styles.navbar}>

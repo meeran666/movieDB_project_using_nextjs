@@ -1,7 +1,7 @@
 import navbarStyles from '@/styles/navbar.module.css'
 import { RefObject } from 'react'
 type HambergerMenuLayerProp = {
-  sidebarRef: RefObject<HTMLDivElement> | undefined
+  sidebarRef: RefObject<HTMLDivElement | null>
   isHambergerMenuOpen: boolean
 }
 export default function HambergerMenuLayer({
@@ -9,6 +9,8 @@ export default function HambergerMenuLayer({
   isHambergerMenuOpen,
 }: HambergerMenuLayerProp) {
   return (
+    // <div className={navbarStyles.hambergerMenuLayer}>
+    // <div className="navbarStyles.outsideHamberger"></div>
     <div
       ref={sidebarRef}
       className={`${navbarStyles.hamberger_menu} ${
@@ -17,5 +19,6 @@ export default function HambergerMenuLayer({
       <a href={'/'}> Browse Movie </a>
       <a> About </a>
     </div>
+    // </div>
   )
 }
