@@ -1,10 +1,9 @@
 'use client'
 import Navbar from './navbar'
 import Footer from './fotter'
-import navbarStyles from '@/styles/navbar.module.css'
 import '@/styles/globals.css'
 import React, { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
+import HambergerMenuLayer from './hambergermenu_layer'
 
 export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const [isHambergerMenuOpen, setIsHambergerMenuOpen] = useState(false)
@@ -59,14 +58,7 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
           buttonref={buttonRef}
         />
         {isHambergerMenuOpen ? (
-          <div
-            ref={sidebarRef}
-            className={`${navbarStyles.hamberger_menu} ${
-              isHambergerMenuOpen ? navbarStyles.hamberger_menu_open : ''
-            }`}>
-            <Link href={'/'}> Browse Movie </Link>
-            <a> About </a>
-          </div>
+          <HambergerMenuLayer sidebarRef={sidebarRef} isHambergerMenuOpen={isHambergerMenuOpen} />
         ) : null}
         <main style={{ display: 'flex', flexGrow: '1', flexDirection: 'column' }}>{children}</main>
         {/* <SearchBox></SearchBox> */}

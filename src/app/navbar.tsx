@@ -1,7 +1,6 @@
 'use client'
 import navbar_styles from '@/styles/navbar.module.css'
 import Logo from '@/public/logo.svg'
-import Link from 'next/link'
 import { Ref } from 'react'
 type ButtonProp = {
   onHambergerClick: () => void
