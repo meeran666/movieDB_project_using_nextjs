@@ -12,6 +12,7 @@ async function search_contain(title: string | null, limit: number): Promise<Movi
       .select()
       .from(mainTable)
       .where(and(ilike(mainTable.title, t), isNotNull(mainTable.releaseDate)))
+      .orderBy(mainTable.title)
       .limit(limit)
       .execute()
   } catch (error) {
