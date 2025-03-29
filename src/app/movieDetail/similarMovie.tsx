@@ -9,10 +9,8 @@ function Poster({
   postertitle: string | null
 }) {
   const poster = posterpath ? (
-    <Image
+    <img
       alt="similarBoxPoster"
-      width="300"
-      height="400"
       className={similarMovieStyles.similar_box_poster}
       src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${posterpath}`}
     />

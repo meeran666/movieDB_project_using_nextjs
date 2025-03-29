@@ -98,10 +98,8 @@ function FirstContainer({
         {detail.posterPath == null  ? (
           <div className={detailStyles.poster_name}>{detail.title}</div>
         ) : (
-          <Image
+          <img
             alt="imageMovie"
-            width="200"
-            height="300"
             className={detailStyles.image_movie}
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
           />
@@ -142,9 +140,7 @@ export default function Detail({
               justifyContent: 'center',
             }}>
             {detail.posterPath ? (
-              <Image
-                width="300"
-                height="400"
+              <img
                 alt="backgroundImage"
                 className={detailStyles.background_img}
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}

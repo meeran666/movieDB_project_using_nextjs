@@ -1,6 +1,6 @@
 import getDatabaseConection from '@/lib/db.ts'
 import { mainTable } from '@/src/drizzle/schema'
-import { and, eq, like, not } from 'drizzle-orm'
+import { and, desc, eq, ilike, like, not, sql } from 'drizzle-orm'
 import { NextRequest, NextResponse } from 'next/server'
 import { PosterDetailType } from '../types'
 async function search_contain(
@@ -8,16 +8,14 @@ async function search_contain(
   selfid: number,
   limit: number,
 ): Promise<PosterDetailType[]> {
-  const t = '%' + title + '%'
+  const wrapped_title = '%' + title + '%'
   const db = await getDatabaseConection()
-  // const [result] = await connection.query(
-  //   'select * from main_table where title LIKE ? and id != ? limit ?;',
-  //   [t, selfid, limit],
-  // )
+ 
   const result = await db
     .select({ id: mainTable.id, title: mainTable.title, posterPath: mainTable.posterPath })
     .from(mainTable)
-    .where(and(like(mainTable.title, t), not(eq(mainTable.id, selfid))))
+    .where(and(ilike(mainTable.title, wrapped_title), not(eq(mainTable.id, selfid))))
+    .orderBy(sql`CASE WHEN main_table.title ilike ${title} THEN 1 ELSE 2 END ASC`,desc(mainTable.title))
     .limit(limit)
 
   return result
