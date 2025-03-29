@@ -95,7 +95,7 @@ function FirstContainer({
   return (
     <div className={detailStyles.first_container}>
       <div className={detailStyles.image_container}>
-        {detail.posterPath == null && detail.title != null ? (
+        {detail.posterPath == null  ? (
           <div className={detailStyles.poster_name}>{detail.title}</div>
         ) : (
           <Image
