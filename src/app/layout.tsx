@@ -62,7 +62,7 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
         {isHambergerMenuOpen ? (
           <HambergerMenuLayer sidebarRef={sidebarRef} isHambergerMenuOpen={isHambergerMenuOpen} />
         ) : null}
-        <main style={{ display: 'flex', flexGrow: '1', flexDirection: 'column' }}>{children}</main>
+        <main  className="flex grow flex-col">{children}</main>
         {/* <SearchBox></SearchBox> */}
         <Footer />
       </body>

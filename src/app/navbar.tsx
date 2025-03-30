@@ -14,7 +14,7 @@ type NavbarProp = MobileComponentProp & {
 }
 function HamButton({ onHambergerClick, buttonref }: ButtonProp) {
   return (
-    <div className={navbar_styles.hamberger_button} onClick={onHambergerClick} ref={buttonref}>
+    <div className="flex flex-col gap-[3px] [&>*]:h-[6px] [&>*]:w-[20px] [&>*]:rounded-[20%] [&>*]:bg-[cyan]" onClick={onHambergerClick} ref={buttonref}>
       <div></div>
       <div></div>
       <div></div>
@@ -27,18 +27,15 @@ function CrossButton({ onHambergerClick, buttonref }: ButtonProp) {
       <div
         onClick={onHambergerClick}
         ref={buttonref}
-        style={{
-          width: '1.5rem',
-          height: '1.5rem',
-          position: 'relative',
-        }}>
+        className='w-[1.5rem] h-[1.5] relative'
+        >
         <div
-          className={navbar_styles.cross_line}
+          className="rotate-[45] w-[1rem] h-[0.2rem]  bg-white absolute top-[50%] left-[50%] origin-center"
           style={{
             transform: 'translate(-50%, -50%) rotate(45deg)',
           }}></div>
         <div
-          className={navbar_styles.cross_line}
+          className="rotate-[45] w-[1rem] h-[0.2rem]  bg-white absolute top-[50%] left-[50%] origin-center"
           style={{
             transform: 'translate(-50%, -50%) rotate(-45deg)',
           }}></div>
@@ -59,11 +56,11 @@ function MobileComponent({ onHambergerClick, isHambergerMenu, buttonref }: Mobil
 }
 function DesktopComponent() {
   return (
-    <div className={navbar_styles.nav_buttons}>
-      <a className={navbar_styles.browse_movie + ' ' + navbar_styles.hover_effect_cyan} href={'/'}>
+    <div className="[&>*]:px-[10px] [&>*]:inline">
+      <a className="no-underline text-gray-500 text-[20px] hover:text-[cyan]" href={'/'}>
         Browse movie
       </a>
-      <div className={navbar_styles.about + ' ' + navbar_styles.hover_effect_cyan}>About</div>
+      <div className="text-gray-500 text-[20px] hover:text-[cyan]">About</div>
     </div>
   )
 }
@@ -76,7 +73,7 @@ export default function Navbar({
   
   return (
     <>
-      <div className={navbar_styles.navbar}>
+      <div className="flex items-center box-border gap-[0.3rem] pl-[4vw] pr-[3.7vw] w-[100dvw] h-[4rem] bg-[rgb(29,29,29)] border-[0.05rem] border-solid border-gray-400 [&>*]:box-border [&>*]:grow-0">
         <div className={navbar_styles.brand}>
           <Logo id={navbar_styles.logo} alt="logo" />
           <div className={navbar_styles.site_name}>Moviemania</div>
