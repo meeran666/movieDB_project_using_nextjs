@@ -24,18 +24,20 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      console.log('inside window')
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node) &&
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
+        
       ) {
+        console.log("inside menu ok")
         setIsHambergerMenuOpen(false)
       } else {
         event.stopPropagation()
       }
     }
+
     if (isHambergerMenuOpen) {
       setTimeout(() => {
         window.addEventListener('click', handleClickOutside)
