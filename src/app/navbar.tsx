@@ -1,5 +1,4 @@
 'use client'
-import navbar_styles from '@/styles/navbar.module.css'
 import Logo from '@/public/logo.svg'
 import { RefObject } from 'react'
 type ButtonProp = {
@@ -9,8 +8,6 @@ type ButtonProp = {
 type MobileComponentProp = ButtonProp & {
   isHambergerMenu: boolean
 }
-
-
 
 
 type NavbarProp = MobileComponentProp & {
@@ -79,7 +76,7 @@ export default function Navbar({
     <>
       <div className="max-[780px]:h-[3rem] max-[780px]:pl-15px flex items-center gap-[0.3rem] pl-[4vw] pr-[3.7vw] w-[100dvw] h-[4rem] bg-(--black_color) border-[0.05rem] border-solid border-(--gray_color)">
         <div className="flex items-center gap-[0.4rem] grow">
-          <Logo id={navbar_styles.logo} className='max-[780px]:h-[1.6rem] w-auto' alt="logo" />
+          <Logo className='max-[780px]:h-[1.6rem] max-[780px]:w-auto w-auto h-[2.1rem]' alt="logo" />
           <div className="max-[780px]:text-[1.7rem] text-[35px] text-(--voilet_color)">Moviemania</div>
         </div>
         {isMobile ? (

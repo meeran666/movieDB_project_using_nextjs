@@ -12,7 +12,8 @@ img {
   max-width: none;
 }
 @theme{
-  --hamberger_color: rgb(15, 45, 95);
+  --hamberger_color: rgb(160, 32, 240);
+  --hamberger_child_color: rgb(247, 247, 247);
   --border_color:rgb(127, 190, 87);
   --voilet_color:rgb(92, 87, 190);
   --black_color:rgb(29, 29, 29);

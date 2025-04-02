@@ -1,5 +1,4 @@
 'use client'
-import list_styles from '@/styles/searchlist.module.css'
 import { useState, useEffect } from 'react'
 import { MovieListType } from './api/types'
 type Component = {

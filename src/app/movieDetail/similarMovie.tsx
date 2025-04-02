@@ -1,4 +1,3 @@
-import similarMovieStyles from '@/styles/similarMovie.module.css'
 import { PosterDetailType } from '../api/types'
 function Poster({
   posterpath,
