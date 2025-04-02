@@ -8,9 +8,19 @@ body {
   flex-direction: column;
   /* justify-content: center; */
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+img {
+  max-width: none;
 }
+@theme{
+  --hamberger_color: rgb(15, 45, 95);
+  --border_color:rgb(127, 190, 87);
+  --voilet_color:rgb(92, 87, 190);
+  --black_color:rgb(29, 29, 29);
+  --gray_color:rgb(145, 145, 145);
+  --button_color: rgb(255, 252, 244);
+  --aqua_color_hover: rgb(0,225,225);
+  --full_opacity:rgba(0, 0, 0, 1);
+  --full_transparency:rgba(0, 0, 0, 0);
+}
+
+

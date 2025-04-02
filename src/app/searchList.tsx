@@ -11,11 +11,12 @@ type Component = {
 }
 function Component({ index, date, title, id, isMobile }: Component) {
   return (
-    <a className={list_styles.row + ' ' + list_styles.disable_hover} href={`/movieDetail?id=${id}`}>
-      <div className={list_styles.first_inside_div}>{index}</div>
-      <div className={list_styles.second_inside_div}>{title}</div>
-      <div className={list_styles.third_inside_div}>{isMobile ? date.slice(-4) : date}</div>
+    <a className="h-[3rem] w-[100vw]  bg-(--aqua_color_hover) hover:min-[780px]:bg-amber-400 max-[780px]:h-[2.5rem]  border-b-[0.2rem] border-solid border-[red] flex items-center  pl-[3vw] pr-[3vw] no-underline" href={`/movieDetail?id=${id}`}>
+      <div className="pointer-events-none max-[780px]:pl-[0.5rem] max-[780px]:pr-[0.5rem] w-[6vw] grow-0">{index}</div>
+      <div className="pointer-events-none max-[780px]:pl-[0.5rem] max-[780px]:pr-[0.5rem] max-[780px]:h-[2.5rem]  content-center w-[5rem] overflow-hidden text-ellipsis grow h-[3rem]">{title}</div>
+      <div className="pointer-events-none max-[780px]:pl-[0.5rem] max-[780px]:pr-[0.5rem] w-[14rem] grow-0">{isMobile ? date.slice(-4) : date}</div>
     </a>
+  
   )
 }
 export default function SearchList({

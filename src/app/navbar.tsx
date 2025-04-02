@@ -9,15 +9,19 @@ type ButtonProp = {
 type MobileComponentProp = ButtonProp & {
   isHambergerMenu: boolean
 }
+
+
+
+
 type NavbarProp = MobileComponentProp & {
   isMobile: boolean
 }
 function HamButton({ onHambergerClick, buttonref }: ButtonProp) {
   return (
-    <div className="flex flex-col gap-[3px] [&>*]:h-[6px] [&>*]:w-[20px] [&>*]:rounded-[20%] [&>*]:bg-[cyan]" onClick={onHambergerClick} ref={buttonref}>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="flex flex-col gap-[3px] " onClick={onHambergerClick} ref={buttonref}>
+      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
+      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
+      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
     </div>
   )
 }
@@ -56,11 +60,11 @@ function MobileComponent({ onHambergerClick, isHambergerMenu, buttonref }: Mobil
 }
 function DesktopComponent() {
   return (
-    <div className="[&>*]:px-[10px] [&>*]:inline">
-      <a className="no-underline text-gray-500 text-[20px] hover:text-[cyan]" href={'/'}>
+    <div className="grow-0 ">
+      <a  className="px-[10px] inline hover:text-[cyan] text-gray-500 text-[20px]"href={'/'}>
         Browse movie
       </a>
-      <div className="text-gray-500 text-[20px] hover:text-[cyan]">About</div>
+      <div className='px-[10px] inline hover:text-[cyan] text-gray-500 text-[20px]' >About</div>
     </div>
   )
 }
@@ -73,10 +77,10 @@ export default function Navbar({
   
   return (
     <>
-      <div className="flex items-center box-border gap-[0.3rem] pl-[4vw] pr-[3.7vw] w-[100dvw] h-[4rem] bg-[rgb(29,29,29)] border-[0.05rem] border-solid border-gray-400 [&>*]:box-border [&>*]:grow-0">
-        <div className={navbar_styles.brand}>
-          <Logo id={navbar_styles.logo} alt="logo" />
-          <div className={navbar_styles.site_name}>Moviemania</div>
+      <div className="max-[780px]:h-[3rem] max-[780px]:pl-15px flex items-center gap-[0.3rem] pl-[4vw] pr-[3.7vw] w-[100dvw] h-[4rem] bg-(--black_color) border-[0.05rem] border-solid border-(--gray_color)">
+        <div className="flex items-center gap-[0.4rem] grow">
+          <Logo id={navbar_styles.logo} className='max-[780px]:h-[1.6rem] w-auto' alt="logo" />
+          <div className="max-[780px]:text-[1.7rem] text-[35px] text-(--voilet_color)">Moviemania</div>
         </div>
         {isMobile ? (
           <MobileComponent

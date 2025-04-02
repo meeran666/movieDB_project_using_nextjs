@@ -9,16 +9,11 @@ export default function HambergerMenuLayer({
   isHambergerMenuOpen,
 }: HambergerMenuLayerProp) {
   return (
-    // <div className={navbarStyles.hambergerMenuLayer}>
-    // <div className="navbarStyles.outsideHamberger"></div>
     <div
       ref={sidebarRef}
-      className={`${navbarStyles.hamberger_menu} ${
-        isHambergerMenuOpen ? navbarStyles.hamberger_menu_open : ''
-      }`}>
+      className='absolute p-0.2rem rounded-[3%] h-[4rem] w-[8rem] top-[3rem] right-[0] bg-(--hamberger_color) z-[4]' >
       <a href={'/'}> Browse Movie </a>
       <a> About </a>
     </div>
-    // </div>
   )
 }
