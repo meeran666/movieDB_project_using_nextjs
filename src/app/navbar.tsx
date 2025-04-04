@@ -61,7 +61,9 @@ function DesktopComponent() {
       <a  className="px-[10px] inline hover:text-[cyan] text-gray-500 text-[20px]"href={'/'}>
         Browse movie
       </a>
-      <div className='px-[10px] inline hover:text-[cyan] text-gray-500 text-[20px]' >About</div>
+      <a className='px-[10px] inline hover:text-[cyan] text-gray-500 text-[20px]' href={'/about'} >
+        About
+      </a>
     </div>
   )
 }

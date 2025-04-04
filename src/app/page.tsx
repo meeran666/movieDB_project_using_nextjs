@@ -1,5 +1,10 @@
 import SearchBox from "./searchbar";
 
 export default function Page(){
-  return (<SearchBox/>)
+
+  return (
+  <main  className="flex grow flex-col">
+    <SearchBox/>
+  </main>
+)
 }
