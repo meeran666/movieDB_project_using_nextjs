@@ -33,6 +33,9 @@ export default async function getDatabaseConection(): Promise<
   if (db != null) return db
   try {
     console.log('yoda')
+    console.log(process.env.DB_HOST)
+    console.log(process.env.POSTGRES_USER)
+    console.log(process.env.POSTGRES_PORT)
     client = new Client({
       host: process.env.DB_HOST ?? '172.17.0.1',
       user: process.env.POSTGRES_USER ?? 'meeran',

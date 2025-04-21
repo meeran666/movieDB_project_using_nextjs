@@ -1,26 +1,29 @@
-'use client'
-import Navbar from './navbar'
-import Footer from './fotter'
-import '@/styles/globals.css'
-import React, { useState, useEffect, useRef } from 'react'
-import HambergerMenuLayer from './hambergermenu_layer'
+"use client";
+import Navbar from "./navbar";
+import Footer from "./fotter";
+import "@/styles/globals.css";
+import React, { useState, useEffect, useRef } from "react";
+import SidebarLayer from "./sidebar_layer";
 
-export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [isHambergerMenuOpen, setIsHambergerMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement | null>(null)
-  const buttonRef = useRef<HTMLDivElement | null>(null)
+export default function DashboardLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const buttonRef = useRef<HTMLDivElement | null>(null);
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
   const handleHambergerButtonClick = () => {
-    setIsHambergerMenuOpen(!isHambergerMenuOpen)
-  }
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 780)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
+      setIsMobile(window.innerWidth <= 780);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -29,42 +32,45 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
         !sidebarRef.current.contains(event.target as Node) &&
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
-        
       ) {
-        console.log("inside menu ok")
-        setIsHambergerMenuOpen(false)
+        console.log("inside menu ok");
+        setIsSidebarOpen(false);
       } else {
-        event.stopPropagation()
+        event.stopPropagation();
       }
-    }
+    };
 
-    if (isHambergerMenuOpen) {
+    if (isSidebarOpen) {
       setTimeout(() => {
-        window.addEventListener('click', handleClickOutside)
-      }, 0)
+        window.addEventListener("click", handleClickOutside);
+      }, 0);
     } else {
-      window.removeEventListener('click', handleClickOutside)
+      window.removeEventListener("click", handleClickOutside);
     }
 
     return () => {
-      window.removeEventListener('click', handleClickOutside)
-    }
-  }, [isHambergerMenuOpen])
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [isSidebarOpen]);
   return (
     <html lang="en">
       <body>
-        <Navbar
+        <SidebarLayer
           onHambergerClick={handleHambergerButtonClick}
-          isHambergerMenu={isHambergerMenuOpen}
-          isMobile={isMobile}
+          sidebarRef={sidebarRef}
+          isSidebarOpen={isSidebarOpen}
           buttonref={buttonRef}
         />
-        {isHambergerMenuOpen ? (
-          <HambergerMenuLayer sidebarRef={sidebarRef} isHambergerMenuOpen={isHambergerMenuOpen} />
-        ) : null}
-       {children}
-        <Footer />
+        <div className={`${isSidebarOpen ? "" : null} flex grow flex-col`}>
+          <Navbar
+            onHambergerClick={handleHambergerButtonClick}
+            isMobile={isMobile}
+            buttonref={buttonRef}
+          />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
-  )
+  );
 }

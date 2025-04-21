@@ -14,17 +14,19 @@ body {
 img {
   max-width: none;
 }
-@theme{
-  --hamberger_color: rgb(160, 32, 240);
+@theme {
+  --hamberger_color: rgb(156, 39, 176);
   --hamberger_child_color: rgb(247, 247, 247);
-  --border_color:rgb(127, 190, 87);
-  --voilet_color:rgb(92, 87, 190);
-  --black_color:rgb(29, 29, 29);
-  --gray_color:rgb(145, 145, 145);
+  --border_color: rgb(127, 190, 87);
+  --voilet_color: rgb(92, 87, 190);
+  --black_color: rgb(29, 29, 29);
+  --gray_color: rgb(145, 145, 145);
   --button_color: rgb(255, 252, 244);
-  --aqua_color_hover: rgb(0,225,225);
-  --full_opacity:rgba(0, 0, 0, 1);
-  --full_transparency:rgba(0, 0, 0, 0);
+  --aqua_color_hover: rgb(0, 225, 225);
+  --full_opacity: rgba(0, 0, 0, 1);
+  --full_transparency: rgba(0, 0, 0, 0);
+  --sidebar_hover_color: rgb(147, 51, 234);
+  --selected_sidebar_color: rgb(106, 27, 154);
 }
 
 :root {
@@ -142,4 +144,3 @@ img {
     @apply bg-background text-foreground;
   }
 }
-
