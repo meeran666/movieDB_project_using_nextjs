@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type DropDownProp = {
   isDropped: boolean;
   isHoverAbout: boolean;
@@ -5,15 +7,27 @@ type DropDownProp = {
 export default function DropDown({ isDropped, isHoverAbout }: DropDownProp) {
   return (
     <div
-      className={`absolute grid w-30 overflow-hidden shadow-md shadow-white duration-300 ease-in-out ${isDropped || isHoverAbout ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      className={`absolute z-2 grid w-35 overflow-hidden shadow-md shadow-white duration-300 ease-in-out ${isDropped || isHoverAbout ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
-      <div className="min-h-0 bg-[rgb(145,180,48)]">
-        <a className="text-1xl flex h-10 content-center items-center hover:bg-amber-200">
-          test1
-        </a>
-        <a className="text-1xl flex h-10 content-center items-center hover:bg-amber-200">
-          test2
-        </a>
+      <div className="min-h-0 bg-[rgb(46,177,166)]">
+        <Link
+          href="/about/Introduction"
+          className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
+        >
+          Introduction
+        </Link>
+        <Link
+          href="/about/DatabaseDesign"
+          className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]`"
+        >
+          Database Design
+        </Link>
+        <Link
+          href="/about/FutureUpdate"
+          className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
+        >
+          Future Update
+        </Link>
       </div>
     </div>
   );

@@ -2,6 +2,8 @@
 import { FormEvent, useState } from "react";
 import type { WrappedMovieListType } from "@/src/app/api/types.ts";
 import SearchList from "./searchList.tsx";
+import { useTopLoader } from "nextjs-toploader";
+import { toast } from "react-toastify";
 
 function SpaceBoard() {
   return <div className="w-[100vw] grow bg-(--black_color)"></div>;
@@ -18,9 +20,16 @@ function isApiResponse(data: unknown): data is WrappedMovieListType {
 export default function SearchBox() {
   const [search, setSearch] = useState<string>("");
   const [result, setResult] = useState<WrappedMovieListType | null>(null);
+  const loader = useTopLoader();
+  // const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    loader.start();
+    loader.setProgress(0.5);
+    function sleep(ms: number) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
     try {
       //request send with data
       const response = await fetch(`/api/movieList?name=${search}`, {
@@ -35,7 +44,15 @@ export default function SearchBox() {
       const data: unknown = await response.json();
       if (isApiResponse(data)) {
         console.log("Fetched movies");
+        if (data.rowdata.length == 0) {
+          toast.warn("No such movie exist!", {
+            position: "bottom-right",
+            autoClose: 7000,
+          });
+        }
+        await sleep(2000);
         setResult(data);
+        loader.done();
       } else {
         console.error("Invalid API response structure");
       }
@@ -50,7 +67,7 @@ export default function SearchBox() {
   };
   return (
     <>
-      <div className="flex h-[16.8rem] w-[100vw] items-center justify-center border-b-[0.2rem] border-solid border-[red] bg-(--black_color)">
+      <div className="flex h-[16.8rem] w-[100vw] items-center justify-center border-b-[0.2rem] border-[red] bg-(--black_color)">
         <form
           className="h-[10rem] w-[55vw] max-[780px]:grow max-[780px]:p-[1rem]"
           onSubmit={handleSubmit}
@@ -73,7 +90,7 @@ export default function SearchBox() {
               placeholder="search movie"
             />
             <button
-              className="mt-[0.9rem] ml-[1rem] h-[2.4rem] w-[6.6rem] rounded-[0.2rem] border-none bg-(--voilet_color) pl-[0.2rem] font-[bolder] text-(--button_color) outline-none max-[780px]:h-[1.9rem] max-[780px]:w-[5rem]"
+              className="mt-[0.9rem] ml-[1rem] h-[2.4rem] w-[6.6rem] rounded-[0.2rem] border-none bg-(--violet_color) pl-[0.2rem] font-[bolder] text-(--button_color) outline-none max-[780px]:h-[1.9rem] max-[780px]:w-[5rem]"
               type="submit"
             >
               Search

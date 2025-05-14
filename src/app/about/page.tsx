@@ -1,8 +1,7 @@
-import Documentation from "./documentation";
-export default function Page() {
-  return (
-    <>
-      <Documentation />
-    </>
-  );
+import React from "react";
+
+function page() {
+  return <></>;
 }
+
+export default page;

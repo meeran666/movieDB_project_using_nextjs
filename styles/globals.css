@@ -18,7 +18,7 @@ img {
   --hamberger_color: rgb(156, 39, 176);
   --hamberger_child_color: rgb(247, 247, 247);
   --border_color: rgb(127, 190, 87);
-  --voilet_color: rgb(92, 87, 190);
+  --violet_color: rgb(92, 87, 190);
   --black_color: rgb(29, 29, 29);
   --gray_color: rgb(145, 145, 145);
   --button_color: rgb(255, 252, 244);
@@ -27,6 +27,7 @@ img {
   --full_transparency: rgba(0, 0, 0, 0);
   --sidebar_hover_color: rgb(147, 51, 234);
   --selected_sidebar_color: rgb(106, 27, 154);
+  --prog_width: 0%;
 }
 
 :root {

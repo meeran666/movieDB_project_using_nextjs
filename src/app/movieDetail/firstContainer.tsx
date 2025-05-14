@@ -1,4 +1,4 @@
-import { AllType } from "../api/types.ts";
+import { AllTypeFilter } from "../api/types.ts";
 import AttributeContainer from "./attributeContainer.tsx";
 export default function FirstContainer({
   detail,
@@ -6,7 +6,7 @@ export default function FirstContainer({
   date,
   isMobile,
 }: {
-  detail: AllType;
+  detail: AllTypeFilter;
   genre: string;
   date: string;
   isMobile: boolean;

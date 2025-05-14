@@ -4,18 +4,21 @@ import Footer from "./fotter";
 import "@/styles/globals.css";
 import React, { useState, useEffect, useRef } from "react";
 import SidebarLayer from "./sidebar_layer";
+import NextTopLoader from "nextjs-toploader";
+import { ToastContainer } from "react-toastify";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
+
   const handleHambergerButtonClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 780);
@@ -62,13 +65,16 @@ export default function DashboardLayout({
           buttonref={buttonRef}
         />
         <div className={`${isSidebarOpen ? "" : null} flex grow flex-col`}>
+          <NextTopLoader speed={7} initialPosition={0.01} color="#5c57be" />
           <Navbar
             onHambergerClick={handleHambergerButtonClick}
             isMobile={isMobile}
             buttonref={buttonRef}
           />
           {children}
+
           <Footer />
+          <ToastContainer />
         </div>
       </body>
     </html>

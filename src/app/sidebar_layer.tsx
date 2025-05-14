@@ -1,5 +1,6 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RefObject, useState } from "react";
+import Link from "next/link";
 
 type SidebarLayerProp = {
   onHambergerClick: () => void;
@@ -10,16 +11,32 @@ type SidebarLayerProp = {
 type ButtonProp = {
   buttonref: RefObject<HTMLDivElement | null>;
 };
-function DropDown() {
+function DropDown({ dropClicked }: { dropClicked: boolean }) {
   return (
     <>
-      <div className="">
-        <a className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)">
-          Introduction
-        </a>
-        <a className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)">
-          second part
-        </a>
+      <div
+        className={`grid overflow-hidden duration-300 ease-in-out ${dropClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="min-h-0">
+          <Link
+            href="/about/Introduction"
+            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+          >
+            Introduction
+          </Link>
+          <Link
+            href="/about/DatabaseDesign"
+            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+          >
+            Database Design
+          </Link>
+          <Link
+            href="/about/FutureUpdate"
+            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+          >
+            Future Update
+          </Link>
+        </div>
       </div>
     </>
   );
@@ -52,6 +69,7 @@ export default function SidebarLayer({
 }: SidebarLayerProp) {
   const [dropClicked, setDropClicked] = useState(false);
   const handleDropClick = () => {
+    console.log("ok drip");
     setDropClicked(!dropClicked);
   };
   return (
@@ -81,11 +99,8 @@ export default function SidebarLayer({
             className={`inline h-9 w-9 text-[white] ${dropClicked ? "rotate-180" : null}`}
           />
         </a>
-        <div
-          className={`h-0 overflow-hidden duration-300 ease-in-out ${dropClicked ? "h-16" : null}`}
-        >
-          <DropDown />
-        </div>
+
+        <DropDown dropClicked={dropClicked} />
         <a
           className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-(--sidebar_hover_color)"
           href=""

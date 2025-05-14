@@ -112,7 +112,7 @@ export default function Navbar({
             className="h-[2.1rem] w-auto max-[780px]:h-[1.6rem] max-[780px]:w-auto"
             alt="logo"
           />
-          <div className="text-[35px] text-(--voilet_color) max-[780px]:text-[1.7rem]">
+          <div className="text-[35px] text-(--violet_color) max-[780px]:text-[1.7rem]">
             Moviemania
           </div>
         </div>
