@@ -1,5 +1,5 @@
 import getDatabaseConection from "@/lib/db.ts";
-import { mainTable } from "@/src/drizzle/schema.ts";
+import { mainTable } from "@/src/drizzle/models";
 import type { MovieListType } from "@/src/app/api/types";
 import { and, desc, ilike, isNotNull, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
@@ -40,9 +40,6 @@ async function search_contain(
       )
       .limit(limit)
       .execute();
-
-    console.log("result");
-    console.log(result);
   } catch (error) {
     console.log(error);
   }

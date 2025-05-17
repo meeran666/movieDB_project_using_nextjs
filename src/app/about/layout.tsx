@@ -6,6 +6,7 @@ import { Context } from "./context";
 export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  console.log("route");
   const pathname = usePathname().split("/")[2];
   const [isMobile, setIsMobile] = useState(false);
 

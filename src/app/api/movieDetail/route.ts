@@ -1,5 +1,5 @@
 import getDatabaseConection from "@/lib/db.ts";
-import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/schema";
+import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/models";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import { AllTypeFilter } from "../types";
@@ -157,8 +157,6 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await search_exact_id(parseInt(id));
-    console.log("result");
-    console.log(result);
     const genres = genre_str_create(result[0]);
     let cut_str_date: string | null = null;
     if (result[0].releaseDate !== null) {

@@ -1,5 +1,5 @@
 import getDatabaseConection from "@/lib/db.ts";
-import { mainTable } from "@/src/drizzle/schema";
+import { mainTable } from "@/src/drizzle/models";
 import { and, desc, eq, ilike, not, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import { PosterDetailType } from "../types";

@@ -1,17 +1,16 @@
 import {
   pgTable,
-  integer,
   index,
+  integer,
   varchar,
   text,
   bigint,
   boolean,
+  unique,
+  uuid,
+  timestamp,
 } from "drizzle-orm/pg-core";
-
-export const tableName1 = pgTable("table_name1", {
-  columnName1: integer("column_name_1"),
-  columnName2: integer("column_name_2"),
-});
+import { sql } from "drizzle-orm";
 
 export const mainTable = pgTable(
   "main_table",
@@ -79,3 +78,23 @@ export const genreTable = pgTable("genre_table", {
   tvMovie: boolean("tv_movie"),
   documentary: boolean(),
 });
+
+export const authTable = pgTable(
+  "auth_table",
+  {
+    id: uuid()
+      .default(sql`uuid_generate_v4()`)
+      .primaryKey()
+      .notNull(),
+    username: varchar({ length: 512 }),
+    email: text().notNull(),
+    password: text().notNull(),
+    verifyCode: text().notNull(),
+    verifyCodeExpiry: timestamp({ mode: "string" }).notNull(),
+    isVerified: boolean().default(false),
+  },
+  (table) => [
+    unique("auth_table_username_key").on(table.username),
+    unique("auth_table_email_key").on(table.email),
+  ],
+);

@@ -18,7 +18,6 @@ export default function Detail({
   posterDetail: PosterDetailType[] | null;
 }) {
   const isMobile = useMediaQuery({ maxWidth: 780 });
-  console.log(detail.posterPath);
   return (
     <>
       <div className="bg-[black]">

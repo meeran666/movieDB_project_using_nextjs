@@ -1,8 +1,4 @@
-import {
-  abbreviationTable,
-  genreTable,
-  mainTable,
-} from "@/src/drizzle/schema.ts";
+import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/models";
 type MovieListTypeUnfilter = typeof mainTable.$inferSelect;
 type MovieListType = Pick<
   MovieListTypeUnfilter,
@@ -34,7 +30,12 @@ type WrappedPosterDetailType = {
   posterData: PosterDetailType[];
 };
 
+type SignupApiResponse = {
+  success: boolean;
+  message: string;
+};
 export type {
+  SignupApiResponse,
   MovieListType,
   WrappedMovieListType,
   WrappedAllTypeFilter,

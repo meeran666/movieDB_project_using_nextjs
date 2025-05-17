@@ -18,7 +18,7 @@ export default function DropDown({ isDropped, isHoverAbout }: DropDownProp) {
         </Link>
         <Link
           href="/about/DatabaseDesign"
-          className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]`"
+          className="text-1xl hover:bg-[rgb(23,103,96)]` flex h-10 content-center items-center pl-2 font-medium text-white"
         >
           Database Design
         </Link>
@@ -27,6 +27,12 @@ export default function DropDown({ isDropped, isHoverAbout }: DropDownProp) {
           className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
         >
           Future Update
+        </Link>
+        <Link
+          href="/sign-up"
+          className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
+        >
+          sign-up
         </Link>
       </div>
     </div>

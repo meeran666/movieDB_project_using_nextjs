@@ -1,4 +1,4 @@
-import Documentation from "./documentation";
+import Documentation from "./documentation";  
 export default function Page(isMobile) {
   return (
     <>

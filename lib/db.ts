@@ -14,11 +14,11 @@ export default async function getDatabaseConection(): Promise<
 > {
   let client: pg.Client | null = null;
 
-  if (db != null) return db;
+  if (db != null) {
+    console.log("already connected with database");
+    return db;
+  }
   try {
-    console.log(process.env.DB_HOST);
-    console.log(process.env.POSTGRES_USER);
-    console.log(process.env.POSTGRES_PORT);
     client = new Client({
       host: process.env.DB_HOST ?? "172.17.0.1",
       user: process.env.POSTGRES_USER ?? "meeran",

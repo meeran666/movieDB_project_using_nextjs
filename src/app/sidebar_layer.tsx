@@ -69,7 +69,6 @@ export default function SidebarLayer({
 }: SidebarLayerProp) {
   const [dropClicked, setDropClicked] = useState(false);
   const handleDropClick = () => {
-    console.log("ok drip");
     setDropClicked(!dropClicked);
   };
   return (
