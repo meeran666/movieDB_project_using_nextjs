@@ -5,30 +5,40 @@ const db = await getDatabaseConection();
 
 export async function POST(request: Request) {
   try {
-    const { username, code } = await request.json();
-    const decodedUsername = decodeURIComponent(username);
+    const { username, email, code } = await request.json();
+    const decodedValue = decodeURIComponent(username ? username : email);
+    const columnbName = username ? authTable.username : authTable.email;
     const user = await db
       .select()
       .from(authTable)
-      .where(eq(authTable.username, decodedUsername));
+      .where(eq(columnbName, decodedValue));
+    console.log("user");
+
     if (user.length === 0) {
+      const message = username
+        ? "User not found, please first register your self"
+        : "this Email is not registered, please first register the email";
       return Response.json(
-        { success: false, message: "User not found" },
-        { status: 404 },
+        { success: false, message: message },
+        { status: 400 },
       );
     }
+
+
 
     // Check if the code is correct and not expired
     const isCodeValid = user[0]?.verifyCode === code;
     const isCodeNotExpired = new Date(user[0]?.verifyCodeExpiry) > new Date();
-
+    console.log(user[0]?.verifyCodeExpiry);
+    console.log(new Date(user[0]?.verifyCodeExpiry));
+    console.log(new Date());
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       await db
         .update(authTable)
         .set({ isVerified: true })
         .where(eq(authTable.id, user[0].id));
-        
+
       return Response.json(
         { success: true, message: "Account verified successfully" },
         { status: 200 },

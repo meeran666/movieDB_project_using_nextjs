@@ -34,8 +34,10 @@ type SignupApiResponse = {
   success: boolean;
   message: string;
 };
+type ForgotPasswordApiResponse = SignupApiResponse;
 export type {
   SignupApiResponse,
+  ForgotPasswordApiResponse,
   MovieListType,
   WrappedMovieListType,
   WrappedAllTypeFilter,

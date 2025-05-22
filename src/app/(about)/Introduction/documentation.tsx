@@ -1,9 +1,9 @@
 "use client";
-import { useContext } from "react";
-import { Context } from "../context";
+// import { useContext } from "react";
+// import { Context } from "../context";
 
 function Documentation() {
-  const isMobile = useContext(Context); // Access the data
+  // const isMobile = useContext(Context); // Access the data
 
   return (
     <>
@@ -46,11 +46,11 @@ function Documentation() {
           </div>
           <div className="pb-7">
             When you click or touch on search box you can put title or name of
-            movie. If you don't know the full name or spelling of name there is
-            another option for you to serach, which is you could also put part
-            of name or title of movie in search box. For searching a movie you
-            have to click or touch on serach button or press enter which will
-            trigger the sending of title of movie to backend, there it will
+            movie. If you {`don't`} know the full name or spelling of name there
+            is another option for you to serach, which is you could also put
+            part of name or title of movie in search box. For searching a movie
+            you have to click or touch on serach button or press enter which
+            will trigger the sending of title of movie to backend, there it will
             search and send back the list of movies to frontend.
           </div>
           <div className="pb-7">
@@ -91,8 +91,8 @@ function Documentation() {
             companies, homepage (link), keywords, tagline, original title.
           </div>
           <div className="pb-7">
-            Third section contain synopsis. It's length could possibly be high $
-            {`that's `} why it gets its own section with dynamic width
+            Third section contain synopsis. {`It's`} length could possibly be
+            high ${`that's `} why it gets its own section with dynamic width
           </div>
           <div className="pb-7">
             Forth section name is similar movies. This section contain similar

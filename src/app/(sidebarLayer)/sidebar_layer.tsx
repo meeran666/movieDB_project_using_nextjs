@@ -1,73 +1,31 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { MdOutlineLogin } from "react-icons/md";
+
 import { RefObject, useState } from "react";
 import Link from "next/link";
+import AuthDetailLayer from "../authDetailLayer";
+import { useSession } from "next-auth/react";
+import DropDown from "./dropdown";
+import CrossButton from "./crossButton";
 
 type SidebarLayerProp = {
   onHambergerClick: () => void;
   sidebarRef: RefObject<HTMLDivElement | null>;
   isSidebarOpen: boolean;
   buttonref: RefObject<HTMLDivElement | null>;
+  setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-type ButtonProp = {
-  buttonref: RefObject<HTMLDivElement | null>;
-};
-function DropDown({ dropClicked }: { dropClicked: boolean }) {
-  return (
-    <>
-      <div
-        className={`grid overflow-hidden duration-300 ease-in-out ${dropClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="min-h-0">
-          <Link
-            href="/about/Introduction"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
-          >
-            Introduction
-          </Link>
-          <Link
-            href="/about/DatabaseDesign"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
-          >
-            Database Design
-          </Link>
-          <Link
-            href="/about/FutureUpdate"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
-          >
-            Future Update
-          </Link>
-        </div>
-      </div>
-    </>
-  );
-}
-function CrossButton({ buttonref }: ButtonProp) {
-  return (
-    <>
-      <div ref={buttonref} className="relative h-10 w-10 grow-0">
-        <div
-          className="absolute top-[50%] left-[50%] h-[0.1rem] w-[1rem] origin-center rotate-[45] bg-white"
-          style={{
-            transform: "translate(-50%, -50%) rotate(45deg)",
-          }}
-        ></div>
-        <div
-          className="absolute top-[50%] left-[50%] h-[0.1rem] w-[1rem] origin-center rotate-[45] bg-white"
-          style={{
-            transform: "translate(-50%, -50%) rotate(-45deg)",
-          }}
-        ></div>
-      </div>
-    </>
-  );
-}
+
 export default function SidebarLayer({
   onHambergerClick,
   sidebarRef,
   isSidebarOpen,
   buttonref,
+  setIsSideBarOpen,
 }: SidebarLayerProp) {
   const [dropClicked, setDropClicked] = useState(false);
+  const { status } = useSession();
+
   const handleDropClick = () => {
     setDropClicked(!dropClicked);
   };
@@ -82,7 +40,7 @@ export default function SidebarLayer({
       >
         <CrossButton buttonref={buttonref} />
       </div>
-      <ul className="pt-3">
+      <ul className="flex grow-1 flex-col pt-3">
         <a
           className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-(--sidebar_hover_color)"
           href={"/"}
@@ -106,6 +64,22 @@ export default function SidebarLayer({
         >
           test
         </a>
+        <div className="block grow-1"></div>
+
+        {status === "unauthenticated" ? (
+          <Link
+            href="/sign-in"
+            onClick={() => {
+              setIsSideBarOpen((val: boolean) => !val);
+            }}
+            className="flex items-center gap-1.5 py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
+          >
+            <MdOutlineLogin />
+            login
+          </Link>
+        ) : (
+          <AuthDetailLayer />
+        )}
       </ul>
     </div>
   );

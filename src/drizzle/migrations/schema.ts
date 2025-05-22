@@ -33,6 +33,19 @@ export const mainTable = pgTable("main_table", {
 	index("title_btree").using("btree", table.title.asc().nullsLast().op("text_ops")),
 ]);
 
+export const authTable = pgTable("auth_table", {
+	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
+	username: varchar({ length: 512 }).notNull(),
+	email: text().notNull(),
+	password: text(),
+	verifyCode: text().notNull(),
+	verifyCodeExpiry: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
+	isVerified: boolean().default(false),
+}, (table) => [
+	unique("auth_table_username_key").on(table.username),
+	unique("auth_table_email_key").on(table.email),
+]);
+
 export const abbreviationTable = pgTable("abbreviation_table", {
 	originalLanguage: varchar("original_language", { length: 70 }).primaryKey().notNull(),
 	languageCode: varchar("language_code", { length: 16 }),
@@ -60,16 +73,3 @@ export const genreTable = pgTable("genre_table", {
 	tvMovie: boolean("tv_movie"),
 	documentary: boolean(),
 });
-
-export const authTable = pgTable("auth_table", {
-	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
-	username: varchar({ length: 512 }),
-	email: text().notNull(),
-	password: text().notNull(),
-	verifyCode: text().notNull(),
-	verifyCodeExpiry: timestamp({ mode: 'string' }).notNull(),
-	isVerified: boolean().default(false),
-}, (table) => [
-	unique("auth_table_username_key").on(table.username),
-	unique("auth_table_email_key").on(table.email),
-]);

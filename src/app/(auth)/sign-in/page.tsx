@@ -46,7 +46,7 @@ export default function SignInForm() {
     }
   };
   const googleSignIn = async () => {
-    const result = await signIn("google");
+    signIn("google");
   };
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-800">
@@ -86,18 +86,27 @@ export default function SignInForm() {
               type="text"
             ></input>
           </div>
-          <button className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
-            Sign In
-          </button>
+          <div className="">
+            <button className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+              Sign In
+            </button>
+            <div className="flex">
+              <Link
+                href="/sign-up"
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Forgot Password?
+              </Link>
+              <div className="grow-1"></div>
+              <Link
+                href="/sign-up"
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Sign up
+              </Link>
+            </div>
+          </div>
         </form>
-        <div className="mt-4 text-center">
-          <p>
-            Not a member yet?{" "}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign up
-            </Link>
-          </p>
-        </div>
         <button
           className="ring-offset-background focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-primary inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           onClick={googleSignIn}

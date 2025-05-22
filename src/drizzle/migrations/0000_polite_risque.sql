@@ -27,6 +27,18 @@ CREATE TABLE "main_table" (
 	"keywords" text
 );
 --> statement-breakpoint
+CREATE TABLE "auth_table" (
+	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
+	"username" varchar(512) NOT NULL,
+	"email" text NOT NULL,
+	"password" text,
+	"verifyCode" text NOT NULL,
+	"verifyCodeExpiry" timestamp with time zone NOT NULL,
+	"isVerified" boolean DEFAULT false,
+	CONSTRAINT "auth_table_username_key" UNIQUE("username"),
+	CONSTRAINT "auth_table_email_key" UNIQUE("email")
+);
+--> statement-breakpoint
 CREATE TABLE "abbreviation_table" (
 	"original_language" varchar(70) PRIMARY KEY NOT NULL,
 	"language_code" varchar(16)
@@ -53,18 +65,6 @@ CREATE TABLE "genre_table" (
 	"history" boolean,
 	"tv_movie" boolean,
 	"documentary" boolean
-);
---> statement-breakpoint
-CREATE TABLE "auth_table" (
-	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"username" varchar(512),
-	"email" text NOT NULL,
-	"password" text NOT NULL,
-	"verifyCode" text NOT NULL,
-	"verifyCodeExpiry" timestamp NOT NULL,
-	"isVerified" boolean DEFAULT false,
-	CONSTRAINT "auth_table_username_key" UNIQUE("username"),
-	CONSTRAINT "auth_table_email_key" UNIQUE("email")
 );
 --> statement-breakpoint
 CREATE INDEX "title_btree" ON "main_table" USING btree ("title" text_ops);

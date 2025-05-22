@@ -1,11 +1,12 @@
 "use client";
-import Navbar from "./navbar";
+import Navbar from "./(navbar)/navbar";
 import Footer from "./fotter";
 import "@/styles/globals.css";
 import React, { useState, useEffect, useRef } from "react";
-import SidebarLayer from "./sidebar_layer";
+import SidebarLayer from "./(sidebarLayer)/sidebar_layer";
 import NextTopLoader from "nextjs-toploader";
 import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "next-auth/react";
 
 export default function DashboardLayout({
   children,
@@ -58,12 +59,16 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body>
-        <SidebarLayer
-          onHambergerClick={handleHambergerButtonClick}
-          sidebarRef={sidebarRef}
-          isSidebarOpen={isSidebarOpen}
-          buttonref={buttonRef}
-        />
+        <SessionProvider>
+          <SidebarLayer
+            onHambergerClick={handleHambergerButtonClick}
+            setIsSideBarOpen={setIsSidebarOpen}
+            sidebarRef={sidebarRef}
+            isSidebarOpen={isSidebarOpen}
+            buttonref={buttonRef}
+          />
+        </SessionProvider>
+
         <div className={`${isSidebarOpen ? "" : null} flex grow flex-col`}>
           <NextTopLoader speed={7} initialPosition={0.01} color="#5c57be" />
           <Navbar

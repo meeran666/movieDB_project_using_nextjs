@@ -7,7 +7,7 @@ export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   console.log("route");
-  const pathname = usePathname().split("/")[2];
+  const pathname = usePathname().split("/")[1];
   const [isMobile, setIsMobile] = useState(false);
 
   const [activeItem, setActiveItem] = useState<string | undefined>(pathname);

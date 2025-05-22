@@ -172,6 +172,78 @@
       "policies": {},
       "isRLSEnabled": false
     },
+    "public.auth_table": {
+      "name": "auth_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "uuid_generate_v4()"
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verifyCode": {
+          "name": "verifyCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "verifyCodeExpiry": {
+          "name": "verifyCodeExpiry",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "isVerified": {
+          "name": "isVerified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "auth_table_username_key": {
+          "columns": [
+            "username"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_username_key"
+        },
+        "auth_table_email_key": {
+          "columns": [
+            "email"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_email_key"
+        }
+      },
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
     "public.abbreviation_table": {
       "name": "abbreviation_table",
       "schema": "",
@@ -326,78 +398,6 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {},
-      "policies": {},
-      "isRLSEnabled": false
-    },
-    "public.auth_table": {
-      "name": "auth_table",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "uuid_generate_v4()"
-        },
-        "username": {
-          "name": "username",
-          "type": "varchar(512)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "password": {
-          "name": "password",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "verifyCode": {
-          "name": "verifyCode",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "verifyCodeExpiry": {
-          "name": "verifyCodeExpiry",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "isVerified": {
-          "name": "isVerified",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "auth_table_username_key": {
-          "columns": [
-            "username"
-          ],
-          "nullsNotDistinct": false,
-          "name": "auth_table_username_key"
-        },
-        "auth_table_email_key": {
-          "columns": [
-            "email"
-          ],
-          "nullsNotDistinct": false,
-          "name": "auth_table_email_key"
-        }
-      },
       "checkConstraints": {},
       "policies": {},
       "isRLSEnabled": false

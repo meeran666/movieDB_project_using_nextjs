@@ -64,17 +64,16 @@ export default function SignupPage() {
         data,
       );
 
-      toast.warn(response.data.message, {
+      toast.success(response.data.message, {
         position: "bottom-right",
         autoClose: 7000,
+        theme: "colored",
       });
 
       router.replace(`/verify/${data.username}`);
 
       setIsSubmitting(false);
     } catch (error) {
-      console.log("wooooo56");
-
       // console.error("Error during sign-up:", error);
 
       const axiosError = error as AxiosError<SignupApiResponse>;
@@ -84,10 +83,10 @@ export default function SignupPage() {
         axiosError.response?.data.message ||
         "There was a problem with your sign-up. Please try again.";
 
-      console.log("username is already 44");
-      toast.warn(errorMessage, {
+      toast.error(errorMessage, {
         position: "bottom-right",
         autoClose: 7000,
+        theme: "colored",
       });
 
       setIsSubmitting(false);
@@ -140,7 +139,7 @@ export default function SignupPage() {
             <p className="">{errors.email?.message}</p>
           </div>
           <div className="">
-            <label htmlFor="channel">Password</label>
+            <label htmlFor="Password">Password</label>
             <input
               className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               type="text"

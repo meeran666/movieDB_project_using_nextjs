@@ -1,13 +1,12 @@
 import Link from "next/link";
 
 type DropDownProp = {
-  isDropped: boolean;
   isHoverAbout: boolean;
 };
-export default function DropDown({ isDropped, isHoverAbout }: DropDownProp) {
+export default function DropDown({ isHoverAbout }: DropDownProp) {
   return (
     <div
-      className={`absolute z-2 grid w-35 overflow-hidden shadow-md shadow-white duration-300 ease-in-out ${isDropped || isHoverAbout ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      className={`absolute z-2 grid w-35 overflow-hidden shadow-md shadow-white duration-300 ease-in-out ${isHoverAbout ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
       <div className="min-h-0 bg-[rgb(46,177,166)]">
         <Link
