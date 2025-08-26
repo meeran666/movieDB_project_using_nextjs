@@ -35,14 +35,16 @@ export const mainTable = pgTable("main_table", {
 
 export const authTable = pgTable("auth_table", {
 	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
-	username: varchar({ length: 512 }).notNull(),
+	username: varchar({ length: 512 }),
+	googleAuthUsername: varchar({ length: 512 }),
 	email: text().notNull(),
 	password: text(),
-	verifyCode: text().notNull(),
+	verifyCode: text(),
 	verifyCodeExpiry: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
 	isVerified: boolean().default(false),
 }, (table) => [
 	unique("auth_table_username_key").on(table.username),
+	unique("auth_table_googleAuthUsername_key").on(table.googleAuthUsername),
 	unique("auth_table_email_key").on(table.email),
 ]);
 

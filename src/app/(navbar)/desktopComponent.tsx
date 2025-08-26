@@ -11,8 +11,6 @@ function AuthWrapper({
 }: {
   status: "authenticated" | "loading" | "unauthenticated";
 }) {
-  console.log("status");
-  console.log(status);
   return (
     <>
       {status === "authenticated" ? (

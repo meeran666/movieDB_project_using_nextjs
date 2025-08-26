@@ -29,6 +29,7 @@ export default async function getDatabaseConection(): Promise<
 
     await client.connect();
     console.log("connected with sqlserver");
+    console.log("wow");
     db = drizzle({ client: client });
     return db;
   } catch (error) {

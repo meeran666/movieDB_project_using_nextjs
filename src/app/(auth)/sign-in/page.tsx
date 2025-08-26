@@ -53,7 +53,7 @@ export default function SignInForm() {
       <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Welcome Back to True Feedback
+            Sign in for AI use
           </h1>
           <p className="mb-4">Sign in to continue your secret conversations</p>
         </div>

@@ -21,12 +21,6 @@ declare module "next-auth" {
     name?: string;
     email?: string;
   }
-
-  interface Profile {
-    username?: string;
-    email?: string;
-    exp?: string;
-  }
 }
 declare module "next-auth/jwt" {
   interface JWT {
@@ -35,5 +29,6 @@ declare module "next-auth/jwt" {
     isVerified?: boolean;
     name?: string;
     email?: string;
+    exp?: string;
   }
 }

@@ -29,13 +29,15 @@ CREATE TABLE "main_table" (
 --> statement-breakpoint
 CREATE TABLE "auth_table" (
 	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"username" varchar(512) NOT NULL,
+	"username" varchar(512),
+	"googleAuthUsername" varchar(512),
 	"email" text NOT NULL,
 	"password" text,
-	"verifyCode" text NOT NULL,
+	"verifyCode" text,
 	"verifyCodeExpiry" timestamp with time zone NOT NULL,
 	"isVerified" boolean DEFAULT false,
 	CONSTRAINT "auth_table_username_key" UNIQUE("username"),
+	CONSTRAINT "auth_table_googleAuthUsername_key" UNIQUE("googleAuthUsername"),
 	CONSTRAINT "auth_table_email_key" UNIQUE("email")
 );
 --> statement-breakpoint

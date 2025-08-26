@@ -5,7 +5,7 @@ const redis = new Redis({
   host: "localhost",
   port: 6379,
   username: "meeran",
-  password: "0786",
+  password: "password",
 });
 
 export default redis;

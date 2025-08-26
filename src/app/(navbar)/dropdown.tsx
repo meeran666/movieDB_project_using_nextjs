@@ -10,19 +10,19 @@ export default function DropDown({ isHoverAbout }: DropDownProp) {
     >
       <div className="min-h-0 bg-[rgb(46,177,166)]">
         <Link
-          href="/about/Introduction"
+          href="/Introduction"
           className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
         >
           Introduction
         </Link>
         <Link
-          href="/about/DatabaseDesign"
-          className="text-1xl hover:bg-[rgb(23,103,96)]` flex h-10 content-center items-center pl-2 font-medium text-white"
+          href="/DatabaseDesign"
+          className="text-1xl hover:bg-[rgb(23,103,96)]` flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
         >
           Database Design
         </Link>
         <Link
-          href="/about/FutureUpdate"
+          href="/FutureUpdate"
           className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white hover:bg-[rgb(23,103,96)]"
         >
           Future Update

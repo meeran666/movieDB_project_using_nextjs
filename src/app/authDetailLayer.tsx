@@ -1,3 +1,4 @@
+import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { CgLogOut } from "react-icons/cg";
@@ -5,11 +6,15 @@ import { CgLogOut } from "react-icons/cg";
 export default function AuthDetailLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
   const { data: session } = useSession();
-  
+
   const name = session?.user?.username || session?.user?.name;
   const nameFirstChar = name?.[0].toUpperCase();
   const email = session?.user?.email;
-
+  const onSignout = async () => {
+    console.log("custom-signout");
+    await axios("/api/custom-signout");
+    signOut();
+  };
   return (
     <>
       <div
@@ -26,12 +31,7 @@ export default function AuthDetailLayer() {
             <div className="border-b-amber-200">{email}</div>
             <div className="flex items-center">
               <CgLogOut className="" />
-              <div
-                onClick={() => {
-                  signOut();
-                }}
-                className=""
-              >
+              <div onClick={onSignout} className="">
                 logout
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { NextAuthOptions, Session, User } from "next-auth";
+import { Account, NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -14,14 +14,6 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      // async authorize(credentials: any): Promise<any> {
-      //   console.log("credentials");
-      //   console.log(credentials);
-      //   // try {
-      //   // } catch (err: any) {
-      //   //   throw new Error(err);
-      //   // }
-      // },
     }),
     CredentialsProvider({
       id: "credentials",
@@ -69,36 +61,58 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     // async signIn({ account, profile }) {
-    //   console.log("profile");
-    //   console.log(profile);
-    //   // if (
-    //   //   account?.provider === "google" &&
-    //   //   profile?.name !== undefined &&
-    //   //   profile?.email !== undefined &&
-    //   //   profile?.exp !== undefined
-    //   // ) {
-    //   //   await db.insert(authTable).values({
-    //   //     username: profile?.name,
-    //   //     email: profile?.email,
-    //   //     verifyCodeExpiry: profile?.exp,
-    //   //     isVerified: true,
-    //   //   });
-    //   // }
-    //   return "authenticated";
+    //   console.log(account?.provider);
+    //   if (
+    //     account?.provider === "google" &&
+    //     profile?.name !== undefined &&
+    //     profile?.email !== undefined &&
+    //     profile?.exp !== undefined
+    //   ) {
+    //     return true;
+    //   }
     // },
-    async jwt({ token, user }: { token: JWT; user: User }) {
-      console.log("token3");
-      console.log(token);
-      // console.log("user");
-      // console.log(user);
-
+    async jwt({
+      token,
+      account,
+      user,
+      trigger,
+    }: {
+      token: JWT;
+      account: Account | null;
+      user: User;
+      trigger?: "signUp" | "signIn" | "update";
+    }) {
       if (user) {
-        token.id = user?.id?.toString(); // Convert ObjectId to string
+        token.id = user?.id?.toString();
         token.isVerified = user?.isVerified;
         token.username = user?.username;
         token.name = user?.name;
         token.email = user?.email;
       }
+
+      if (account?.provider !== "google" && trigger !== "signIn") {
+        console.log("wow000");
+        return token;
+      }
+      try {
+        if (token?.name !== undefined && token?.email !== undefined) {
+          const date = new Date(Date.now() + 3600000);
+          await db
+            .insert(authTable)
+            .values({
+              googleAuthUsername: token?.name,
+              email: token?.email,
+              verifyCodeExpiry: date.toISOString(),
+              isVerified: true,
+            })
+            .onConflictDoNothing();
+          console.log("loger");
+        }
+      } catch (error) {
+        console.log("8900");
+        console.error(error);
+      }
+
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {

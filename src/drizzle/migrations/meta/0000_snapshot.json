@@ -187,7 +187,13 @@
           "name": "username",
           "type": "varchar(512)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "googleAuthUsername": {
+          "name": "googleAuthUsername",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
         },
         "email": {
           "name": "email",
@@ -205,7 +211,7 @@
           "name": "verifyCode",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "verifyCodeExpiry": {
           "name": "verifyCodeExpiry",
@@ -231,6 +237,13 @@
           ],
           "nullsNotDistinct": false,
           "name": "auth_table_username_key"
+        },
+        "auth_table_googleAuthUsername_key": {
+          "columns": [
+            "googleAuthUsername"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_googleAuthUsername_key"
         },
         "auth_table_email_key": {
           "columns": [

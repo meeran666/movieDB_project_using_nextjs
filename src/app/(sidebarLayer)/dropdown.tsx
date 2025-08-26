@@ -8,19 +8,19 @@ export default function DropDown({ dropClicked }: { dropClicked: boolean }) {
       >
         <div className="min-h-0">
           <Link
-            href="/about/Introduction"
+            href="/Introduction"
             className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
             Introduction
           </Link>
           <Link
-            href="/about/DatabaseDesign"
+            href="/DatabaseDesign"
             className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
             Database Design
           </Link>
           <Link
-            href="/about/FutureUpdate"
+            href="/FutureUpdate"
             className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
             Future Update
