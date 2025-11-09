@@ -13,7 +13,7 @@ services:
   db:
     image: postgres:latest
     container_name: pg_moviedb
-    env_file: "dbcontainer.env"
+    env_file: ".env"
     volumes:
       - ../largeFile1/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
       - pg_data_volume:/var/lib/postgresql/18/main
