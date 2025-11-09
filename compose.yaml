@@ -2,7 +2,7 @@ name: moviemania
 services:
   cache:
     image: redis:latest
-    container_name: redis
+    container_name: redis_moviedb
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
       - redis_data_volume:/data
@@ -15,8 +15,8 @@ services:
     container_name: pg_moviedb
     env_file: "dbcontainer.env"
     volumes:
-      - ../largeFile/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
-      - pg_data_volume:/var/lib/postgresql/data
+      - ../largeFile1/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
+      - pg_data_volume:/var/lib/postgresql/18/main
     ports:
       - "5500:5432"
     restart: unless-stopped
