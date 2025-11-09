@@ -1,28 +1,30 @@
+name: moviemania
 services:
-  app:
-    image: nextjs_movieapp_image:0.0.1
-    container_name: nextjs_movieapp
-    # build:
-    #   context: .
-    # dockerfile: Dockerfile
+  cache:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis_data_volume:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     ports:
-      - '3005:3000'
-    depends_on:
-      - db
-    command: ['bun', 'server.js']
-    env_file: 'prod.env'
+      - "6379:6379"
+    restart: unless-stopped
   db:
     image: postgres:latest
     container_name: pg_moviedb
-    env_file: 'dbcontainer.env'
+    env_file: "dbcontainer.env"
     volumes:
-      - ~/pg_moviedb_backup.sql:/docker-entrypoint-initdb.d/pg_moviedb_backup.sql
-      - pg_data:/var/lib/postgresql/data
+      - ../largeFile/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
+      - pg_data_volume:/var/lib/postgresql/data
     ports:
-      - '5500:5432'
+      - "5500:5432"
+    restart: unless-stopped
 networks:
-  docker_network:
-    driver: bridge
+  default:
+    name: docker_network
 volumes:
-  pg_data:
+  pg_data_volume:
     name: movieapp_data
+  redis_data_volume:
+    name: redis_data

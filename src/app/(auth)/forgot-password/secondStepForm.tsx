@@ -6,6 +6,7 @@ import { ForgotPasswordApiResponse } from "../../api/types";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SecondStepForm({ email }: any) {
   // email = "meeran.equebal@gmail.com";
@@ -26,6 +27,7 @@ export default function SecondStepForm({ email }: any) {
   const password1 = watch("password1");
   const { onChange, ...rest } = register("password2");
   const [isPasswordSame, setIsPasswordSame] = useState(true);
+  const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof sendPasswordSchema>) => {
     try {
@@ -40,6 +42,7 @@ export default function SecondStepForm({ email }: any) {
         autoClose: 7000,
         theme: "colored",
       });
+      router.replace("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<ForgotPasswordApiResponse>;
       const errorMessage =
@@ -89,7 +92,7 @@ export default function SecondStepForm({ email }: any) {
       </div>
       <button
         type="submit"
-        className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+        className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
       >
         Reset Password
       </button>

@@ -4,6 +4,7 @@ import type { WrappedMovieListType } from "@/src/app/api/types.ts";
 import SearchList from "./searchList.tsx";
 import { useTopLoader } from "nextjs-toploader";
 import { toast } from "react-toastify";
+import Footer from "./fotter.tsx";
 
 function SpaceBoard() {
   return <div className="w-[100vw] grow bg-(--black_color)"></div>;
@@ -27,9 +28,6 @@ export default function SearchBox() {
     event.preventDefault();
     loader.start();
     loader.setProgress(0.5);
-    function sleep(ms: number) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
-    }
     try {
       //request send with data
       const response = await fetch(`/api/movieList?name=${search}`, {
@@ -50,7 +48,6 @@ export default function SearchBox() {
             autoClose: 7000,
           });
         }
-        await sleep(2000);
         setResult(data);
         loader.done();
       } else {
@@ -90,7 +87,7 @@ export default function SearchBox() {
               placeholder="search movie"
             />
             <button
-              className="mt-[0.9rem] ml-[1rem] h-[2.4rem] w-[6.6rem] rounded-[0.2rem] border-none bg-(--violet_color) pl-[0.2rem] font-[bolder] text-(--button_color) outline-none max-[780px]:h-[1.9rem] max-[780px]:w-[5rem]"
+              className="mt-[0.9rem] ml-[1rem] h-[2.4rem] w-[6.6rem] cursor-pointer rounded-[0.2rem] border-none bg-(--violet_color) pl-[0.2rem] font-[bolder] text-(--button_color) outline-none max-[780px]:h-[1.9rem] max-[780px]:w-[5rem]"
               type="submit"
             >
               Search
@@ -102,6 +99,7 @@ export default function SearchBox() {
         <SearchList rowdata={result.rowdata} rowdate={result.rowdate} />
       ) : null}
       <SpaceBoard />
+      <Footer />
     </>
   );
 }

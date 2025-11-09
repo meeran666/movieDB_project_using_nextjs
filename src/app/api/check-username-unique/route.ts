@@ -1,9 +1,8 @@
-import getDatabaseConection from "@/lib/db";
+import { db } from "@/lib/db";
 import { authTable } from "@/src/drizzle/models";
 import { z } from "zod";
 import { usernameValidation } from "@/src/schemas/signUpSchema";
 import { and, eq } from "drizzle-orm";
-const db = await getDatabaseConection();
 const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });

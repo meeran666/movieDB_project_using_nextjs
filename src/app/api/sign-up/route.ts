@@ -1,15 +1,12 @@
-import getDatabaseConection from "@/lib/db";
+import { db } from "@/lib/db";
 import { authTable } from "@/src/drizzle/models";
 import bcrypt from "bcryptjs";
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import { and, eq } from "drizzle-orm";
-const db = await getDatabaseConection();
 
 export async function POST(request: Request) {
   try {
-    
     const { username, email, password } = await request.json();
-    console.log(username, email, password);
     //finding any username already contanin in database
     const existingNonVerifiedUserByUsername = await db
       .select()
@@ -94,20 +91,20 @@ export async function POST(request: Request) {
     }
 
     // Send verification email
-    // const emailResponse = await sendVerificationEmail(
-    //   email,
-    //   username,
-    //   verifyCode,
-    // );
-    // if (!emailResponse.success) {
-    //   return Response.json(
-    //     {
-    //       success: false,
-    //       message: emailResponse.message,
-    //     },
-    //     { status: 500 },
-    //   );
-    // }
+    const emailResponse = await sendVerificationEmail(
+      email,
+      username,
+      verifyCode,
+    );
+    if (!emailResponse.success) {
+      return Response.json(
+        {
+          success: false,
+          message: emailResponse.message,
+        },
+        { status: 500 },
+      );
+    }
 
     return Response.json(
       {

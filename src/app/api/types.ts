@@ -34,6 +34,12 @@ type SignupApiResponse = {
   success: boolean;
   message: string;
 };
+type imgPropertyObj = {
+  imageLink: string;
+  realWidthImg: number;
+  imgDim: [number, number];
+};
+
 type ForgotPasswordApiResponse = SignupApiResponse;
 export type {
   SignupApiResponse,
@@ -44,4 +50,5 @@ export type {
   AllTypeFilter,
   PosterDetailType,
   WrappedPosterDetailType,
+  imgPropertyObj,
 };

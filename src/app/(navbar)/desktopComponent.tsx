@@ -28,14 +28,13 @@ export default function DesktopComponent() {
 
   // const [isDropped, setIsDropped] = useState(false);
   const browseRef = useRef<HTMLAnchorElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLButtonElement>(null);
   const { status } = useSession();
   const pathname = usePathname();
+  type MyMouseEvent<T extends HTMLElement> = MouseEvent<T>;
 
   const handleMouseIn = (
-    event:
-      | MouseEvent<HTMLDivElement, globalThis.MouseEvent>
-      | MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    event: MyMouseEvent<HTMLButtonElement> | MyMouseEvent<HTMLAnchorElement>,
   ) => {
     if (event.target && aboutRef.current?.contains(event.target as Node)) {
       setIsHoverAbout(true);
@@ -44,10 +43,9 @@ export default function DesktopComponent() {
       setisHoverBrowse(true);
     }
   };
+
   const handleMouseOut = (
-    event:
-      | MouseEvent<HTMLDivElement, globalThis.MouseEvent>
-      | MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    event: MyMouseEvent<HTMLButtonElement> | MyMouseEvent<HTMLAnchorElement>,
   ) => {
     if (event.target && aboutRef.current?.contains(event.target as Node)) {
       setIsHoverAbout(false);
@@ -55,7 +53,26 @@ export default function DesktopComponent() {
     if (event.target && browseRef.current?.contains(event.target as Node)) {
       setisHoverBrowse(false);
     }
-  };
+  }; // const handleMouseIn = (event: MouseEvent<HTMLButtonElement>) => {
+  //   if (event.target && aboutRef.current?.contains(event.target as Node)) {
+  //     setIsHoverAbout(true);
+  //   }
+  //   if (event.target && browseRef.current?.contains(event.target as Node)) {
+  //     setisHoverBrowse(true);
+  //   }
+  // };
+  // const handleMouseOut = (
+  //   event:
+  //     | MouseEvent<HTMLDivElement, globalThis.MouseEvent>
+  //     | MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+  // ) => {
+  //   if (event.target && aboutRef.current?.contains(event.target as Node)) {
+  //     setIsHoverAbout(false);
+  //   }
+  //   if (event.target && browseRef.current?.contains(event.target as Node)) {
+  //     setisHoverBrowse(false);
+  //   }
+  // };
   return (
     <div className="flex grow-0">
       <a
@@ -67,11 +84,11 @@ export default function DesktopComponent() {
       >
         Browse movie
       </a>
-      <div
+      <button
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
         ref={aboutRef}
-        className=""
+        className="cursor-pointer"
       >
         <div className="flex h-15.5 hover:bg-[rgb(25,25,54)]">
           <div className="flex items-center px-[24px]">
@@ -87,7 +104,7 @@ export default function DesktopComponent() {
         </div>
 
         <DropDown isHoverAbout={isHoverAbout} />
-      </div>
+      </button>
 
       {pathname === "/sign-in" ? null : <AuthWrapper status={status} />}
     </div>

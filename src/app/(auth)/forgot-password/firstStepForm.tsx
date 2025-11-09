@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "react-12 ify";
 import { ForgotPasswordApiResponse, SignupApiResponse } from "../../api/types";
 import axios, { AxiosError } from "axios";
 import { verifySchema } from "@/src/schemas/verifySchema";
@@ -106,7 +106,7 @@ export default function FirstStepForm({
         <p className="text-red-500">{errorsEmail.email?.message}</p>
         <button
           type="submit"
-          className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-26 items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-26 cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
         >
           Send Code
         </button>
@@ -127,7 +127,7 @@ export default function FirstStepForm({
         <p className="text-red-500">{errorsCode.code?.message}</p>
         <button
           type="submit"
-          className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-2.5 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
         >
           Continue
         </button>

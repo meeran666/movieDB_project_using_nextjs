@@ -5,6 +5,7 @@ import { AllTypeFilter, PosterDetailType } from "../api/types.ts";
 import FirstContainer from "./firstContainer.tsx";
 import SecondGroup from "./secondGroup.tsx";
 import SynopsisContainer from "./synopsisContainer.tsx";
+import Footer from "../fotter.tsx";
 
 export default function Detail({
   detail,
@@ -44,6 +45,8 @@ export default function Detail({
           </div>
         </div>
       </div>
+      <Footer />
+
       {/* <div className="bg-[black]">
         <div className="relative flex w-[100%] flex-col items-center">
           {detail.posterPath ? (

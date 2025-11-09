@@ -18,9 +18,9 @@ export default function AuthDropdownLayer() {
         }
         className="flex h-15.5 items-center py-3 text-2xl text-(--hamberger_child_color) no-underline"
       >
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-400 pb-1">
+        <button className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-orange-400 pb-1">
           <div className="text-[1rem]">{nameFirstChar}</div>
-        </div>
+        </button>
       </div>
       <AuthDetailDropdown
         name={name}

@@ -1,7 +1,6 @@
 import { authTable } from "@/src/drizzle/models";
-import getDatabaseConection from "@/lib/db";
+import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-const db = await getDatabaseConection();
 
 export async function POST(request: Request) {
   try {
@@ -12,7 +11,6 @@ export async function POST(request: Request) {
       .select()
       .from(authTable)
       .where(eq(columnbName, decodedValue));
-    console.log("user");
 
     if (user.length === 0) {
       const message = username
@@ -24,14 +22,9 @@ export async function POST(request: Request) {
       );
     }
 
-
-
     // Check if the code is correct and not expired
     const isCodeValid = user[0]?.verifyCode === code;
     const isCodeNotExpired = new Date(user[0]?.verifyCodeExpiry) > new Date();
-    console.log(user[0]?.verifyCodeExpiry);
-    console.log(new Date(user[0]?.verifyCodeExpiry));
-    console.log(new Date());
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       await db

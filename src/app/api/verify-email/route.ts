@@ -1,13 +1,11 @@
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
-import getDatabaseConection from "@/lib/db";
+import { db } from "@/lib/db";
 import { authTable } from "@/src/drizzle/models";
 import { and, eq } from "drizzle-orm";
-const db = await getDatabaseConection();
 
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
-    console.log("ok");
     const existingUser = await db
       .select()
       .from(authTable)
@@ -22,7 +20,6 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    console.log("ok2");
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
     const date = new Date(Date.now() + 3600000);
 
@@ -35,23 +32,22 @@ export async function POST(request: Request) {
         verifyCodeExpiry: date.toISOString(),
       })
       .where(eq(authTable.id, existingUser[0].id));
-    console.log("ok3");
 
     // Send verification email
-    // const emailResponse = await sendVerificationEmail(
-    //   email,
-    //   existingUser[0].username!,
-    //   verifyCode,
-    // );
-    // if (!emailResponse.success) {
-    //   return Response.json(
-    //     {
-    //       success: false,
-    //       message: emailResponse.message,
-    //     },
-    //     { status: 500 },
-    //   );
-    // }
+    const emailResponse = await sendVerificationEmail(
+      email,
+      existingUser[0].username!,
+      verifyCode,
+    );
+    if (!emailResponse.success) {
+      return Response.json(
+        {
+          success: false,
+          message: emailResponse.message,
+        },
+        { status: 500 },
+      );
+    }
 
     return Response.json(
       {

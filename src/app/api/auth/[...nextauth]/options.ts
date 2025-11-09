@@ -2,12 +2,12 @@ import { Account, NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import getDatabaseConection from "@/lib/db";
+import { db } from "@/lib/db";
 import { authTable } from "@/src/drizzle/models";
 import { eq, or } from "drizzle-orm";
 // import Google from "next-auth/providers/google";
 import GoogleProvider from "next-auth/providers/google";
-const db = await getDatabaseConection();
+// const db = await getDatabaseConection();
 export const authOptions: NextAuthOptions = {
   providers: [
     // Google,
@@ -91,7 +91,6 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (account?.provider !== "google" && trigger !== "signIn") {
-        console.log("wow000");
         return token;
       }
       try {
@@ -106,10 +105,8 @@ export const authOptions: NextAuthOptions = {
               isVerified: true,
             })
             .onConflictDoNothing();
-          console.log("loger");
         }
       } catch (error) {
-        console.log("8900");
         console.error(error);
       }
 

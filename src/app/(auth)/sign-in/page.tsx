@@ -49,7 +49,7 @@ export default function SignInForm() {
     signIn("google");
   };
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-800">
+    <div className="flex h-[75vh] items-center justify-center bg-[rgb(2,48,32)]">
       <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -87,7 +87,7 @@ export default function SignInForm() {
             ></input>
           </div>
           <div className="">
-            <button className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+            <button className="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
               Sign In
             </button>
             <div className="flex">
@@ -108,7 +108,7 @@ export default function SignInForm() {
           </div>
         </form>
         <button
-          className="ring-offset-background focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-primary inline-flex h-10 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="ring-offset-background focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-primary inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           onClick={googleSignIn}
         >
           <div className="">

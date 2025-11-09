@@ -1,4 +1,4 @@
-import getDatabaseConection from "@/lib/db.ts";
+import { db } from "@/lib/db.ts";
 import { mainTable } from "@/src/drizzle/models";
 import { and, desc, eq, ilike, not, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
@@ -19,7 +19,6 @@ async function search_contain(
   limit: number,
 ): Promise<PosterDetailType[]> {
   const wrapped_title = "%" + title + "%";
-  const db = await getDatabaseConection();
 
   const result = await db
     .select({

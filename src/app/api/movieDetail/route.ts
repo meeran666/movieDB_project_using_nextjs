@@ -1,4 +1,4 @@
-import getDatabaseConection from "@/lib/db.ts";
+import { db } from "@/lib/db.ts";
 import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/models";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
@@ -77,7 +77,6 @@ function genre_str_create(arr: AllTypeFilter) {
 }
 async function search_exact_id(id: number): Promise<AllTypeFilter[]> {
   try {
-    const db = await getDatabaseConection();
     const result = await db
       .select({
         id: mainTable.id,
@@ -163,7 +162,6 @@ export async function POST(request: NextRequest) {
       const dateformat = new Date(result[0].releaseDate);
       cut_str_date = dateformat.toString().substring(0, 15);
     }
-    await sleep(5000);
     const responseData = {
       detail: result[0],
       date: cut_str_date,

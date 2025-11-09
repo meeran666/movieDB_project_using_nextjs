@@ -26,7 +26,7 @@ export default function AuthDetailDropdown({
             <div className="">{name}</div>
           </div>
           <div className="border-b-amber-200 pb-3">{email}</div>
-          <div className="flex h-8 w-24 items-center justify-center rounded-full bg-blue-500">
+          <button className="flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-blue-500">
             <CgLogOut className="" />
             <div
               onClick={() => {
@@ -36,7 +36,7 @@ export default function AuthDetailDropdown({
             >
               logout
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>

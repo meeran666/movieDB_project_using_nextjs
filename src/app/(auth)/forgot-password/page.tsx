@@ -29,7 +29,7 @@ export default function SignInForm() {
   const email = watchEmail("email");
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-800">
+    <div className="flex h-[75vh] items-center justify-center bg-[rgb(2,48,32)]">
       <div className="flex w-full max-w-md flex-col space-y-8 rounded-lg bg-white p-8 shadow-md">
         <div className="text-center">
           <h1 className="mb-6 text-2xl font-extrabold tracking-tight lg:text-3xl">
@@ -64,7 +64,7 @@ export default function SignInForm() {
           {isCodeVerified ? (
             <button
               onClick={() => setIsCodeVerified(false)}
-              className="font-bold text-blue-600"
+              className="cursor-pointer font-bold text-blue-600"
             >
               Get back
             </button>

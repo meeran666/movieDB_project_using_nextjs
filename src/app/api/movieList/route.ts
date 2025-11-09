@@ -1,4 +1,4 @@
-import getDatabaseConection from "@/lib/db.ts";
+import { db } from "@/lib/db.ts";
 import { mainTable } from "@/src/drizzle/models";
 import type { MovieListType } from "@/src/app/api/types";
 import { and, desc, ilike, isNotNull, sql } from "drizzle-orm";
@@ -17,7 +17,7 @@ async function search_contain(
   limit: number,
 ): Promise<MovieListType[]> {
   const wrapped_title = "%" + title + "%";
-  const db = await getDatabaseConection();
+  // const db = await getDatabaseConection();
 
   let result: MovieListType[] = [];
   try {
