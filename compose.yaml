@@ -1,0 +1,30 @@
+name: moviemania
+services:
+  cache:
+    image: redis:latest
+    container_name: redis_moviedb
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis_data_volume:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+  db:
+    image: postgres:latest
+    container_name: pg_moviedb
+    env_file: ".env"
+    volumes:
+      - ../largeFile/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
+      - pg_data_volume:/var/lib/postgresql/18/main
+    ports:
+      - "5500:5432"
+    restart: unless-stopped
+networks:
+  default:
+    name: docker_network
+volumes:
+  pg_data_volume:
+    name: movieapp_data
+  redis_data_volume:
+    name: redis_data

@@ -1,0 +1,433 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.main_table": {
+      "name": "main_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vote_average": {
+          "name": "vote_average",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vote_count": {
+          "name": "vote_count",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "release_date": {
+          "name": "release_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue": {
+          "name": "revenue",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runtime": {
+          "name": "runtime",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adult": {
+          "name": "adult",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "backdrop_path": {
+          "name": "backdrop_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "budget": {
+          "name": "budget",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "homepage": {
+          "name": "homepage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imdb_id": {
+          "name": "imdb_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language_code": {
+          "name": "language_code",
+          "type": "varchar(2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_title": {
+          "name": "original_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "overview": {
+          "name": "overview",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "popularity": {
+          "name": "popularity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "poster_path": {
+          "name": "poster_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tagline": {
+          "name": "tagline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "production_companies": {
+          "name": "production_companies",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "production_countries": {
+          "name": "production_countries",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spoken_languages": {
+          "name": "spoken_languages",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keywords": {
+          "name": "keywords",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "title_btree": {
+          "name": "title_btree",
+          "columns": [
+            {
+              "expression": "title",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
+    "public.auth_table": {
+      "name": "auth_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "uuid_generate_v4()"
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "googleAuthUsername": {
+          "name": "googleAuthUsername",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verifyCode": {
+          "name": "verifyCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verifyCodeExpiry": {
+          "name": "verifyCodeExpiry",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "isVerified": {
+          "name": "isVerified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "auth_table_username_key": {
+          "columns": [
+            "username"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_username_key"
+        },
+        "auth_table_googleAuthUsername_key": {
+          "columns": [
+            "googleAuthUsername"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_googleAuthUsername_key"
+        },
+        "auth_table_email_key": {
+          "columns": [
+            "email"
+          ],
+          "nullsNotDistinct": false,
+          "name": "auth_table_email_key"
+        }
+      },
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
+    "public.abbreviation_table": {
+      "name": "abbreviation_table",
+      "schema": "",
+      "columns": {
+        "original_language": {
+          "name": "original_language",
+          "type": "varchar(70)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "language_code": {
+          "name": "language_code",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
+    "public.genre_table": {
+      "name": "genre_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "action": {
+          "name": "action",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "science_fiction": {
+          "name": "science_fiction",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adventure": {
+          "name": "adventure",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drama": {
+          "name": "drama",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "crime": {
+          "name": "crime",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thriller": {
+          "name": "thriller",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fantasy": {
+          "name": "fantasy",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comedy": {
+          "name": "comedy",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "romance": {
+          "name": "romance",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "western": {
+          "name": "western",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mystery": {
+          "name": "mystery",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "war": {
+          "name": "war",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "animation": {
+          "name": "animation",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family": {
+          "name": "family",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "horror": {
+          "name": "horror",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "music": {
+          "name": "music",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "history": {
+          "name": "history",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tv_movie": {
+          "name": "tv_movie",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "documentary": {
+          "name": "documentary",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {}
+  }
+}
