@@ -1,5 +1,4 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect } from "react";
 
 export default function Youtube({ embedUrl }: { embedUrl: string }) {
   return (

@@ -2,62 +2,66 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 function documentation() {
-  const code = `const stream = new ReadableStream({ 
+  const code1 = `const stream = new ReadableStream({ 
   async start(controller) {
-        try {
-          request_signal.addEventListener("abort", () => {
-            console.log(" Client aborted request");
-            controller.close();
-          });
-          for (let topicIndex = 0; topicIndex < topics.length; topicIndex++) {
-            if (topicIndex === 6) {
-              break;
-            }
-            let buffer = "";
-            const topic =
-              topics[topicIndex][0].toUpperCase() + topics[topicIndex].slice(1);
-            const header = \`\\n<div style="width: 100%">
-              <strong style="font-size: 25px; display:block; margin-top:10px; margin-bottom:5px; color: white;">\${topic}</strong></div>\\n\\n\`;
-  
-            controller.enqueue(encoder.encode(header));
-  
-            // Create a NEW streaming LLM for EACH topic
-            const repo_id = "deepseek/deepseek-chat-v3.1";
-  
-            const llm = new ChatOpenAI({
-              model: repo_id,
-              apiKey: process.env.OPENROUTER_API_KEY,
-              temperature: 0.7,
-              configuration: { baseURL: "https://openrouter.ai/api/v1" },
-              streaming: true,
-              // maxTokens: 20,
-              callbacks: [
-                {
-                  handleLLMNewToken(token: string) {
-                    buffer += token;
-                    console.log(token);
-                    controller.enqueue(encoder.encode(token));
-                  },
-                },
-              ],
-            });
-  
-            const formattedPrompt = await prompt_template.format({
-              title,
-              topic: topics[topicIndex],
-            });
-  
-            await llm.invoke(formattedPrompt);
-          }
-  
-          
-          controller.close();
-        } catch (err) {
-          controller.error(err);
+    try {
+      request_signal.addEventListener("abort", () => {
+        console.log(" Client aborted request");
+        controller.close();
+      });
+      for (let topicIndex = 0; topicIndex < topics.length; topicIndex++) {
+        if (topicIndex === 6) {
+          break;
         }
-      },
-    });
-  `;
+        let buffer = "";
+        const topic =
+          topics[topicIndex][0].toUpperCase() + topics[topicIndex].slice(1);
+        const header = \`\\n<div style="width: 100%">
+          <strong style="font-size: 25px; display:block; margin-top:10px; margin-bottom:5px; color: white;">\${topic}</strong></div>\\n\\n\`;
+        controller.enqueue(encoder.encode(header));
+        // Create a NEW streaming LLM for EACH topic
+        const repo_id = "deepseek/deepseek-chat-v3.1";
+        const llm = new ChatOpenAI({
+          model: repo_id,
+          apiKey: process.env.OPENROUTER_API_KEY,
+          temperature: 0.7,
+          configuration: { baseURL: "https://openrouter.ai/api/v1" },
+          streaming: true,
+          // maxTokens: 20,
+          callbacks: [
+            {
+              handleLLMNewToken(token: string) {
+                buffer += token;
+                console.log(token);
+                controller.enqueue(encoder.encode(token));
+              },
+            },
+          ],
+        });
+        const formattedPrompt = await prompt_template.format({
+          title,
+          topic: topics[topicIndex],
+        });
+        await llm.invoke(formattedPrompt);
+      }
+      
+      controller.close();
+    } catch (err) {
+      controller.error(err);
+    }
+  },
+});`;
+  const code2 = `<div className="mx-auto aspect-video w-full max-w-3xl">
+{
+  <iframe
+    className="h-full w-full rounded-xl"
+    src={embedUrl}
+    title="YouTube trailer"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+}
+</div>  `;
   return (
     <>
       <div className="pb-14 text-4xl font-bold">AI Search</div>
@@ -135,7 +139,7 @@ function documentation() {
             OpenAI model to use, such as gpt-4o, deepseek-chat-v3.1,
             gpt-3.5-turbo and many more.
           </div>
-          <div className="border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
             model?: OpenAIChatModelId <br />
             OpenAIChatModelId: OpenAIClient.ChatModel | string &
             NonNullable&lt;unknown&gt;
@@ -159,12 +163,14 @@ function documentation() {
             ChatOpenAI class will automatically look for the OPENAI_API_KEY
             variable.
           </div>
-          <div className="border-2 border-gray-400 p-3">apiKey?: string</div>
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
+            apiKey?: string
+          </div>
           <div className="pt-4 pb-4 text-2xl font-semibold">temperature</div>
           <div className="pb-2">
             Sampling temperature to use. This field is optional.
           </div>
-          <div className="border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
             temperature?: number
           </div>
           <div className="pt-4 pb-4 text-2xl font-semibold">configuration</div>
@@ -174,7 +180,7 @@ function documentation() {
             value that can be specified during the initialization of the model
             instance. This field is optional.`}
           </div>
-          <div className="border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
             configuration?: ClientOptions
             <br></br>
             ClientOptions contain many other fields but i used only baseURL.
@@ -187,7 +193,7 @@ function documentation() {
             setting the streaming argument to True. Enabling disables tokenUsage
             reporting.Note: If your specific model integration does not support the streaming parameter, you may need to use disable_streaming=True. This field is optional.`}
           </div>
-          <div className="border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
             streaming?: boolean
           </div>
           <div className="pt-4 pb-4 text-2xl font-semibold">callbacks</div>
@@ -198,7 +204,7 @@ function documentation() {
             perform other actions in real-time as the model processes the
             request. This field is optional.
           </div>
-          <div className="overflow-x-scroll border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3 whitespace-nowrap">
             callbacks?: Callbacks
             <br></br>
             Callbacks: CallbackManager | (BaseCallbackHandler |
@@ -216,7 +222,7 @@ function documentation() {
               wrapLines={true}
               wrapLongLines={true}
             >
-              {code}
+              {code1}
             </SyntaxHighlighter>
           </div>
           <div className="pb-7 whitespace-pre-line">
@@ -243,6 +249,33 @@ function documentation() {
             
             The code iterates through a list of predefined topics and streams content for each topic separately. A hard limit is applied to the number of topics processed to avoid excessive output. For every topic, a formatted HTML header is streamed first, allowing the client interface to display section titles immediately before the AI-generated explanation begins. This structure improves readability and user experience by clearly separating content into sections.`}
           </div>
+        </div>
+        <div className="pb-7 text-3xl font-bold">Youtube video of trailer </div>
+        <div className="pb-7">
+          This is the last part of aisearch where youtube video section is
+          atached at the end of response. For working of youtube in forntend, I
+          used iframe tag of html. This iframe takes attribute of embedurl which
+          comes from the backend. In backend, this embedurl comes from the route
+          of{" "}
+          <code>{`
+fetch(
+  https://www.googleapis.com/youtube/v3/search?part=snippet&q=\${encodeURIComponent(query)}&type=video&maxResults=1&key=\${YT_API_KEY},
+  { signal: req.signal }
+);
+`}</code>
+          from which Below is the code for youtube working part.
+        </div>
+        <div className="pb-7">
+          <SyntaxHighlighter
+            className="overflow-x-hidden pb-7 text-[15px]"
+            language="javascript"
+            style={atomDark}
+            showLineNumbers={true}
+            wrapLines={true}
+            wrapLongLines={true}
+          >
+            {code2}
+          </SyntaxHighlighter>
         </div>
       </div>
     </>
