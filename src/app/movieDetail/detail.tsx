@@ -5,7 +5,7 @@ import { AllTypeFilter, PosterDetailType } from "../api/types.ts";
 import FirstContainer from "./firstContainer.tsx";
 import SecondGroup from "./secondGroup.tsx";
 import SynopsisContainer from "./synopsisContainer.tsx";
-import Footer from "../fotter.tsx";
+import Footer from "../footer.tsx";
 
 export default function Detail({
   detail,

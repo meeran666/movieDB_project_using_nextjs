@@ -12,16 +12,6 @@ type LoginCredentials = {
   identifier: string;
   password: string;
 };
-// interface user {
-//   id: string;
-//   username: string | null;
-//   googleAuthUsername: string | null;
-//   email: string;
-//   password: string | null;
-//   verifyCode: string | null;
-//   verifyCodeExpiry: string;
-//   isVerified: boolean | null;
-// }
 export const authOptions: NextAuthOptions = {
   providers: [
     // Google,
@@ -67,7 +57,11 @@ export const authOptions: NextAuthOptions = {
             user[0].password,
           );
           if (isPasswordCorrect) {
-            return user[0];
+            return {
+              id: user[0].id,
+              email: user[0].email,
+              name: user[0].username ?? user[0].googleAuthUsername ?? undefined,
+            };
           } else {
             throw new Error("Incorrect password");
           }
@@ -77,15 +71,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  //   credentials
-  // {
-  //   redirect: 'false',
-  //   identifier: 'meeran',
-  //   password: '345398503948',
-  //   csrfToken: '663ef20dd5cbc0a3e771969aef35193624144445f832ac3e05b610ec7c2576c1',
-  //   callbackUrl: 'http://localhost:3000/sign-in',
-  //   json: 'true'
-  // }
+
   callbacks: {
     // async signIn({ account, profile }) {
     //   console.log(account?.provider);
@@ -121,18 +107,18 @@ export const authOptions: NextAuthOptions = {
         return token;
       }
       try {
-        // if (token?.name !== undefined && token?.email !== undefined) {
-        //   const date = new Date(Date.now() + 3600000);
-        //   await db
-        //     .insert(authTable)
-        //     .values({
-        //       googleAuthUsername: token?.name,
-        //       email: token?.email,
-        //       verifyCodeExpiry: date.toISOString(),
-        //       isVerified: true,
-        //     })
-        //     .onConflictDoNothing();
-        // }
+        if (token?.name !== undefined && token?.email !== undefined) {
+          const date = new Date(Date.now() + 172800);
+          await db
+            .insert(authTable)
+            .values({
+              googleAuthUsername: token?.name,
+              email: token?.email,
+              verifyCodeExpiry: date.toISOString(),
+              isVerified: true,
+            })
+            .onConflictDoNothing();
+        }
       } catch (error) {
         console.error(error);
       }
@@ -152,6 +138,10 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 2,
+  },
+  jwt: {
+    maxAge: 60 * 60 * 24 * 2,
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {

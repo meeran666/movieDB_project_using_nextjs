@@ -8,7 +8,7 @@ export default async function MultipleRunModel(
   request_signal: AbortSignal,
 ) {
   const encoder = new TextEncoder();
-  const token_number = Math.trunc(Math.random() * (50 - 35) + 35);
+  const token_number = Math.trunc(Math.random() * 16 + 35);
   const max_token_number = token_number + 50;
 
   const prompt_template = new PromptTemplate({

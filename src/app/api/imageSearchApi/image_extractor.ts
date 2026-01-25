@@ -23,10 +23,11 @@ export async function ImageExtractor(
   );
 
   const text: string = await res1.text();
-
+  console.log("text");
+  console.log(text);
   //  Extract vqd token safely
   const vqdMatch: RegExpMatchArray | null = text.match(/vqd=\\?"([0-9-]+)\\?"/);
-
+  console.log(vqdMatch);
   if (!vqdMatch) {
     throw new Error("Failed to extract vqd token from DuckDuckGo");
   }

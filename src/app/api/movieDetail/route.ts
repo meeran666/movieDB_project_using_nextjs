@@ -162,6 +162,7 @@ export async function POST(request: NextRequest) {
       const dateformat = new Date(result[0].releaseDate);
       cut_str_date = dateformat.toString().substring(0, 15);
     }
+
     const responseData = {
       detail: result[0],
       date: cut_str_date,

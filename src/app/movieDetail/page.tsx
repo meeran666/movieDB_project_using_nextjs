@@ -99,7 +99,7 @@ function Page() {
 }
 export default function wrappedLayout() {
   return (
-    <Suspense fallback={<div>loading</div>}>
+    <Suspense fallback={<div className="bg-gray-800">loading</div>}>
       <Page />
     </Suspense>
   );

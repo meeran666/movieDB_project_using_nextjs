@@ -5,7 +5,6 @@ import Sidebar from "./sidebar";
 export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  console.log("route");
   const pathname = usePathname().split("/")[1];
   const [isMobile, setIsMobile] = useState(false);
 

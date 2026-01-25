@@ -82,7 +82,6 @@ export default function FirstStepForm({
   };
 
   const onSubmitCode = async (data: z.infer<typeof verifySchema>) => {
-    console.log(email);
     if (!isValidEmail) {
       return;
     }

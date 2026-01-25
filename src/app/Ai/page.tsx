@@ -1,7 +1,7 @@
 "use client";
 import AiLogo from "@/public/AiMagicIcon.svg";
 import { useTopLoader } from "nextjs-toploader";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import ImageGrid from "./imageGrid";
 import AiResponse from "./chat";
@@ -62,7 +62,6 @@ export default function Page() {
         signal: controller.signal,
       })
         .then((res) => {
-          console.log("ok i am trailer");
           return res.json();
         })
         .then((data) => {
@@ -168,7 +167,7 @@ export default function Page() {
           autoComplete="none"
         />
         <button
-          className="sch mr-2 flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-[white] outline-none"
+          className="mr-2 flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-[white] outline-none"
           type="submit"
         >
           {isStreaming ? (

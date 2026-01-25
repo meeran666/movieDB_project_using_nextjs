@@ -27,7 +27,7 @@ function Documentation() {
         <div className="pb-7 text-3xl">Searching go Through</div>
         <div className="pb-7">
           Home page is a first page comes when you can open website moviemania.
-          Home page contain navbar and fotter which is a part of every route
+          Home page contain navbar and footer which is a part of every route
           layout and contains searchbox also.
         </div>
         <div className="flex items-center justify-center">

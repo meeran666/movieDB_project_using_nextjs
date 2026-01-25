@@ -2,7 +2,6 @@
 import NextTopLoader from "nextjs-toploader";
 import SidebarLayer from "./(sidebarLayer)/sidebar_layer";
 import Navbar from "./(navbar)/navbar";
-import Footer from "./fotter";
 import { useSession } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
@@ -37,7 +36,6 @@ export default function Dashboard({
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
       ) {
-        console.log("inside menu ok");
         setIsSidebarOpen(false);
       } else {
         event.stopPropagation();
@@ -74,7 +72,9 @@ export default function Dashboard({
           isMobile={isMobile}
           buttonref={buttonRef}
         />
-        {children}
+        <div className="flex grow flex-col bg-(--black_color) pt-16">
+          {children}
+        </div>
 
         <ToastContainer />
       </div>

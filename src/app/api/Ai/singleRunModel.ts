@@ -65,7 +65,6 @@ Formatting rules:
             {
               handleLLMNewToken(token: string) {
                 buffer += token;
-                console.log("does it work");
                 controller.enqueue(encoder.encode(token));
               },
             },

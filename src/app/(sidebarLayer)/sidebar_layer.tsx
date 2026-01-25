@@ -32,23 +32,23 @@ export default function SidebarLayer({
   return (
     <div
       ref={sidebarRef}
-      className={`fixed z-4 flex h-screen w-60 flex-col bg-(--hamberger_color) duration-600 ${isSidebarOpen ? "right-0" : "-right-80"}`}
+      className={`fixed z-4 flex h-screen w-60 flex-col bg-slate-900 duration-600 ${isSidebarOpen ? "right-0" : "-right-80"}`}
     >
       <div
-        className="h-19.5 border-b-3 pt-3 pl-5 hover:bg-(--sidebar_hover_color)"
+        className="h-19.5 border-b-3 pt-3 pl-5 hover:bg-slate-950"
         onClick={onHambergerClick}
       >
         <CrossButton buttonref={buttonref} />
       </div>
       <ul className="flex grow-1 flex-col pt-3">
         <a
-          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-(--sidebar_hover_color)"
+          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-slate-950"
           href={"/"}
         >
           Browse Movie
         </a>
         <a
-          className={`block pl-7 text-2xl text-(--hamberger_child_color) no-underline ${dropClicked ? "bg-(--selected_sidebar_color)" : "hover:bg-(--sidebar_hover_color)"}`}
+          className={`block pl-7 text-2xl text-(--hamberger_child_color) no-underline ${dropClicked ? "bg-slate-950" : "hover:bg-slate-950"}`}
           onClick={handleDropClick}
         >
           About
@@ -59,7 +59,7 @@ export default function SidebarLayer({
 
         <DropDown dropClicked={dropClicked} />
         <a
-          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-(--sidebar_hover_color)"
+          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-slate-950"
           href=""
         >
           test

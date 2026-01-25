@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       );
     }
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-    const date = new Date(Date.now() + 3600000);
+    const date = new Date(Date.now() + 172800);
 
     //updateing the field with verify code of existing email
 

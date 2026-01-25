@@ -39,13 +39,9 @@ export default function SignupPage() {
           const response = await axios.get<SignupApiResponse>(
             `/api/check-username-unique?username=${debouncedUsername}`,
           );
-          console.log("response.data.message");
-          console.log(response.data.message);
           setUsernameMessage(response.data.message);
         } catch (error) {
           const axiosError = error as AxiosError<SignupApiResponse>;
-          console.log("axiosError");
-          console.log(axiosError);
           setUsernameMessage(
             axiosError.response?.data.message ?? "Error checking username",
           );
@@ -93,7 +89,7 @@ export default function SignupPage() {
     }
   };
   return (
-    <div className="flex h-[75vh] items-center justify-center bg-[rgb(2,48,32)]">
+    <div className="flex h-[94vh] items-center justify-center bg-[rgb(2,48,32)]">
       <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">

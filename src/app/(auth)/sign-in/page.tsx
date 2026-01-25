@@ -49,11 +49,11 @@ export default function SignInForm() {
     signIn("google");
   };
   return (
-    <div className="flex h-[75vh] items-center justify-center bg-[rgb(2,48,32)]">
+    <div className="flex h-[94vh] items-center justify-center bg-[rgb(2,48,32)]">
       <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Sign in for AI use
+            Sign in to use AI
           </h1>
           <p className="mb-4">Sign in to continue your secret conversations</p>
         </div>
@@ -120,3 +120,14 @@ export default function SignInForm() {
     </div>
   );
 }
+
+// export default function AuthFrontend({
+//   children,
+// }: Readonly<{ children: React.ReactNode }>) {
+//   return (
+//     <>
+//       {children}
+//       <div className="w-full bg-[rgb(2,48,32)]"></div>
+//     </>
+//   );
+// }

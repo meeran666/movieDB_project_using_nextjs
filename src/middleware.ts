@@ -25,7 +25,6 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!token && url.pathname.startsWith("/Introduction")) {
-    console.log("nokai");
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 

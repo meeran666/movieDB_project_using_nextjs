@@ -8,12 +8,11 @@ export async function POST(request: Request) {
     const { email, password2 } = await request.json();
     const hashedPassword = await bcrypt.hash(password2, 10);
 
-    const result = await db
+    await db
       .update(authTable)
       .set({ password: hashedPassword })
       .where(and(eq(authTable.email, email), eq(authTable.isVerified, true)))
       .returning();
-    console.log(result);
     return Response.json(
       { success: false, message: "reset password succesfull" },
       { status: 200 },
