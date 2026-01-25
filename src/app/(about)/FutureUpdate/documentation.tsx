@@ -198,7 +198,7 @@ function documentation() {
             perform other actions in real-time as the model processes the
             request. This field is optional.
           </div>
-          <div className="border-2 border-gray-400 p-3">
+          <div className="overflow-x-scroll border-2 border-gray-400 p-3">
             callbacks?: Callbacks
             <br></br>
             Callbacks: CallbackManager | (BaseCallbackHandler |
