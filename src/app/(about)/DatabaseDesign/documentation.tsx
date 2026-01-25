@@ -173,7 +173,7 @@ return result;
         </div>
 
         <div className="pb-7">
-          {/* <SyntaxHighlighter
+          <SyntaxHighlighter
             className="overflow-x-hidden pb-7 text-[15px]"
             language="javascript"
             style={atomDark}
@@ -182,7 +182,7 @@ return result;
             wrapLongLines={true}
           >
             {code1}
-          </SyntaxHighlighter> */}
+          </SyntaxHighlighter>
         </div>
 
         <div className="pb-7 text-3xl">Movie Detail Query</div>
@@ -208,7 +208,7 @@ return result;
           </div>
 
           <div className="pb-7">
-            {/* <SyntaxHighlighter
+            <SyntaxHighlighter
               className="h-350 w-185 text-[15px]"
               language="javascript"
               style={atomDark}
@@ -216,7 +216,7 @@ return result;
               wrapLines={true}
             >
               {code2}
-            </SyntaxHighlighter> */}
+            </SyntaxHighlighter>
           </div>
           <div className="pb-7 text-3xl">Similar Movie Query</div>
           <div className="pb-7">
@@ -227,7 +227,7 @@ return result;
             alphabatical in decreasing.
           </div>
           <div className="pb-7">
-            {/* <SyntaxHighlighter
+            <SyntaxHighlighter
               className="h-60 w-185 text-[15px]"
               language="javascript"
               style={atomDark}
@@ -235,7 +235,7 @@ return result;
               wrapLines={true}
             >
               {code3}
-            </SyntaxHighlighter> */}
+            </SyntaxHighlighter>
           </div>
         </div>
       </div>

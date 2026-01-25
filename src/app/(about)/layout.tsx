@@ -28,7 +28,7 @@ export default function Dashboard({
 
   return (
     <div className="flex w-dvw justify-center bg-[black]">
-      <div className="relative grid w-[min(75rem,100%)] grid-cols-[minmax(0,1fr)_minmax(0,300px)] border-x-2 border-solid text-white [border-image-slice:30%] [border-image-source:linear-gradient(to_bottom,white,black)]">
+      <div className="relative grid w-[min(75rem,100%)] grid-cols-[minmax(0,1fr)_auto] border-x-2 border-solid text-white [border-image-slice:30%] [border-image-source:linear-gradient(to_bottom,white,black)]">
         <div className="grow">
           <div className="flex flex-col justify-center p-6">{children}</div>
         </div>
