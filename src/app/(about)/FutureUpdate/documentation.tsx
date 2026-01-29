@@ -256,26 +256,14 @@ function documentation() {
           atached at the end of response. For working of youtube in forntend, I
           used iframe tag of html. This iframe takes attribute of embedurl which
           comes from the backend. In backend, this embedurl comes from the route
-          of{" "}
-          <code>{`
-fetch(
-  https://www.googleapis.com/youtube/v3/search?part=snippet&q=\${encodeURIComponent(query)}&type=video&maxResults=1&key=\${YT_API_KEY},
+          <code>{` https://www.googleapis.com/youtube/v3/search?part=snippet&q=\${encodeURIComponent(query)}&type=video&maxResults=1&key=\${YT_API_KEY},
   { signal: req.signal }
 );
 `}</code>
-          from which Below is the code for youtube working part.
-        </div>
-        <div className="pb-7">
-          <SyntaxHighlighter
-            className="overflow-x-hidden pb-7 text-[15px]"
-            language="javascript"
-            style={atomDark}
-            showLineNumbers={true}
-            wrapLines={true}
-            wrapLongLines={true}
-          >
-            {code2}
-          </SyntaxHighlighter>
+          , here YT_API_KEY is youtube api key which is for the youtube access
+          for this website. To create a YouTube API key, log into the Google
+          Developer Console, create a new project, enable the YouTube Data API
+          v3, and then generate an API key under the credentials section.
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export const config = {
-  // matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 
 export async function middleware(request: NextRequest) {
@@ -10,9 +10,9 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   // Redirect to dashboard if the user is already authenticated
   // and trying to access sign-in, sign-up, or home page
-  console.log("token");
-  console.log(token);
-  console.log(url.pathname);
+  // console.log("token");
+  // console.log(token);
+  // console.log(url.pathname);
   if (
     token &&
     (url.pathname.startsWith("/sign-in") ||

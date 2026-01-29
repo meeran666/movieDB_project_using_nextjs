@@ -1,3 +1,4 @@
+import redis from "@/lib/redis";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 function sleep(ms: number) {
@@ -36,6 +37,20 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
   const stream = new ReadableStream({
     async start(controller) {
       try {
+        const day_passed = Date.now() % 86400000;
+        const day_left = 86400000 - day_passed;
+        const fold = Math.round(day_left / 1000);
+        const key = "request_count";
+        const usage = await redis.incr(key);
+        if (usage === 1) {
+          await redis.expire(key, fold);
+        }
+        // const expire = await redis.ttl(key);
+        // console.log(expire);
+        // const value = await redis.get(key);
+        // console.log(value);
+        if (usage >= 40) {
+        }
         request_signal.addEventListener("abort", () => {
           console.log(" Client aborted request");
           controller.close();

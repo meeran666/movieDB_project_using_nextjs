@@ -5,7 +5,6 @@ export async function POST(request: NextRequest) {
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const title = searchParams.get("title");
-
   try {
     if (title === null) {
       return NextResponse.json("Error");
@@ -24,7 +23,8 @@ export async function POST(request: NextRequest) {
       no_of_image,
       request.signal,
     );
-
+    console.log("{ image_links, poster_image_link }");
+    console.log({ image_links, poster_image_link });
     return NextResponse.json({ image_links, poster_image_link });
   } catch (error) {
     console.log(error);

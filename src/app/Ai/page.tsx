@@ -104,6 +104,7 @@ export default function Page() {
         const { done, value } = await reader.read();
         if (done) {
           controllerRef.current = null;
+
           setIsFinishedWriting(true);
           setIsStreaming(false);
           break;
