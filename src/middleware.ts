@@ -21,12 +21,10 @@ export async function middleware(request: NextRequest) {
       url.pathname.startsWith("/forgot-password"))
   ) {
     return NextResponse.redirect(new URL("/", request.url));
-    console.log("doka");
   }
 
   if (!token && url.pathname.startsWith("/Introduction")) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
-
   return NextResponse.next();
 }

@@ -127,7 +127,6 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
-        session.user.id = token?.id;
         session.user.name = token?.name;
         session.user.email = token?.email;
         session.user.isVerified = token?.isVerified;

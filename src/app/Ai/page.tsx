@@ -1,10 +1,10 @@
 "use client";
 import AiLogo from "@/public/AiMagicIcon.svg";
 import { useTopLoader } from "nextjs-toploader";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import ImageGrid from "./imageGrid";
-import AiResponse from "./chat";
+import TextResponse from "./textResponse";
 import BlinkBlur from "./blinkblur";
 import Youtube from "./youtube";
 import Image from "next/image";
@@ -80,9 +80,9 @@ export default function Page() {
           },
         },
       );
-      let links = await image_response.json();
-      links = [links.poster_image_link[0], ...links.image_links];
-      setImgLinks(links);
+      const images = await image_response.json();
+
+      setImgLinks(images.links);
       setIsLoadedLink(true);
 
       //ai response
@@ -191,12 +191,12 @@ export default function Page() {
           {!isLoadingStart && found && isLoadedLink && (
             <ImageGrid imgLinks={imgLinks}></ImageGrid>
           )}
-          {isLoadedLink && <AiResponse ai_data={ai_data}></AiResponse>}
-          {isFinishedWriting && embedUrl && (
+          {isLoadedLink && <TextResponse ai_data={ai_data}></TextResponse>}
+          {/* {isFinishedWriting && embedUrl && (
             <div className="mt-15 mb-55 aspect-video w-full max-w-3xl">
               <Youtube embedUrl={embedUrl}></Youtube>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

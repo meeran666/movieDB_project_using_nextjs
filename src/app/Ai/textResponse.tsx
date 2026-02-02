@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
-export default function AiResponse({ ai_data }: { ai_data: string }) {
+export default function TextResponse({ ai_data }: { ai_data: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [lastHeightRef, setLastHeightRef] = useState<number>(0);
   const [shouldAutoScrollRef, setShouldAutoScrollRef] = useState<boolean>(true);

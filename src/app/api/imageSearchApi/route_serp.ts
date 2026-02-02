@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ImageExtractor } from "./image_extractor_scrapingdog.ts";
-// import { ImageExtractor } from "./image_extractor.ts";
+import { ImageExtractor } from "./image_extractor_serp";
+
 export async function POST(request: NextRequest) {
   try {
-    // const url = new URL(request.url);
-    // const searchParams = url.searchParams;
-    // const title = searchParams.get("title");
+    console.log("wow");
+    const url = new URL(request.url);
+    const searchParams = url.searchParams;
+    const title = searchParams.get("title");
 
-    // if (!title) {
-    //   console.log("ok55");
-    //   return NextResponse.json({ error: "Title is required" }, { status: 400 });
-    // }
-
-    const title = "the batman";
+    // const title = "the batman";
+    if (!title) {
+      return NextResponse.json({ error: "Title is required" }, { status: 400 });
+    }
 
     const no_of_image = 6;
 
