@@ -2,7 +2,76 @@ import { getToken } from "next-auth/jwt";
 import redis from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 import MultipleRunModel from "./multipleRunModel";
+type UserTokenResult =
+  | {
+      ok: true;
+      token_limit: number;
+      id: string;
+    }
+  | {
+      ok: false;
+      error: "UNAUTHORIZED" | "LIMIT_EXCEEDED";
+    };
 // import SingleModel from "./single_model";
+async function daily_request_no_update() {
+  const request_count_key = "request_count";
+  const day_passed = Date.now() % 86400000;
+  const day_left = 86400000 - day_passed;
+  const expire_time = Math.round(day_left / 1000);
+  const exists_request_count_key = await redis.exists(request_count_key);
+  if (!exists_request_count_key) {
+    console.log("inside the expire term");
+    await redis.set(request_count_key, 0, "EX", expire_time);
+  }
+  const usage = await redis.incr(request_count_key);
+  return usage;
+}
+async function user_token_no_update(
+  request: NextRequest,
+): Promise<UserTokenResult> {
+  const day_passed = Date.now() % 86400000;
+  const day_left = 86400000 - day_passed;
+  const expire_time = Math.round(day_left / 1000);
+
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+
+  if (!token) {
+    return { ok: false, error: "UNAUTHORIZED" };
+  }
+
+  const id = token.id ?? "";
+  const exists_id = await redis.exists(id);
+
+  if (!exists_id) {
+    const token_no = 2000;
+    await redis
+      .multi()
+      .hset(id, {
+        requests: 5,
+        tokens: token_no,
+      })
+      .expire(id, expire_time)
+      .exec();
+    await redis.expire(id, expire_time);
+
+    return { ok: true, token_limit: token_no, id: id };
+  }
+
+  const credit = await redis.hgetall(id);
+
+  if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
+    return { ok: false, error: "LIMIT_EXCEEDED" };
+  }
+
+  return {
+    ok: true,
+    token_limit: Number(credit.tokens),
+    id,
+  };
+}
 
 export async function POST(request: NextRequest) {
   const url = new URL(request.url);
@@ -15,20 +84,8 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const request_count_key = "request_count";
-    const day_passed = Date.now() % 86400000;
-    const day_left = 86400000 - day_passed;
-    const expire_time = Math.round(day_left / 1000);
-    // const expire_flag = await redis.ttl(key);
-    let exists = await redis.exists(request_count_key);
-
-    if (!exists) {
-      console.log("inside the expire term");
-      await redis.set(request_count_key, 0, "EX", expire_time);
-    }
-    const usage = await redis.incr(request_count_key);
-    // const value = await redis.get(key);
-    // console.log(value);
+    // daily request no value update
+    const usage = await daily_request_no_update();
     if (usage >= 40) {
       return NextResponse.json(
         {
@@ -38,65 +95,29 @@ export async function POST(request: NextRequest) {
         { status: 429 },
       );
     }
+    //user token no update
+    const user_token = await user_token_no_update(request);
 
-    const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
+    if (!user_token.ok) {
+      if (user_token.error === "UNAUTHORIZED") {
+        return new Response("Unauthorized, accessing token is not allowed", {
+          status: 401,
+        });
+      }
 
-    if (!token) {
-      return new Response("Unauthorized", { status: 401 });
-    }
-    console.log("token.id");
-    console.log(token.id);
-    const id = token.id ?? "";
-    //checking the user's token exist or not
-    exists = await redis.exists(id);
-    let token_limit = 1000;
-    const tokenObj = { token_limit: token_limit };
-    if (!exists) {
-      //storing user's token
-
-      console.log("inside the expire term");
-      await redis.hset(id, {
-        requests: 5,
-        tokens: 1000,
-      });
-      redis.expire(id, expire_time);
-    } else {
-      const credit = await redis.hgetall(id);
-      token_limit = Number(credit.tokens);
-      console.log(credit);
-
-      if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
+      if (user_token.error === "LIMIT_EXCEEDED") {
         return NextResponse.json(
-          {
-            error: "your credits for LLM ended ",
-          },
+          { error: "your credits for LLM ended" },
           { status: 402 },
         );
       }
+      return;
     }
+    const tokenObj = { token_limit: user_token.token_limit, id: user_token.id };
 
     const stream = await MultipleRunModel(title, tokenObj, request.signal);
     // const stream = await SingleRunModel(title);
-    const reader = stream.getReader();
-    while (true) {
-      const { done, value } = await reader.read();
 
-      if (done) {
-        console.log("tokenObj.token_limit");
-        console.log(tokenObj.token_limit);
-        console.log("stream ended");
-        break;
-      }
-
-      // use value
-    }
-
-    await redis.hincrby(id, "requests", -1);
-
-    await redis.hset(id, "tokens", tokenObj.token_limit);
     return new Response(stream, {
       headers: {
         "Content-Type": "text/plain",

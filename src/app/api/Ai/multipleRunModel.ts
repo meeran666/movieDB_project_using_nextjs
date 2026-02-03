@@ -1,11 +1,13 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
+import redis from "@/lib/redis";
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 export default async function MultipleRunModel(
   title: string,
-  tokenObj: { token_limit: number },
+  tokenObj: { token_limit: number; id: string },
   request_signal: AbortSignal,
 ) {
   const encoder = new TextEncoder();
@@ -67,12 +69,19 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
         //     // maxTokens: 20,
         //     callbacks: [
         //       {
-        //         handleLLMNewToken(token: string) {
+        //         async handleLLMNewToken(token: string) {
         //           buffer += token;
         //           console.log(token);
         //           controller.enqueue(encoder.encode(token));
         //           tokenObj.token_limit--;
         //           if (tokenObj.token_limit <= 0) {
+        //             await redis.hincrby(tokenObj.id, "requests", -1);
+        //             await redis.hset(
+        //               tokenObj.id,
+        //               "tokens",
+        //               tokenObj.token_limit,
+        //             );
+
         //             controller.close();
         //           }
         //         },
@@ -112,9 +121,10 @@ not found
 The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his breakup and subsequent hacking of Harvard's databases to create *Facemash*. This attracts the attention of twins Cameron and Tyler Winklevoss, who hire him to build *HarvardConnection*. Instead, Zuckerberg, with funding from his friend Eduardo Saverin, builds *TheFacebook*. The plot follows the site's explosive growth, the resulting lawsuits, and the fracturing of Zuckerberg's friendships.<S`;
         const array = header_test.split(" ");
 
-        for (let i = 0; i < 400; i++) {
+        for (let i = 0; i < 500; i++) {
           if (tokenObj.token_limit <= 0) {
-            controller.close();
+            console.log("ok this is it");
+            break;
           }
           controller.enqueue(array[i]);
           tokenObj.token_limit--;
@@ -122,6 +132,8 @@ The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his b
           controller.enqueue(" ");
           await sleep(1);
         }
+        await redis.hincrby(tokenObj.id, "requests", -1);
+        await redis.hset(tokenObj.id, "tokens", tokenObj.token_limit);
 
         controller.close();
       } catch (err) {
@@ -129,6 +141,5 @@ The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his b
       }
     },
   });
-
   return stream;
 }
