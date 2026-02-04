@@ -7,9 +7,11 @@ export default function AuthDetailLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
   const { data: session } = useSession();
 
-  const name = session?.user?.username || session?.user?.name;
+  const name = session?.user?.name;
   const nameFirstChar = name?.[0].toUpperCase();
   const email = session?.user?.email;
+  const llmtoken = session?.user?.llmTokens;
+
   const onSignout = async () => {
     console.log("custom-signout");
     await axios("/api/custom-signout");
@@ -29,6 +31,7 @@ export default function AuthDetailLayer() {
               <div className="">{name}</div>
             </div>
             <div className="border-b-amber-200">{email}</div>
+            <div className="border-b-amber-200">{llmtoken}</div>
             <div className="flex items-center">
               <CgLogOut className="" />
               <div onClick={onSignout} className="">

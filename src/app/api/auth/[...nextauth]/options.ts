@@ -1,10 +1,12 @@
-import { Account, NextAuthOptions, Session, User } from "next-auth";
+import { Account, NextAuthOptions, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
+import redis from "@/lib/redis";
 import { authTable } from "@/src/drizzle/models";
 import { eq, or } from "drizzle-orm";
+
 // import Google from "next-auth/providers/google";
 import GoogleProvider from "next-auth/providers/google";
 // const db = await getDatabaseConection();
@@ -52,15 +54,33 @@ export const authOptions: NextAuthOptions = {
           if (user[0].password === null) {
             throw new Error("error password is null");
           }
+
           const isPasswordCorrect = await bcrypt.compare(
             password,
             user[0].password,
           );
           if (isPasswordCorrect) {
+            const day_passed = Date.now() % 86400000;
+            const day_left = 86400000 - day_passed;
+            const expire_time = Math.round(day_left / 1000);
+            const llmtoken = 2000;
+            const requests = 5;
+
+            await redis
+              .multi()
+              .hset(user[0].id, {
+                requests: 5,
+                tokens: llmtoken,
+              })
+              .expire(user[0].id, expire_time)
+              .exec();
+
             return {
               id: user[0].id,
               email: user[0].email,
               name: user[0].username ?? user[0].googleAuthUsername ?? undefined,
+              llmTokens: llmtoken,
+              requests: requests,
             };
           } else {
             throw new Error("Incorrect password");
@@ -92,15 +112,18 @@ export const authOptions: NextAuthOptions = {
     }: {
       token: JWT;
       account: Account | null;
-      user: User;
+      user?: User;
       trigger?: "signUp" | "signIn" | "update";
     }) {
+      console.log("user?.llmTokens");
+      console.log(user?.llmTokens);
       if (user) {
-        token.id = user?.id?.toString();
+        token.id = user?.id;
         token.isVerified = user?.isVerified;
-        token.username = user?.username;
         token.name = user?.name;
         token.email = user?.email;
+        token.llmTokens = user?.llmTokens;
+        token.requests = user?.requests;
       }
 
       if (account?.provider !== "google" && trigger !== "signIn") {
@@ -125,12 +148,13 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({ session, token }) {
       if (token) {
+        // session.
         session.user.name = token?.name;
         session.user.email = token?.email;
-        session.user.isVerified = token?.isVerified;
-        session.user.username = token?.username;
+        session.user.llmTokens = token?.llmTokens;
+        session.user.requests = token?.requests;
       }
       return session;
     },

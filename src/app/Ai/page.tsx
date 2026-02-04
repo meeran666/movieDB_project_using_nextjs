@@ -102,6 +102,7 @@ export default function Page() {
       let buffer = "";
       while (true) {
         const { done, value } = await reader.read();
+
         if (done) {
           controllerRef.current = null;
 

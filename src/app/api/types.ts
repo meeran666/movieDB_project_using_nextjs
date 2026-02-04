@@ -34,6 +34,7 @@ type SignupApiResponse = {
   success: boolean;
   message: string;
 };
+
 interface DuckDuckGoImage {
   thumbnail: string;
   image: string;
@@ -60,4 +61,5 @@ export type {
   PosterDetailType,
   WrappedPosterDetailType,
   DuckDuckGoImageResponse,
+  UserTokenResult,
 };
