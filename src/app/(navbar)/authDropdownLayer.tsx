@@ -5,23 +5,22 @@ import { CgLogOut } from "react-icons/cg";
 
 export default function AuthDropdownLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
-  // const [sessionUser, setSessionUser] = useState<undefined | Session["user"]>(
-  //   undefined,
-  // );
+  // const [sessionUser, setSessionUser] = useState<null | Session["user"]>(null);
+
   const { data } = useSession();
   const user = data?.user;
+  const id = user?.id;
   const name = user?.name;
   const nameFirstChar = name?.[0].toUpperCase();
   const email = user?.email;
   const llmtoken = user?.llmTokens;
   const requests = user?.requests;
 
-  // useEffect(() => {
-  //   if (isAuthButtonClicked) {
-  //     const { data } = useSession();
-  //     setSessionUser(data?.user);
-  //   }
-  // }, [isAuthButtonClicked]);
+  useEffect(() => {
+    if (!isAuthButtonClicked) {
+      return;
+    }
+  }, [isAuthButtonClicked, id]);
 
   return (
     <div className="">

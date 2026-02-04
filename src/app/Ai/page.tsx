@@ -2,6 +2,8 @@
 import AiLogo from "@/public/AiMagicIcon.svg";
 import { useTopLoader } from "nextjs-toploader";
 import { FormEvent, useEffect, useRef, useState } from "react";
+
+import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import ImageGrid from "./imageGrid";
 import TextResponse from "./textResponse";
@@ -20,7 +22,7 @@ export default function Page() {
   const [isLoadingStart, setIsLoadingStart] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState(false);
   const loader = useTopLoader();
-
+  const { update } = useSession();
   const Pulser = () => (
     <div className="mt-10 mb-8 flex h-[30vh] w-100 items-center justify-center sm:h-[60vh] md:h-[70vh]">
       <BlinkBlur
@@ -104,8 +106,8 @@ export default function Page() {
         const { done, value } = await reader.read();
 
         if (done) {
+          await update({ llmTokens: 120, requests: 3 });
           controllerRef.current = null;
-
           setIsFinishedWriting(true);
           setIsStreaming(false);
           break;

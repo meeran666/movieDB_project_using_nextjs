@@ -1,4 +1,4 @@
-import { Account, NextAuthOptions, User } from "next-auth";
+import { Account, NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -14,6 +14,7 @@ type LoginCredentials = {
   identifier: string;
   password: string;
 };
+
 export const authOptions: NextAuthOptions = {
   providers: [
     // Google,
@@ -109,22 +110,36 @@ export const authOptions: NextAuthOptions = {
       account,
       user,
       trigger,
+      session,
     }: {
       token: JWT;
       account: Account | null;
       user?: User;
       trigger?: "signUp" | "signIn" | "update";
+      session?: {
+        llmTokens: number;
+        requests: number;
+      };
     }) {
-      console.log("user?.llmTokens");
+      console.log("user.llmTokens");
       console.log(user?.llmTokens);
-      if (user) {
-        token.id = user?.id;
-        token.isVerified = user?.isVerified;
-        token.name = user?.name;
-        token.email = user?.email;
-        token.llmTokens = user?.llmTokens;
-        token.requests = user?.requests;
+
+      if (user === undefined) {
+        return token;
       }
+
+      if (trigger === "update" && session) {
+        token.llmTokens = session.llmTokens;
+        token.requests = session.requests;
+      } else {
+        token.llmTokens = user.llmTokens;
+        token.requests = user.requests;
+      }
+
+      token.id = user.id;
+      token.isVerified = user.isVerified;
+      token.name = user.name;
+      token.email = user.email;
 
       if (account?.provider !== "google" && trigger !== "signIn") {
         return token;
@@ -151,10 +166,12 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token) {
         // session.
+
+        session.user.id = token?.id;
         session.user.name = token?.name;
         session.user.email = token?.email;
-        session.user.llmTokens = token?.llmTokens;
-        session.user.requests = token?.requests;
+        session.user.llmTokens = token.llmTokens;
+        session.user.requests = token.requests;
       }
       return session;
     },

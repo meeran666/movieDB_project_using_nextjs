@@ -1,14 +1,14 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import redis from "@/lib/redis";
-import { JWT } from "next-auth/jwt";
+import { useSession } from "next-auth/react";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 export default async function MultipleRunModel(
   title: string,
-  token: JWT,
+  tokenObj: { token_limit: number; id: string },
   request_signal: AbortSignal,
 ) {
   const encoder = new TextEncoder();
@@ -123,19 +123,18 @@ The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his b
         const array = header_test.split(" ");
 
         for (let i = 0; i < 500; i++) {
-          if (token.llmTokens <= 0) {
+          if (tokenObj.token_limit <= 0) {
             console.log("ok this is it");
             break;
           }
           controller.enqueue(array[i]);
-          token.llmTokens--;
+          tokenObj.token_limit--;
 
           controller.enqueue(" ");
           await sleep(1);
         }
-        await redis.hincrby(token.id, "requests", -1);
-        await redis.hset(token.id, "tokens", token.llmTokens);
-        token.requests--;
+        await redis.hincrby(tokenObj.id, "requests", -1);
+        await redis.hset(tokenObj.id, "tokens", tokenObj.token_limit);
         controller.close();
       } catch (err) {
         controller.error(err);

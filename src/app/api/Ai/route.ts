@@ -28,19 +28,20 @@ async function user_token_no_update(token: JWT): any {
 
   if (!exists_id) {
     const token_no = 2000;
+    const requests = 5;
     const exists = await redis.exists(id);
 
     if (!exists) {
       await redis
         .multi()
         .hset(id, {
-          requests: 5,
+          requests: requests,
           tokens: token_no,
         })
         .expire(id, expire_time)
         .exec();
     }
-    token.llmTokens = token_no;
+    return { ok: true, token_limit: token_no, id: id, requests: requests };
   }
 
   const credit = await redis.hgetall(id);
@@ -48,9 +49,15 @@ async function user_token_no_update(token: JWT): any {
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
     return false;
   }
-  return true;
-}
 
+  return {
+    ok: true,
+    token_limit: Number(credit.tokens),
+    requests: Number(credit.tokens),
+    id,
+  };
+}
+// the post request
 export async function POST(request: NextRequest) {
   const token = await getToken({
     req: request,
@@ -84,17 +91,23 @@ export async function POST(request: NextRequest) {
       );
     }
     //user token no update
-    const ok = await user_token_no_update(token);
 
-    if (!ok) {
+    const user_token = await user_token_no_update(token);
+
+    if (!user_token.ok) {
       return NextResponse.json(
         { error: "your credits for LLM ended" },
         { status: 402 },
       );
     }
-    // const tokenObj = { token_limit: token.llmTokens, id: token.requests };
 
-    const stream = await MultipleRunModel(title, token, request.signal);
+    const tokenObj = {
+      id: user_token.requests,
+      token_limit: user_token.llmTokens,
+      requests: token.requests,
+    };
+
+    const stream = await MultipleRunModel(title, tokenObj, request.signal);
     // const stream = await SingleRunModel(title);
 
     return new Response(stream, {
