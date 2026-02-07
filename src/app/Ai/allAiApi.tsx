@@ -125,6 +125,8 @@ export default function AllAiApi() {
         if (endIndex !== -1) {
           const chunkPart = chunk.slice(9);
           try {
+            console.log("chunkPart");
+            console.log(chunkPart);
             const jsonPart = JSON.parse(chunkPart);
             await onStreamFinished(jsonPart);
           } catch (err) {
