@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { DuckDuckGoImageResponse } from "../types";
+import { DuckDuckGoImageResponse } from "../../../../types/types";
 // Type for each image item from DuckDuckGo
 interface DuckDuckGoImage {
   thumbnail: string;

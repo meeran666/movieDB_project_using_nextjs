@@ -1,4 +1,4 @@
-import { AllTypeFilter } from "../api/types.ts";
+import { AllTypeFilter } from "../../../types/types.ts";
 import SecondGroup from "./secondGroup.tsx";
 export default function AttributeContainer({
   detail,

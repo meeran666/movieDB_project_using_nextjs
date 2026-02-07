@@ -1,6 +1,6 @@
 "use client";
 
-import { SignupApiResponse } from "@/src/app/api/types";
+import { SignupApiResponse } from "@/types/types";
 import { verifySchema } from "@/src/schemas/verifySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";

@@ -1,5 +1,5 @@
 import Star from "@/public/star.svg";
-import { AllTypeFilter } from "../api/types.ts";
+import { AllTypeFilter } from "../../../types/types.ts";
 
 export default function SecondGroup({ detail }: { detail: AllTypeFilter }) {
   return (

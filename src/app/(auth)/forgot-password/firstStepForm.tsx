@@ -1,5 +1,8 @@
 import { toast } from "react-toastify";
-import { ForgotPasswordApiResponse, SignupApiResponse } from "../../api/types";
+import {
+  ForgotPasswordApiResponse,
+  SignupApiResponse,
+} from "../../../../types/types";
 import axios, { AxiosError } from "axios";
 import { verifySchema } from "@/src/schemas/verifySchema";
 import {

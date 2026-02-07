@@ -7,7 +7,7 @@ import { useDebounce } from "use-debounce";
 import { signUpSchema } from "@/src/schemas/signUpSchema";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { SignupApiResponse } from "@/src/app/api/types";
+import { SignupApiResponse } from "@/types/types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";

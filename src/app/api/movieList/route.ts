@@ -1,6 +1,6 @@
 import { db } from "@/lib/db.ts";
 import { mainTable } from "@/src/drizzle/models";
-import type { MovieListType } from "@/src/app/api/types";
+import type { MovieListType } from "@/types/types";
 import { and, desc, ilike, isNotNull, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import redis from "@/lib/redis";

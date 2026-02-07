@@ -24,7 +24,6 @@ export default function AuthDropdownLayer() {
   }, [isAuthButtonClicked, id]);
 
   const onSignout = async () => {
-    // await axios("/api/custom-signout");
     signOut();
   };
   return (
@@ -51,7 +50,7 @@ export default function AuthDropdownLayer() {
               <div className="">{name}</div>
             </div>
             <div className="border-b-amber-200 pb-3">{email}</div>
-            <div className="border-b-amber-200">{`tokens: ${llmtoken}`}`</div>
+            <div className="border-b-amber-200">{`tokens: ${llmtoken}`}</div>
             <div className="border-b-amber-200">{`no of requests: ${requests}`}</div>
 
             <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-blue-500">

@@ -1,7 +1,7 @@
 import SimilarMovieContainer from "./similarMovie.tsx";
 import Star from "@/public/star.svg";
 import { useMediaQuery } from "react-responsive";
-import { AllTypeFilter, PosterDetailType } from "../api/types.ts";
+import { AllTypeFilter, PosterDetailType } from "../../../types/types.ts";
 import FirstContainer from "./firstContainer.tsx";
 import SecondGroup from "./secondGroup.tsx";
 import SynopsisContainer from "./synopsisContainer.tsx";

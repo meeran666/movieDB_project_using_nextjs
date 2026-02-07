@@ -1,4 +1,4 @@
-import { AllTypeFilter } from "../api/types.ts";
+import { AllTypeFilter } from "../../../types/types.ts";
 export default function SynopsisContainer({
   detail,
 }: {

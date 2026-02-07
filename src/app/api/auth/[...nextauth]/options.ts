@@ -157,8 +157,8 @@ export const authOptions: NextAuthOptions = {
           await db
             .insert(authTable)
             .values({
-              googleAuthUsername: token?.name,
-              email: token?.email,
+              googleAuthUsername: token.name,
+              email: token.email,
               verifyCodeExpiry: date.toISOString(),
               isVerified: true,
             })

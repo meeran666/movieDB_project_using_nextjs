@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MovieListType } from "./api/types";
+import { MovieListType } from "../../types/types";
 import { GerardSky } from "./fonts";
 type Component = {
   index: number;

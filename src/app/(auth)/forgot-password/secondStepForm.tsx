@@ -2,7 +2,7 @@ import { sendPasswordSchema } from "@/src/schemas/forgotPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ForgotPasswordApiResponse } from "../../api/types";
+import { ForgotPasswordApiResponse } from "../../../../types/types";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";

@@ -1,4 +1,4 @@
-import { PosterDetailType } from "../api/types";
+import { PosterDetailType } from "../../../types/types";
 function Poster({
   posterpath,
   postertitle,

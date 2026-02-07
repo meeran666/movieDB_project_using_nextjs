@@ -1,4 +1,4 @@
-import { AuthUser } from "@/src/app/api/types";
+import { AuthUser } from "@/types/types";
 import { DefaultSession } from "next-auth";
 import { JWT as DefaultJWT } from "next-auth/jwt";
 
@@ -9,7 +9,7 @@ declare module "next-auth/jwt" {
     llmTokens: number;
     requests: number;
     email: string;
-    name: string;
+    name?: string;
   }
 }
 // Extend the default Session type to include your custom properties
@@ -19,7 +19,7 @@ declare module "next-auth" {
       id: string;
       llmTokens: number;
       requests: number;
-      name: string;
+      name?: string;
       email: string;
     } & DefaultSession["user"];
   }
@@ -29,6 +29,6 @@ declare module "next-auth" {
     llmTokens: number;
     requests: number;
     email: string;
-    name: string;
+    name?: string;
   }
 }

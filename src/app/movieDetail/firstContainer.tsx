@@ -1,4 +1,4 @@
-import { AllTypeFilter } from "../api/types.ts";
+import { AllTypeFilter } from "../../../types/types.ts";
 import AttributeContainer from "./attributeContainer.tsx";
 export default function FirstContainer({
   detail,

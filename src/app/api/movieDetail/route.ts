@@ -2,7 +2,7 @@ import { db } from "@/lib/db.ts";
 import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/models";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
-import { AllTypeFilter } from "../types";
+import { AllTypeFilter } from "../../../../types/types";
 import redis from "@/lib/redis";
 
 async function search_in_redis(key: string) {

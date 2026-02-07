@@ -8,7 +8,7 @@ import {
   PosterDetailType,
   WrappedAllTypeFilter,
   WrappedPosterDetailType,
-} from "../api/types.ts";
+} from "../../../types/types.ts";
 function isApiResponseofData1(data1: unknown): data1 is WrappedAllTypeFilter {
   return typeof data1 === "object" && data1 !== null && "detail" in data1;
 }

@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
-import type { WrappedMovieListType } from "@/src/app/api/types.ts";
+import type { WrappedMovieListType } from "@/types/types.ts";
 import SearchList from "./searchList.tsx";
 import { useTopLoader } from "nextjs-toploader";
 import { toast } from "react-toastify";
