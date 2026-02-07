@@ -52,8 +52,6 @@ export async function ImageExtractor(
       ?.map((img: any) => img.original)
       .slice(0, no_of_image);
 
-    console.log(images);
-
     return images;
   } catch (error) {
     console.error("ImageExtractor error:", error);

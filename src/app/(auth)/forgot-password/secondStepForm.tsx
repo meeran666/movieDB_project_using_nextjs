@@ -31,8 +31,6 @@ export default function SecondStepForm({ email }: { email: string }) {
 
   const onSubmit = async (data: z.infer<typeof sendPasswordSchema>) => {
     try {
-      console.log(email);
-
       const response = await axios.post<ForgotPasswordApiResponse>(
         `/api/resetPassword`,
         { ...data, email },

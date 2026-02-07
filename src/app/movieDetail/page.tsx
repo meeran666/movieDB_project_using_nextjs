@@ -49,7 +49,6 @@ function Page() {
           });
           const data1: unknown = await response.json();
           if (isApiResponseofData1(data1)) {
-            console.log("Fetched detail of movie");
             loader.done();
 
             //2nd response

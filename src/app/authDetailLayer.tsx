@@ -13,8 +13,7 @@ export default function AuthDetailLayer() {
   const llmtoken = session?.user?.llmTokens;
 
   const onSignout = async () => {
-    console.log("custom-signout");
-    await axios("/api/custom-signout");
+    // await axios("/api/custom-signout");
     signOut();
   };
   return (

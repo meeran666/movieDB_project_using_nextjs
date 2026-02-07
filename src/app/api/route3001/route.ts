@@ -14,14 +14,12 @@ export async function GET(request: NextRequest) {
     const title = "the batman";
 
     const no_of_image = 6;
-    console.log("ok55");
 
     const image_links = await ImageExtractor(
       `${title} movie`,
       no_of_image,
       request.signal,
     );
-    console.log("ok55");
 
     return NextResponse.json({ links: image_links });
   } catch (error) {

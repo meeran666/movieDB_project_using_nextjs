@@ -11,7 +11,6 @@ async function daily_request_no_update() {
   const expire_time = Math.round(day_left / 1000);
   const exists_request_count_key = await redis.exists(request_count_key);
   if (!exists_request_count_key) {
-    console.log("inside the expire term");
     await redis.set(request_count_key, 0, "EX", expire_time);
   }
   const usage = await redis.incr(request_count_key);
@@ -43,8 +42,6 @@ async function user_token_no_update(token: JWT): any {
   }
 
   const credit = await redis.hgetall(id);
-  console.log("credit");
-  console.log(credit);
 
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
     return false;
@@ -63,8 +60,6 @@ export async function POST(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-  console.log("token");
-  console.log(token);
   if (!token) {
     return new Response("Unauthorized, accessing token is not allowed", {
       status: 401,
@@ -94,16 +89,12 @@ export async function POST(request: NextRequest) {
     //user token no update
 
     const user_token = await user_token_no_update(token);
-    console.log("user_token");
-    console.log(user_token);
     if (!user_token.ok) {
       return NextResponse.json(
         { error: "your credits for LLM ended" },
         { status: 402 },
       );
     }
-    console.log("user_token.llmTokens");
-    console.log(user_token.llmTokens);
 
     const tokenObj = {
       id: user_token.id,

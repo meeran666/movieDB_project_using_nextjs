@@ -35,14 +35,19 @@ export default function AllAiApi() {
       />
     </div>
   );
-  async function onStreamFinished(jsonPart: any) {
-    const updated_requests = jsonPart.usage.requests - 1;
-    console.log(updated_requests);
+  async function onStreamFinished() {
+    const resUsage = await fetch(`/api/usage`, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+    });
+    const usageObj = await resUsage.json();
+    const updated_requests = usageObj.requests - 1;
     await update({
-      llmTokens: jsonPart.usage.completionTokens,
+      llmTokens: usageObj.llmTokens,
       requests: updated_requests,
     });
   }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -114,26 +119,13 @@ export default function AllAiApi() {
 
         if (done) {
           controllerRef.current = null;
+          await onStreamFinished();
           setIsFinishedWriting(true);
           setIsStreaming(false);
           break;
         }
-        let chunk = decoder.decode(value, { stream: true });
-        const endIndex = chunk.indexOf(
-          `\n\n__END__{"usage":{"completionTokens":`,
-        );
-        if (endIndex !== -1) {
-          const chunkPart = chunk.slice(9);
-          try {
-            console.log("chunkPart");
-            console.log(chunkPart);
-            const jsonPart = JSON.parse(chunkPart);
-            await onStreamFinished(jsonPart);
-          } catch (err) {
-            throw err;
-          }
-          chunk = "";
-        }
+        const chunk = decoder.decode(value, { stream: true });
+
         buffer = buffer + chunk;
 
         if (buffer.includes("not found in first section")) {

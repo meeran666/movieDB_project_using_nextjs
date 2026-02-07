@@ -33,7 +33,6 @@ export const authOptions: NextAuthOptions = {
         credentials: LoginCredentials | undefined,
       ): Promise<User | null> {
         if (!credentials) return null;
-        console.log("inside the authorize functions");
         try {
           const { identifier, password } = credentials;
           const user = await db
@@ -87,8 +86,6 @@ export const authOptions: NextAuthOptions = {
             //   }
             // }
 
-            console.log("user[0]");
-            console.log(user[0]);
             return {
               id: user[0].id,
               email: user[0].email,
@@ -135,27 +132,21 @@ export const authOptions: NextAuthOptions = {
       };
     }) {
       if (user) {
-        console.log("user");
-        console.log(user);
-
         token.id = user.id;
-        token.isVerified = user.isVerified;
         token.name = user.name;
         token.email = user.email;
         token.llmTokens = user.llmTokens;
         token.requests = user.requests;
       }
 
-      // 2️⃣ Session update (useSession().update)
+      //  Session update (useSession().update)
       if (trigger === "update" && session) {
         console.log(session);
         token.llmTokens = session.llmTokens;
         token.requests = session.requests;
-        console.log("token inside the update jwt");
-        console.log(token);
       }
 
-      // 3️⃣ GUARANTEE fields always exist
+      //  GUARANTEE fields always exist
       token.llmTokens ??= 0;
       token.requests ??= 0;
       // console.log("trigger");
@@ -177,20 +168,14 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
-      console.log("point");
-      console.log(token);
       return token;
     },
     async session({ session, token }) {
-      // console.log("token1");
-      // console.log(token);
       if (token) {
         // session.
-        console.log("session inside");
-
-        session.user.id = token?.id;
-        session.user.name = token?.name;
-        session.user.email = token?.email;
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
         session.user.llmTokens = token.llmTokens;
         session.user.requests = token.requests;
       }

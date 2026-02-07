@@ -49,6 +49,13 @@ interface DuckDuckGoImageResponse {
   results: DuckDuckGoImage[];
   next?: string;
 }
+interface AuthUser {
+  id: string;
+  llmTokens: number;
+  requests: number;
+  email: string;
+  name: string;
+}
 
 type ForgotPasswordApiResponse = SignupApiResponse;
 export type {
@@ -61,5 +68,5 @@ export type {
   PosterDetailType,
   WrappedPosterDetailType,
   DuckDuckGoImageResponse,
-  UserTokenResult,
+  AuthUser,
 };

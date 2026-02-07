@@ -39,7 +39,10 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        request_signal.addEventListener("abort", () => {
+        request_signal.addEventListener("abort", async () => {
+          await redis.hincrby(tokenObj.id, "requests", -1);
+          await redis.hset(tokenObj.id, { ["tokens"]: tokenObj.llmTokens });
+
           console.log(" Client aborted request");
 
           controller.close();
@@ -127,7 +130,6 @@ The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his b
 
         for (let i = 0; i < 500; i++) {
           if (tokenObj.llmTokens <= 0) {
-            console.log("ok this is it");
             break;
           }
           controller.enqueue(array[i]);
@@ -137,17 +139,8 @@ The film chronicles Mark Zuckerberg's creation of Facebook. It begins with his b
           await sleep(1);
         }
 
-        //this is commone part with testing
-        console.log("tokenObj.llmTokens");
-
         await redis.hincrby(tokenObj.id, "requests", -1);
         await redis.hset(tokenObj.id, { ["tokens"]: tokenObj.llmTokens });
-
-        controller.enqueue(
-          encoder.encode(
-            `\n\n__END__{"usage":{"completionTokens":${tokenObj.llmTokens},"requests":${tokenObj.requests}}}`,
-          ),
-        );
         controller.close();
       } catch (err) {
         controller.error(err);

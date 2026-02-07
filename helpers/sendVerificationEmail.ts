@@ -9,7 +9,6 @@ export async function sendVerificationEmail(
   verifyCode: string,
 ): Promise<SignupApiResponse> {
   try {
-    console.log("is it wow");
     await resend.emails.send({
       from: "onboarding@resend.dev",
       to: email,

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -22,6 +23,10 @@ export default function AuthDropdownLayer() {
     }
   }, [isAuthButtonClicked, id]);
 
+  const onSignout = async () => {
+    // await axios("/api/custom-signout");
+    signOut();
+  };
   return (
     <div className="">
       <div
@@ -35,7 +40,7 @@ export default function AuthDropdownLayer() {
         </button>
       </div>
       <div
-        className={`absolute right-0 z-2 grid overflow-hidden rounded-2xl bg-amber-500 shadow-md shadow-white duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+        className={`absolute right-0 z-2 grid overflow-hidden rounded-2xl bg-amber-500 shadow-md shadow-white duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"} `}
       >
         <div className="min-h-0">
           <div className="flex flex-col items-center p-4">
@@ -46,17 +51,12 @@ export default function AuthDropdownLayer() {
               <div className="">{name}</div>
             </div>
             <div className="border-b-amber-200 pb-3">{email}</div>
-            <div className="border-b-amber-200">{llmtoken}</div>
-            <div className="border-b-amber-200">{requests}</div>
+            <div className="border-b-amber-200">{`tokens: ${llmtoken}`}`</div>
+            <div className="border-b-amber-200">{`no of requests: ${requests}`}</div>
 
-            <button className="flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-blue-500">
+            <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-blue-500">
               <CgLogOut className="" />
-              <div
-                onClick={() => {
-                  signOut();
-                }}
-                className=""
-              >
+              <div onClick={onSignout} className="">
                 logout
               </div>
             </button>

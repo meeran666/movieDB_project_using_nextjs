@@ -40,7 +40,6 @@ export default function Page() {
       //response result
       const data: unknown = await response.json();
       if (isApiResponse(data)) {
-        console.log("Fetched movies");
         if (data.rowdata.length == 0) {
           toast.warn("No such movie exist!", {
             position: "bottom-right",
@@ -83,12 +82,12 @@ export default function Page() {
             />
           </div>
 
-          <div className="relative inline-flex items-center justify-center">
+          <div className="relative z-0 inline-flex items-center justify-center">
             <div className="absolute z-8 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,_#ff4545,_#00ff99,_#006aff,_#ff0095,_#ff4545)] opacity-50 blur-lg sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg lg:blur-xl" />
             <div className="absolute z-9 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,_#ff4545,_#00ff99,_#006aff,_#ff0095,_#ff4545)] sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg" />
             <button
               type="submit"
-              className="relative z-10 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-[bolder] text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"
+              className="relative z-9 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-[bolder] text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"
             >
               Search
             </button>
