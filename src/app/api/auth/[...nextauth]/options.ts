@@ -67,15 +67,28 @@ export const authOptions: NextAuthOptions = {
             const llmtoken = 2000;
             const requests = 5;
 
-            await redis
-              .multi()
-              .hset(user[0].id, {
-                requests: 5,
-                tokens: llmtoken,
-              })
-              .expire(user[0].id, expire_time)
-              .exec();
+            // this is commentable for now
+            // const id = user[0].id;
+            // const exists_id = await redis.exists(id);
+            // if (!exists_id) {
+            //   const llmtoken = 2000;
+            //   const requests = 5;
+            //   const exists = await redis.exists(id);
 
+            //   if (!exists) {
+            //     await redis
+            //       .multi()
+            //       .hset(user[0].id, {
+            //         requests: requests,
+            //         tokens: llmtoken,
+            //       })
+            //       .expire(user[0].id, expire_time)
+            //       .exec();
+            //   }
+            // }
+
+            console.log("user[0]");
+            console.log(user[0]);
             return {
               id: user[0].id,
               email: user[0].email,
@@ -121,31 +134,34 @@ export const authOptions: NextAuthOptions = {
         requests: number;
       };
     }) {
-      console.log("user.llmTokens");
-      console.log(user?.llmTokens);
+      if (user) {
+        console.log("user");
+        console.log(user);
 
-      if (user === undefined) {
-        return token;
-      }
-
-      if (trigger === "update" && session) {
-        token.llmTokens = session.llmTokens;
-        token.requests = session.requests;
-      } else {
+        token.id = user.id;
+        token.isVerified = user.isVerified;
+        token.name = user.name;
+        token.email = user.email;
         token.llmTokens = user.llmTokens;
         token.requests = user.requests;
       }
 
-      token.id = user.id;
-      token.isVerified = user.isVerified;
-      token.name = user.name;
-      token.email = user.email;
-
-      if (account?.provider !== "google" && trigger !== "signIn") {
-        return token;
+      // 2️⃣ Session update (useSession().update)
+      if (trigger === "update" && session) {
+        console.log(session);
+        token.llmTokens = session.llmTokens;
+        token.requests = session.requests;
+        console.log("token inside the update jwt");
+        console.log(token);
       }
-      try {
-        if (token?.name !== undefined && token?.email !== undefined) {
+
+      // 3️⃣ GUARANTEE fields always exist
+      token.llmTokens ??= 0;
+      token.requests ??= 0;
+      // console.log("trigger");
+      // console.log(trigger);
+      if (account?.provider === "google" && trigger === "signIn") {
+        try {
           const date = new Date(Date.now() + 172800);
           await db
             .insert(authTable)
@@ -156,16 +172,21 @@ export const authOptions: NextAuthOptions = {
               isVerified: true,
             })
             .onConflictDoNothing();
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
       }
 
+      console.log("point");
+      console.log(token);
       return token;
     },
     async session({ session, token }) {
+      // console.log("token1");
+      // console.log(token);
       if (token) {
         // session.
+        console.log("session inside");
 
         session.user.id = token?.id;
         session.user.name = token?.name;

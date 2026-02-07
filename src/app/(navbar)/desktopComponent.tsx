@@ -1,3 +1,4 @@
+"use client";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { MouseEvent, useRef, useState } from "react";
@@ -6,11 +7,9 @@ import DropDown from "./dropdown";
 import AuthDropdownLayer from "./authDropdownLayer";
 import AuthNonDropdownLayer from "./authNonDropdownLayer";
 
-function AuthWrapper({
-  status,
-}: {
-  status: "authenticated" | "loading" | "unauthenticated";
-}) {
+function AuthWrapper() {
+  const { status } = useSession();
+
   return (
     <>
       {status === "authenticated" ? (
@@ -29,7 +28,6 @@ export default function DesktopComponent() {
   // const [isDropped, setIsDropped] = useState(false);
   const browseRef = useRef<HTMLAnchorElement>(null);
   const aboutRef = useRef<HTMLButtonElement>(null);
-  const { status } = useSession();
   const pathname = usePathname();
   type MyMouseEvent<T extends HTMLElement> = MouseEvent<T>;
 
@@ -106,7 +104,7 @@ export default function DesktopComponent() {
         <DropDown isHoverAbout={isHoverAbout} />
       </button>
 
-      {pathname === "/sign-in" ? null : <AuthWrapper status={status} />}
+      {pathname === "/sign-in" ? null : <AuthWrapper />}
     </div>
   );
 }

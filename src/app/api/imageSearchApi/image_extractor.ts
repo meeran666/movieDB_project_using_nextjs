@@ -74,9 +74,9 @@ export async function ImageExtractor(
     //   }
     //   const data = await res.json();
     //   if (data.error) {const expire = await redis.ttl(key);
-        console.log(expire);
-        const value = await redis.get(key);
-        console.log(
+    // console.log(expire);
+    // const value = await redis.get(key);
+    // console.log(
     //     throw new Error(data.error);
     //   }
     //   images = data.jsonObject.images_results

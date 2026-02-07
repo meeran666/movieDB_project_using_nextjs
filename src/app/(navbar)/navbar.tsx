@@ -37,9 +37,9 @@ export default function Navbar({
             buttonref={buttonref}
           />
         ) : (
-          <SessionProvider>
-            <DesktopComponent />
-          </SessionProvider>
+          // <SessionProvider>
+          <DesktopComponent />
+          // </SessionProvider>
         )}
       </div>
     </>

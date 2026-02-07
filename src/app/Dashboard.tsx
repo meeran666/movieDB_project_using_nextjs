@@ -2,14 +2,13 @@
 import NextTopLoader from "nextjs-toploader";
 import SidebarLayer from "./(sidebarLayer)/sidebar_layer";
 import Navbar from "./(navbar)/navbar";
-import { useSession } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
 
 export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { status } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
@@ -54,30 +53,31 @@ export default function Dashboard({
       window.removeEventListener("click", handleClickOutside);
     };
   }, [isSidebarOpen]);
-  if (status === "loading") return <p>Loading session...</p>;
   return (
     <>
-      <SidebarLayer
-        onHambergerClick={handleHambergerButtonClick}
-        setIsSideBarOpen={setIsSidebarOpen}
-        sidebarRef={sidebarRef}
-        isSidebarOpen={isSidebarOpen}
-        buttonref={buttonRef}
-      />
-
-      <div className={`${isSidebarOpen ? "" : null} flex grow flex-col`}>
-        <NextTopLoader speed={7} initialPosition={0.01} color="#5c57be" />
-        <Navbar
+      <SessionProvider>
+        <SidebarLayer
           onHambergerClick={handleHambergerButtonClick}
-          isMobile={isMobile}
+          setIsSideBarOpen={setIsSidebarOpen}
+          sidebarRef={sidebarRef}
+          isSidebarOpen={isSidebarOpen}
           buttonref={buttonRef}
         />
-        <div className="flex grow flex-col bg-(--black_color) pt-16">
-          {children}
-        </div>
 
-        <ToastContainer />
-      </div>
+        <div className={`${isSidebarOpen ? "" : null} flex grow flex-col`}>
+          <NextTopLoader speed={7} initialPosition={0.01} color="#5c57be" />
+          <Navbar
+            onHambergerClick={handleHambergerButtonClick}
+            isMobile={isMobile}
+            buttonref={buttonRef}
+          />
+          <div className="flex grow flex-col bg-(--black_color) pt-16">
+            {children}
+          </div>
+
+          <ToastContainer />
+        </div>
+      </SessionProvider>
     </>
   );
 }

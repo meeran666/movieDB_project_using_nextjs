@@ -9,7 +9,7 @@ declare module "next-auth/jwt" {
     llmTokens: number;
     requests: number;
     isVerified?: boolean;
-    email?: string;
+    email: string;
     name?: string;
   }
 }
@@ -22,19 +22,18 @@ declare module "next-auth" {
       llmTokens: number;
       requests: number;
       name?: string;
-      email?: string;
+      email: string;
     } & DefaultSession["user"];
   }
 
   // Optionally extend the User type
   // interface User extends DefaultUser {
   interface User {
-    llmTokens: number;
     id: string;
-    name?: string;
+    llmTokens: number;
     requests: number;
-    username?: string;
-    email?: string;
+    name?: string;
+    email: string;
     isVerified?: boolean;
   }
 }

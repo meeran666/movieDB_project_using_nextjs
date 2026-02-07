@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import MultipleRunModel from "./multipleRunModel";
 
 // import SingleModel from "./single_model";
-async function daily_request_no_update(token: JWT | null) {
+async function daily_request_no_update() {
   const request_count_key = "request_count";
   const day_passed = Date.now() % 86400000;
   const day_left = 86400000 - day_passed;
@@ -22,10 +22,8 @@ async function user_token_no_update(token: JWT): any {
   const day_passed = Date.now() % 86400000;
   const day_left = 86400000 - day_passed;
   const expire_time = Math.round(day_left / 1000);
-
   const id = token.id;
   const exists_id = await redis.exists(id);
-
   if (!exists_id) {
     const token_no = 2000;
     const requests = 5;
@@ -41,10 +39,12 @@ async function user_token_no_update(token: JWT): any {
         .expire(id, expire_time)
         .exec();
     }
-    return { ok: true, token_limit: token_no, id: id, requests: requests };
+    return { ok: true, id: id, llmTokens: token_no, requests: requests };
   }
 
   const credit = await redis.hgetall(id);
+  console.log("credit");
+  console.log(credit);
 
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
     return false;
@@ -52,8 +52,8 @@ async function user_token_no_update(token: JWT): any {
 
   return {
     ok: true,
-    token_limit: Number(credit.tokens),
-    requests: Number(credit.tokens),
+    llmTokens: Number(credit.tokens),
+    requests: Number(credit.requests),
     id,
   };
 }
@@ -63,7 +63,8 @@ export async function POST(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-
+  console.log("token");
+  console.log(token);
   if (!token) {
     return new Response("Unauthorized, accessing token is not allowed", {
       status: 401,
@@ -80,7 +81,7 @@ export async function POST(request: NextRequest) {
 
   try {
     // daily request no value update
-    const usage = await daily_request_no_update(token);
+    const usage = await daily_request_no_update();
     if (usage >= 40) {
       return NextResponse.json(
         {
@@ -93,18 +94,21 @@ export async function POST(request: NextRequest) {
     //user token no update
 
     const user_token = await user_token_no_update(token);
-
+    console.log("user_token");
+    console.log(user_token);
     if (!user_token.ok) {
       return NextResponse.json(
         { error: "your credits for LLM ended" },
         { status: 402 },
       );
     }
+    console.log("user_token.llmTokens");
+    console.log(user_token.llmTokens);
 
     const tokenObj = {
-      id: user_token.requests,
-      token_limit: user_token.llmTokens,
-      requests: token.requests,
+      id: user_token.id,
+      llmTokens: user_token.llmTokens,
+      requests: user_token.requests,
     };
 
     const stream = await MultipleRunModel(title, tokenObj, request.signal);
