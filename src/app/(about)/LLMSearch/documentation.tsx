@@ -209,7 +209,7 @@ function documentation() {
       </div>
       <div className="pb-7">
         <SyntaxHighlighter
-          className="overflow-x-hidden pb-7 text-[15px]"
+          className="overflow-x-hidden pb-7 text-sm"
           language="javascript"
           style={atomDark}
           showLineNumbers={true}

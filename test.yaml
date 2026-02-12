@@ -6,20 +6,20 @@ services:
     #   context: .
     # dockerfile: Dockerfile
     ports:
-      - '3005:3000'
+      - "3005:3000"
     depends_on:
       - db
-    command: ['bun', 'server.js']
-    env_file: 'prod.env'
+    command: ["bun", "server.js"]
+    env_file: "prod.env"
   db:
     image: postgres:latest
     container_name: pg_moviedb
-    env_file: 'dbcontainer.env'
+    env_file: "dbcontainer.env"
     volumes:
       - ~/pg_moviedb_backup.sql:/docker-entrypoint-initdb.d/pg_moviedb_backup.sql
       - pg_data:/var/lib/postgresql/data
     ports:
-      - '5500:5432'
+      - "5500:5432"
 networks:
   docker_network:
     driver: bridge

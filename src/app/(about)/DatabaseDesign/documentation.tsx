@@ -172,7 +172,7 @@ return result;
 
       <div className="pb-15">
         <SyntaxHighlighter
-          className="overflow-x-hidden pb-7 text-[15px]"
+          className="overflow-x-hidden pb-7 text-sm"
           language="javascript"
           style={atomDark}
           showLineNumbers={true}
@@ -201,18 +201,19 @@ return result;
         {`'where()', `} this keyword is used for conditional clause in which
         column of id of main table is equal to id(query parameter).
       </div>
-
       <div className="pb-15">
         <SyntaxHighlighter
-          className="h-350 w-185 text-[15px]"
+          className="overflow-x-hidden pb-7 text-sm"
           language="javascript"
           style={atomDark}
           showLineNumbers={true}
           wrapLines={true}
+          wrapLongLines={true}
         >
           {code2}
         </SyntaxHighlighter>
       </div>
+
       <div className="pb-7 text-3xl font-bold">Similar Movie Query</div>
       <div className="pb-7">
         This query execute in main table. Select the posterPath, title, id
@@ -223,13 +224,14 @@ return result;
       </div>
       <div className="pb-15">
         <SyntaxHighlighter
-          className="h-60 w-185 text-[15px]"
+          className="overflow-x-hidden pb-7 text-sm"
           language="javascript"
           style={atomDark}
           showLineNumbers={true}
           wrapLines={true}
+          wrapLongLines={true}
         >
-          {code3}
+          {code1}
         </SyntaxHighlighter>
       </div>
     </>

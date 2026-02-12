@@ -22,17 +22,17 @@ export default function Detail({
   return (
     <>
       <div className="bg-[black]">
-        <div className="z-[-1] flex w-[100dvw] flex-col items-center overflow-hidden">
+        <div className="-z-1 flex w-screen flex-col items-center overflow-hidden">
           <div className="relative flex justify-center">
             {detail.posterPath ? (
               <img
                 alt="backgroundImage"
-                className="absolute top-[-1rem] z-[0] h-[100rem] w-[81.5rem] bg-cover bg-center opacity-[0.3]"
+                className="absolute -top-4 z-0 h-400 w-326 bg-cover bg-center opacity-30"
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
               />
             ) : null}
           </div>
-          <div className="z-[1] flex w-[81.5rem] flex-col bg-gradient-to-t from-(--full_opacity) to-transparent max-[1330px]:w-auto">
+          <div className="z-[1] flex w-auto flex-col bg-gradient-to-t from-(--full_opacity) to-transparent xl:w-326">
             <FirstContainer
               detail={detail}
               genre={genre}

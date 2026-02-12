@@ -11,19 +11,19 @@ type Component = {
 function Component({ index, date, title, id, isMobile }: Component) {
   return (
     <div
-      className={`flex h-[4rem] w-full items-center justify-center bg-gray-700 max-[780px]:h-[2.5rem] ${GerardSky.className}`}
+      className={`flex h-10 w-full items-center justify-center bg-gray-700 md:h-[4rem] ${GerardSky.className}`}
     >
       <a
         className="flex h-8/10 w-49/50 items-center rounded-sm bg-gray-600 pr-[3vw] pl-[3vw] text-white no-underline transition-transform duration-300 hover:h-full hover:w-full hover:min-[780px]:bg-gray-800"
         href={`/movieDetail?id=${id}`}
       >
-        <div className="pointer-events-none w-[6vw] grow-0 max-[780px]:pr-[0.5rem] max-[780px]:pl-[0.5rem]">
+        <div className="pointer-events-none w-[6vw] grow-0 max-[780px]:pr-2 max-[780px]:pl-2">
           {index}
         </div>
-        <div className="pointer-events-none h-[3rem] w-[5rem] grow content-center overflow-hidden text-ellipsis max-[780px]:h-[2.5rem] max-[780px]:pr-[0.5rem] max-[780px]:pl-[0.5rem]">
+        <div className="pointer-events-none h-[3rem] w-[5rem] grow content-center overflow-hidden text-ellipsis max-[780px]:h-10 max-[780px]:pr-2 max-[780px]:pl-2">
           {title}
         </div>
-        <div className="pointer-events-none w-[14rem] grow-0 max-[780px]:pr-[0.5rem] max-[780px]:pl-[0.5rem]">
+        <div className="pointer-events-none w-56 grow-0 max-[780px]:pr-2 max-[780px]:pl-2">
           {isMobile ? date.slice(-4) : date}
         </div>
       </a>

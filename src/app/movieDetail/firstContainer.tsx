@@ -13,15 +13,15 @@ export default function FirstContainer({
 }) {
   return (
     <div className="flex w-[100%] pb-[3rem]">
-      <div className="pt-[5.7rem] pl-[3rem] max-[780px]:pl-[1.5rem]">
+      <div className="pt-[5.7rem] pl-[1.5rem] md:pl-[3rem]">
         {detail.posterPath == null ? (
-          <div className="h-[20rem] w-[15rem] overflow-clip border-[0.5rem] border-solid border-[white] p-[0.8vw] text-[2.3vw] text-[blueviolet] max-[1330px]:h-[24vw] max-[1330px]:w-[19vw] max-[920px]:h-[13rem] max-[920px]:w-[10rem] max-[920px]:border-[0.3rem] max-[920px]:text-[1rem]">
+          <div className="h-52 w-40 overflow-clip border-5 border-solid border-[white] p-[0.8vw] text-xl text-[blueviolet] md:h-[24vw] md:w-[19vw] lg:border-8 lg:text-[2.3vw] xl:h-80 xl:w-60">
             {detail.title}
           </div>
         ) : (
           <img
             alt="imageMovie"
-            className="[w-[15rem] h-auto border-[0.5rem] border-solid border-white max-[1330px]:h-auto max-[1330px]:w-[19vw] max-[920px]:h-auto max-[920px]:w-[10rem] min-[780px]:hover:border-(--border_color)"
+            className="h-auto w-40 border-8 border-solid border-white md:w-[19vw] md:hover:border-(--border_color) xl:w-60"
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
           />
         )}

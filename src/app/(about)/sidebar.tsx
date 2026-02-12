@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 export default function Sidebar({
   menuItems,
@@ -20,7 +19,7 @@ export default function Sidebar({
         {menuItems.map((item, id) => (
           <Link
             key={id}
-            className={`mx-2 flex w-60 rounded-[5px] pl-2 text-xl hover:bg-gray-800 ${item.path == activeItem ? "bg-gray-800 text-emerald-500" : null}`}
+            className={`mx-2 flex w-60 rounded-sm pl-2 text-xl hover:bg-gray-800 ${item.path == activeItem ? "bg-gray-800 text-emerald-500" : null}`}
             onClick={() => handleItemClick(item.path)}
             href={item.path}
           >

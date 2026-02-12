@@ -14,13 +14,13 @@ export default function MobileComponent({
 }: MobileComponentProp) {
   return (
     <div
-      className="flex flex-col gap-[3px]"
+      className="flex flex-col gap-1"
       onClick={onHambergerClick}
       ref={buttonref}
     >
-      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
-      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
-      <div className="h-[6px] w-[20px] rounded-[20%] bg-[cyan]"></div>
+      <div className="h-1 w-4 rounded-sm bg-[cyan]"></div>
+      <div className="h-1 w-4 rounded-sm bg-[cyan]"></div>
+      <div className="h-1 w-4 rounded-sm bg-[cyan]"></div>
     </div>
   );
 }

@@ -83,7 +83,7 @@ export default function DesktopComponent() {
     <div className="flex grow-0">
       <a
         ref={browseRef}
-        className={`mr-7 ml-3 content-center px-[10px] text-[20px] hover:bg-[rgb(25,25,54)] ${isHoverBrowse ? "text-[cyan]" : "text-gray-500"}`}
+        className={`mr-7 ml-3 content-center px-2 text-xl hover:bg-[rgb(25,25,54)] ${isHoverBrowse ? "text-[cyan]" : "text-gray-500"}`}
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
         href={"/"}
@@ -92,7 +92,7 @@ export default function DesktopComponent() {
       </a>
       <a
         ref={AiSearchRef}
-        className={`mr-2 content-center px-[10px] text-[20px] hover:bg-[rgb(25,25,54)] ${isHoverAiSearch ? "text-[cyan]" : "text-gray-500"}`}
+        className={`mr-2 content-center px-2 text-xl hover:bg-[rgb(25,25,54)] ${isHoverAiSearch ? "text-[cyan]" : "text-gray-500"}`}
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
         href={"/"}
@@ -106,9 +106,9 @@ export default function DesktopComponent() {
         className="cursor-pointer"
       >
         <div className="mr-4 flex h-15.5 hover:bg-[rgb(25,25,54)]">
-          <div className="flex items-center px-[30px]">
+          <div className="flex items-center px-8">
             <div
-              className={`text-[20px] ${isHoverAbout ? "text-[cyan]" : "text-gray-500"}`}
+              className={`text-xl ${isHoverAbout ? "text-[cyan]" : "text-gray-500"}`}
             >
               About
             </div>
