@@ -54,7 +54,7 @@ export async function ImageExtractor(
     //     throw new Error(data.error);
     //   }
     //   images = data.jsonObject.images_results
-    //     ?.map((img: any) => img.original)
+    //     ?.map((img: { original: string })) => img.original)
     //     .slice(0, no_of_image);
     // } else if (API_CONNECTION_NO === 1) {
     //   //scrapingdog api
@@ -80,7 +80,7 @@ export async function ImageExtractor(
     //     throw new Error(data.error);
     //   }
     //   images = data.jsonObject.images_results
-    //     ?.map((img: any) => img.original)
+    //     ?.map((img: { original: string })) => img.original)
     //     .slice(0, no_of_image);
     // } else {
     //   //google api

@@ -38,18 +38,22 @@ async function search_contain(
 
   return result;
 }
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 export async function POST(request: NextRequest) {
-  const url = new URL(request.url);
-  const searchParams = new URLSearchParams(url.search);
-  const title = searchParams.get("title");
-  const selfid = searchParams.get("selfid");
-  if (title === null || selfid === null) {
-    throw Error("title is null or selfid is null");
-  }
   try {
+    const url = new URL(request.url);
+    const searchParams = new URLSearchParams(url.search);
+    const title = searchParams.get("title");
+    const selfid = searchParams.get("selfid");
+    if (title === null || selfid === null) {
+      return NextResponse.json(
+        { error: "title or selfid is missing" },
+        { status: 400 }, // Bad Request
+      );
+    }
     const finalkey = title + ":" + selfid;
 
     // Check Redis first
@@ -59,7 +63,6 @@ export async function POST(request: NextRequest) {
     }
     //finding posterdetail in db
     const MovieList = await search_contain(title, parseInt(selfid), 5);
-    await sleep(10000);
     const responseData = {
       posterData: MovieList,
     };
@@ -69,6 +72,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(responseData);
   } catch (error) {
     console.log(error);
-    return NextResponse.json("Error");
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

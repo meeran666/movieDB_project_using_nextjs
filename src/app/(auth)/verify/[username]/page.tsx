@@ -29,7 +29,9 @@ export default function VerifyAccount() {
         autoClose: 7000,
       });
 
-      router.replace("/sign-in");
+      if (response.status === 200) {
+        router.replace("/sign-in");
+      }
     } catch (error) {
       const axiosError = error as AxiosError<SignupApiResponse>;
       toast.warn(axiosError.response?.data.message, {

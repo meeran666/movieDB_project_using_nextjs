@@ -15,7 +15,7 @@ services:
     container_name: pg_moviedb
     env_file: ".env"
     volumes:
-      - ../largeFile/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
+      - ../largeFile/pg_dump_moviedb1.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb1.sql
       - pg_data_volume:/var/lib/postgresql/18/main
     ports:
       - "5500:5432"

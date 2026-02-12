@@ -17,7 +17,15 @@ async function daily_request_no_update() {
 
   return usage;
 }
-async function user_token_no_update(token: JWT): any {
+type tokenObjtype =
+  | {
+      ok: true;
+      id: string;
+      llmTokens: number;
+      requests: number;
+    }
+  | { ok: false };
+async function user_token_no_update(token: JWT): Promise<tokenObjtype> {
   const day_passed = Date.now() % 86400000;
   const day_left = 86400000 - day_passed;
   const expire_time = Math.round(day_left / 1000);
@@ -44,7 +52,7 @@ async function user_token_no_update(token: JWT): any {
   const credit = await redis.hgetall(id);
 
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
-    return false;
+    return { ok: false };
   }
 
   return {
@@ -103,7 +111,6 @@ export async function POST(request: NextRequest) {
     };
 
     const stream = await MultipleRunModel(title, tokenObj, request.signal);
-    // const stream = await SingleRunModel(title);
 
     return new Response(stream, {
       headers: {
@@ -114,6 +121,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json(`Error:  error);
+    return NextResponse.json(`Error:  ${error}`);
   }
 }

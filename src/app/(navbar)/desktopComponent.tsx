@@ -24,10 +24,12 @@ function AuthWrapper() {
 export default function DesktopComponent() {
   const [isHoverAbout, setIsHoverAbout] = useState(false);
   const [isHoverBrowse, setisHoverBrowse] = useState(false);
+  const [isHoverAiSearch, setIsHoverAiSearch] = useState(false);
 
   // const [isDropped, setIsDropped] = useState(false);
   const browseRef = useRef<HTMLAnchorElement>(null);
   const aboutRef = useRef<HTMLButtonElement>(null);
+  const AiSearchRef = useRef<HTMLAnchorElement>(null);
   const pathname = usePathname();
   type MyMouseEvent<T extends HTMLElement> = MouseEvent<T>;
 
@@ -40,6 +42,9 @@ export default function DesktopComponent() {
     if (event.target && browseRef.current?.contains(event.target as Node)) {
       setisHoverBrowse(true);
     }
+    if (event.target && AiSearchRef.current?.contains(event.target as Node)) {
+      setIsHoverAiSearch(true);
+    }
   };
 
   const handleMouseOut = (
@@ -50,6 +55,9 @@ export default function DesktopComponent() {
     }
     if (event.target && browseRef.current?.contains(event.target as Node)) {
       setisHoverBrowse(false);
+    }
+    if (event.target && AiSearchRef.current?.contains(event.target as Node)) {
+      setIsHoverAiSearch(false);
     }
   }; // const handleMouseIn = (event: MouseEvent<HTMLButtonElement>) => {
   //   if (event.target && aboutRef.current?.contains(event.target as Node)) {
@@ -75,12 +83,21 @@ export default function DesktopComponent() {
     <div className="flex grow-0">
       <a
         ref={browseRef}
-        className={`content-center px-[10px] text-[20px] hover:bg-[rgb(25,25,54)] ${isHoverBrowse ? "text-[cyan]" : "text-gray-500"}`}
+        className={`mr-7 ml-3 content-center px-[10px] text-[20px] hover:bg-[rgb(25,25,54)] ${isHoverBrowse ? "text-[cyan]" : "text-gray-500"}`}
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
         href={"/"}
       >
         Browse movie
+      </a>
+      <a
+        ref={AiSearchRef}
+        className={`mr-2 content-center px-[10px] text-[20px] hover:bg-[rgb(25,25,54)] ${isHoverAiSearch ? "text-[cyan]" : "text-gray-500"}`}
+        onMouseOver={handleMouseIn}
+        onMouseOut={handleMouseOut}
+        href={"/"}
+      >
+        Ai Search
       </a>
       <button
         onMouseOver={handleMouseIn}
@@ -88,8 +105,8 @@ export default function DesktopComponent() {
         ref={aboutRef}
         className="cursor-pointer"
       >
-        <div className="flex h-15.5 hover:bg-[rgb(25,25,54)]">
-          <div className="flex items-center px-[24px]">
+        <div className="mr-4 flex h-15.5 hover:bg-[rgb(25,25,54)]">
+          <div className="flex items-center px-[30px]">
             <div
               className={`text-[20px] ${isHoverAbout ? "text-[cyan]" : "text-gray-500"}`}
             >

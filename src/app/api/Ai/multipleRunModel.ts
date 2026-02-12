@@ -1,7 +1,6 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import redis from "@/lib/redis";
-import { useSession } from "next-auth/react";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -12,8 +11,8 @@ export default async function MultipleRunModel(
   request_signal: AbortSignal,
 ) {
   const encoder = new TextEncoder();
-  const token_number = Math.trunc(Math.random() * 16 + 35);
-  const max_token_number = token_number + 50;
+  const token_number = Math.trunc(Math.random() * 16 + 30);
+  const max_token_number = token_number + 20;
 
   const prompt_template = new PromptTemplate({
     template: `You are an expert on movies. 
@@ -42,7 +41,6 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
         request_signal.addEventListener("abort", async () => {
           await redis.hincrby(tokenObj.id, "requests", -1);
           await redis.hset(tokenObj.id, { ["tokens"]: tokenObj.llmTokens });
-
           console.log(" Client aborted request");
 
           controller.close();
@@ -70,13 +68,12 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
         //     temperature: 0.7,
         //     configuration: { baseURL: "https://openrouter.ai/api/v1" },
         //     streaming: true,
-        //     // maxTokens: 20,
+        //     maxTokens: 60,
         //     callbacks: [
         //       {
         //         async handleLLMNewToken(token: string) {
         //           buffer += token;
         //           tokenObj.llmTokens--;
-        //           console.log(token);
         //           controller.enqueue(encoder.encode(token));
         //         },
         //       },
@@ -88,21 +85,8 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
         //     topic: topics[topicIndex],
         //   });
 
-        //   // await llm.invoke(formattedPrompt);
-        //   const result = await llm.generate([[formattedPrompt]]);
-
-        //   const usage = result.llmOutput?.tokenUsage;
-        //   if (usage) {
-        //     totalCompletionTokens += usage.completionTokens;
-        //   }
+        //   await llm.invoke(formattedPrompt);
         // }
-        // controller.enqueue(
-        //   encoder.encode(
-        //     `\n\n__END__{"completionTokens":${JSON.stringify({
-        //       completionTokens: totalCompletionTokens,
-        //     })}}}`,
-        //   ),
-        // );
 
         // for testing the design of ai response
         const header_test = `<div style="width: 100%">

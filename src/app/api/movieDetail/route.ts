@@ -138,18 +138,20 @@ async function search_exact_id(id: number): Promise<AllTypeFilter[]> {
     throw err;
   }
 }
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+
 export async function POST(request: NextRequest) {
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const id = searchParams.get("id");
   if (id === null) {
-    throw new Error("id is null");
+    return NextResponse.json(
+      { error: "id is missing" },
+      { status: 400 }, // Bad Request
+    );
   }
   try {
     // Check Redis first
+
     const cached = await search_in_redis(id);
     if (cached != null) {
       return NextResponse.json(JSON.parse(cached));

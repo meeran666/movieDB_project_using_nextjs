@@ -22,6 +22,7 @@ function isApiResponseofData2(
     Array.isArray(data2.posterData)
   );
 }
+
 function Page() {
   const [resultDetail, setResultDetail] = useState<WrappedAllTypeFilter | null>(
     null,

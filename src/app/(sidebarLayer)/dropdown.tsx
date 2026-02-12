@@ -20,10 +20,10 @@ export default function DropDown({ dropClicked }: { dropClicked: boolean }) {
             Database Design
           </Link>
           <Link
-            href="/FutureUpdate"
+            href="/LLMSearch"
             className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
-            Future Update
+            LLM Search
           </Link>
         </div>
       </div>

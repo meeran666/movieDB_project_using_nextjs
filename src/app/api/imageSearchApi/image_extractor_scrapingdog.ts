@@ -25,7 +25,7 @@ export async function ImageExtractor(
     }
 
     const images: string[] = data.jsonObject.images_results
-      ?.map((img: any) => img.original)
+      ?.map((img: { original: string }) => img.original)
       .slice(0, no_of_image);
 
     return images;

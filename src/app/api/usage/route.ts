@@ -19,10 +19,10 @@ export async function POST(request: NextRequest) {
   const id = token.id;
   const credit = await redis.hgetall(id);
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
-    return {
+    return NextResponse.json({
       llmTokens: Number(credit.token),
       requests: Number(credit.requests),
-    };
+    });
   }
   return NextResponse.json({
     llmTokens: credit.tokens,

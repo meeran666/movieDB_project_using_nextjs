@@ -12,7 +12,7 @@ export default function Dashboard({
   const menuItems = [
     { path: "Introduction", name: "Introduction" },
     { path: "DatabaseDesign", name: "Database Design" },
-    { path: "FutureUpdate", name: "Future Update" },
+    { path: "LLMSearch", name: "LLM Search" },
   ];
   const handleItemClick = (path: string) => {
     setActiveItem(path);
@@ -30,7 +30,9 @@ export default function Dashboard({
     <div className="flex w-dvw justify-center bg-[black]">
       <div className="relative grid w-[min(75rem,100%)] grid-cols-[minmax(0,1fr)_auto] border-x-2 border-solid text-white [border-image-slice:30%] [border-image-source:linear-gradient(to_bottom,white,black)]">
         <div className="grow">
-          <div className="flex flex-col justify-center p-6">{children}</div>
+          <div className="flex flex-col justify-center p-6 text-sm">
+            {children}
+          </div>
         </div>
         {isMobile ? null : (
           <Sidebar
