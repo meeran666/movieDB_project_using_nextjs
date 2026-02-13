@@ -3,16 +3,7 @@ import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { CgLogOut } from "react-icons/cg";
-import { Lato, Oswald } from "next/font/google";
-
-const LatoFont = Lato({
-  subsets: ["latin"],
-  weight: "700",
-});
-const OswaldFont = Oswald({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { LatoFont, OswaldFont } from "../fonts";
 
 export default function AuthDropdownLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
@@ -67,9 +58,9 @@ export default function AuthDropdownLayer() {
               </div>
               <div className="">{name}</div>
             </div>
-            <div className="border-b-amber-200 pb-3">{email}</div>
-            <div className="border-b-amber-200">{`tokens: ${llmtoken}`}</div>
-            <div className="border-b-amber-200">{`no of requests: ${requests}`}</div>
+            <div className="pb-3">{email}</div>
+            <div className="">{`tokens: ${llmtoken}`}</div>
+            <div className="">{`no of requests: ${requests}`}</div>
 
             <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
               <CgLogOut className="" />

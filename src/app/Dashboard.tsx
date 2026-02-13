@@ -71,7 +71,7 @@ export default function Dashboard({
             isMobile={isMobile}
             buttonref={buttonRef}
           />
-          <div className="flex grow flex-col bg-(--black_color) pt-16">
+          <div className="flex grow flex-col bg-(--black_color) pt-12 md:pt-16">
             {children}
           </div>
 
