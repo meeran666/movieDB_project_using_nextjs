@@ -1,14 +1,11 @@
 import Link from "next/link";
 
-type DropDownProp = {
-  isHoverAbout: boolean;
-};
-export default function DropDown({ isHoverAbout }: DropDownProp) {
+export default function DropDown({ isHoverAbout }: { isHoverAbout: boolean }) {
   return (
     <div
       className={`absolute z-2 grid w-43 overflow-hidden shadow-xs shadow-white duration-300 ease-in-out ${isHoverAbout ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
-      <div className="min-h-0 bg-[rgb(46,177,166)]">
+      <div className="min-h-0 bg-neutral-800">
         <Link
           href="/Introduction"
           className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white"

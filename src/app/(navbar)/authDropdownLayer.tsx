@@ -3,7 +3,7 @@ import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { CgLogOut } from "react-icons/cg";
-import { Courier_Prime, Lato, Oswald } from "next/font/google";
+import { Lato, Oswald } from "next/font/google";
 
 const courierPrime = Lato({
   subsets: ["latin"],
@@ -68,7 +68,7 @@ export default function AuthDropdownLayer() {
             <div className="border-b-amber-200">{`tokens: ${llmtoken}`}</div>
             <div className="border-b-amber-200">{`no of requests: ${requests}`}</div>
 
-            <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-blue-500">
+            <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
               <CgLogOut className="" />
               <div onClick={onSignout} className="">
                 logout

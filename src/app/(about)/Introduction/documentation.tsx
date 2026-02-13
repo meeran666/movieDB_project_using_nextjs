@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 function Documentation() {
   return (
     <>
@@ -30,12 +32,16 @@ function Documentation() {
         layout and contains searchbox also.
       </div>
       <div className="flex items-center justify-center pb-4">
-        <div className="w-[min(40rem,100%)] items-center justify-center pb-7">
-          <img src="/desktop_home.png" alt="" className={`h-auto w-full`} />
-        </div>
+        <div className="w-[min(40rem,100%)] items-center justify-center pb-7"></div>
       </div>
       <div className="flex items-center justify-center pb-15">
-        <img src="/mobile_home.png" alt="" className="h-100 w-auto" />
+        <Image
+          src="/desktop_home.png"
+          alt="Desktop Home Screenshot"
+          width={1920}
+          height={1080}
+          className="h-auto w-full"
+        />
       </div>
       <div className="pb-7">
         When you click or touch on search box you can put title or name of
@@ -60,11 +66,23 @@ function Documentation() {
       </div>
       <div className="flex items-center justify-center p-15">
         <div className="w-[min(40rem,100%)] items-center justify-center pb-7">
-          <img src="/desktop_home.png" alt="" className={`h-auto w-full`} />
+          <Image
+            src="/desktop_home.png"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />{" "}
         </div>
       </div>{" "}
       <div className="flex items-center justify-center pb-20">
-        <img src="/mobile_home.png" alt="" className="h-100 w-auto" />
+        <Image
+          src="/desktop_home.png"
+          alt="Desktop Home Screenshot"
+          width={1920}
+          height={1080}
+          className="h-auto w-full"
+        />{" "}
       </div>
       <div className="pb-7 text-3xl font-bold">Detail Page</div>
       <div className="pb-7">
@@ -95,19 +113,43 @@ function Documentation() {
       </div>
       <div className="flex items-center justify-center">
         <div className="w-[min(40rem,100%)] items-center justify-center pb-15">
-          <img src="/desktop_home.png" alt="" className={`h-auto w-full`} />
+          <Image
+            src="/desktop_home.png"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />{" "}
         </div>
       </div>{" "}
       <div className="flex items-center justify-center pb-7">
-        <img src="/mobile_home.png" alt="" className="h-100 w-auto" />
+        <Image
+          src="/desktop_home.png"
+          alt="Desktop Home Screenshot"
+          width={1920}
+          height={1080}
+          className="h-auto w-full"
+        />{" "}
       </div>
       <div className="flex items-center justify-center">
         <div className="w-[min(40rem,100%)] items-center justify-center pb-7">
-          <img src="/desktop_home.png" alt="" className={`h-auto w-full`} />
+          <Image
+            src="/desktop_home.png"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />{" "}
         </div>
       </div>{" "}
       <div className="flex items-center justify-center pb-15">
-        <img src="/mobile_home.png" alt="" className="h-100 w-auto" />
+        <Image
+          src="/desktop_home.png"
+          alt="Desktop Home Screenshot"
+          width={1920}
+          height={1080}
+          className="h-auto w-full"
+        />{" "}
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
@@ -73,7 +74,13 @@ function documentation() {
       </div>
       <div className="flex items-center justify-center pb-15">
         <div className="w-[min(40rem,100%)] items-center justify-center">
-          <img src="/AI_image.jpg" alt="" className={`h-auto w-full`} />
+          <Image
+            src="/AI_image.jpg"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />{" "}
         </div>
       </div>
       <div className="pb-15 text-3xl font-bold">Images</div>

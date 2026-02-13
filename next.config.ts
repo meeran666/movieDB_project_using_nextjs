@@ -5,6 +5,7 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
+
     return config;
   },
 
@@ -14,9 +15,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "image.tmdb.org",
-        port: "",
-        pathname: "/t/p/w300_and_h450_bestv2/**",
+        hostname: "**",
       },
     ],
   },
