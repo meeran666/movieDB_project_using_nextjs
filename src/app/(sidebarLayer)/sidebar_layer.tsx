@@ -40,7 +40,7 @@ export default function SidebarLayer({
       >
         <CrossButton buttonref={buttonref} />
       </div>
-      <ul className="flex grow-1 flex-col pt-3">
+      <ul className="flex grow flex-col pt-3">
         <a
           className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-slate-950"
           href={"/"}
@@ -64,7 +64,7 @@ export default function SidebarLayer({
         >
           test
         </a>
-        <div className="block grow-1"></div>
+        <div className="block grow"></div>
 
         {status === "unauthenticated" ? (
           <Link
