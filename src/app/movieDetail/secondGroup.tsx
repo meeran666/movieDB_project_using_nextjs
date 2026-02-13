@@ -3,7 +3,7 @@ import { AllTypeFilter } from "../../../types/types.ts";
 
 export default function SecondGroup({ detail }: { detail: AllTypeFilter }) {
   return (
-    <div className="mr-[2rem] flex flex-col gap-[1rem] rounded-[1rem] border-[2px] border-solid border-[white] p-[1rem] max-[780px]:mr-[1.4rem] max-[780px]:mb-[1.4rem] max-[780px]:ml-[1.4rem] max-[780px]:text-white">
+    <div className="mr-6 mb-16 ml-6 flex flex-col gap-4 rounded-2xl border-2 border-solid border-[white] p-4 text-white md:mr-8 md:mb-0 md:ml-0">
       <div>runtime: {detail.runtime ? `${detail.runtime}min` : " no data"}</div>
       <div>budget: {detail.budget != 0 ? `${detail.budget}$` : "no data"}</div>
       <div>

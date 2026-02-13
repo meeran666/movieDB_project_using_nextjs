@@ -9,21 +9,21 @@ export default function DropDown({ dropClicked }: { dropClicked: boolean }) {
         <div className="min-h-0">
           <Link
             href="/Introduction"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+            className="block pl-7 text-xl text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
             Introduction
           </Link>
           <Link
             href="/DatabaseDesign"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+            className="block pl-7 text-xl text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
             Database Design
           </Link>
           <Link
-            href="/LLMSearch"
-            className="block pl-7 text-[1.3rem] text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
+            href="/AiSearch"
+            className="block pl-7 text-xl text-(--hamberger_child_color) hover:bg-(--sidebar_hover_color)"
           >
-            LLM Search
+            Ai Search
           </Link>
         </div>
       </div>

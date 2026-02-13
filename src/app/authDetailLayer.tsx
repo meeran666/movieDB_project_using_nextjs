@@ -24,7 +24,7 @@ export default function AuthDetailLayer() {
           <div className="flex flex-col items-center p-4">
             <div className="flex flex-col items-center gap-2 pb-7">
               <div className="flex h-18 w-18 items-center justify-center rounded-full bg-orange-400 pb-2">
-                <div className="text-[2.6rem]">{nameFirstChar}</div>
+                <div className="text-5xl">{nameFirstChar}</div>
               </div>
               <div className="">{name}</div>
             </div>
@@ -46,9 +46,9 @@ export default function AuthDetailLayer() {
         className="flex py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
       >
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-400 pb-1">
-          <div className="text-[1rem]">{nameFirstChar}</div>
+          <div className="text-xl">{nameFirstChar}</div>
         </div>
-        <div className="w-40 overflow-hidden pl-2 text-[1.2rem] text-ellipsis whitespace-nowrap">
+        <div className="w-40 overflow-hidden pl-2 text-xl text-ellipsis whitespace-nowrap">
           {name}
         </div>
       </div>

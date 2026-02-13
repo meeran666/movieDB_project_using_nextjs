@@ -20,10 +20,10 @@ function Component({ index, date, title, id, isMobile }: Component) {
         <div className="pointer-events-none w-[6vw] grow-0 pr-2 pl-2 md:pr-0 md:pl-0">
           {index}
         </div>
-        <div className="pointer-events-none h-10 w-20 grow content-center overflow-hidden pr-2 pl-2 text-ellipsis md:h-12 md:pr-0 md:pl-0">
+        <div className="pointer-events-none h-10 grow content-center overflow-hidden pr-2 pl-2 text-ellipsis md:h-12 md:w-20 md:pr-0 md:pl-0">
           {title}
         </div>
-        <div className="pointer-events-none w-56 grow-0 pr-2 pl-2 md:pr-0 md:pl-0">
+        <div className="pointer-events-none grow-0 pr-2 pl-2 md:w-56 md:pr-0 md:pl-0">
           {isMobile ? date.slice(-4) : date}
         </div>
       </a>

@@ -59,26 +59,7 @@ export default function DesktopComponent() {
     if (event.target && AiSearchRef.current?.contains(event.target as Node)) {
       setIsHoverAiSearch(false);
     }
-  }; // const handleMouseIn = (event: MouseEvent<HTMLButtonElement>) => {
-  //   if (event.target && aboutRef.current?.contains(event.target as Node)) {
-  //     setIsHoverAbout(true);
-  //   }
-  //   if (event.target && browseRef.current?.contains(event.target as Node)) {
-  //     setisHoverBrowse(true);
-  //   }
-  // };
-  // const handleMouseOut = (
-  //   event:
-  //     | MouseEvent<HTMLDivElement, globalThis.MouseEvent>
-  //     | MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
-  // ) => {
-  //   if (event.target && aboutRef.current?.contains(event.target as Node)) {
-  //     setIsHoverAbout(false);
-  //   }
-  //   if (event.target && browseRef.current?.contains(event.target as Node)) {
-  //     setisHoverBrowse(false);
-  //   }
-  // };
+  };
   return (
     <div className="flex grow-0">
       <a

@@ -2,7 +2,7 @@
 import NextTopLoader from "nextjs-toploader";
 import SidebarLayer from "./(sidebarLayer)/sidebar_layer";
 import Navbar from "./(navbar)/navbar";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
 

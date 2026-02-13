@@ -171,7 +171,7 @@ export default function AllAiApi() {
   return (
     <div className="max-h-1200 min-h-[100dvh] flex-col bg-[rgb(33,33,33)]">
       <form
-        className="fixed bottom-6 left-1/2 flex h-12 w-[90%] -translate-x-1/2 items-center justify-center rounded-full bg-[rgb(48,48,48)] sm:bottom-15 sm:w-[50%]"
+        className="fixed bottom-6 left-1/2 flex h-12 w-9/10 -translate-x-1/2 items-center justify-center rounded-full bg-[rgb(48,48,48)] sm:bottom-15 sm:w-1/2"
         onSubmit={handleSubmit}
       >
         <input

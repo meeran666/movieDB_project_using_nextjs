@@ -53,7 +53,7 @@ export default function SidebarLayer({
         >
           About
           <RiArrowDropDownLine
-            className={`inline h-9 w-9 text-[white] ${dropClicked ? "rotate-180" : null}`}
+            className={`inline h-9 w-9 text-white ${dropClicked ? "rotate-180" : null}`}
           />
         </a>
 

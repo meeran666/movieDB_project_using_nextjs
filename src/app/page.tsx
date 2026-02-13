@@ -62,15 +62,15 @@ export default function Page() {
   };
   return (
     <main className="flex grow flex-col">
-      <div className="flex h-67 w-[100vw] flex-col items-center justify-center bg-(--black_color)">
-        <div className="mb-2 ml-2 w-[90vw] font-[bolder] text-xl text-[red] sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
+      <div className="flex h-67 w-dvw flex-col items-center justify-center bg-(--black_color)">
+        <div className="mb-2 ml-2 w-[90vw] text-xl font-bold text-[red] sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
           Search Movie:
         </div>
         <form
           className="flex w-[90vw] items-center gap-4 sm:w-[65vw] lg:w-[65vw]"
           onSubmit={handleSubmit}
         >
-          <div className="flex h-7 grow-1 items-center overflow-hidden rounded-sm bg-[white] sm:h-8 lg:h-10 lg:rounded-xl">
+          <div className="flex h-7 grow-1 items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
             <input
               className="ml-4 border-none text-[1rem] outline-none"
               onChange={(e) => setSearch(e.target.value)}
@@ -87,7 +87,7 @@ export default function Page() {
             <div className="absolute z-9 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,_#ff4545,_#00ff99,_#006aff,_#ff0095,_#ff4545)] sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg" />
             <button
               type="submit"
-              className="relative z-9 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-[bolder] text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"
+              className="relative z-9 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-bold text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"
             >
               Search
             </button>

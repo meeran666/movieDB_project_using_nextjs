@@ -26,11 +26,11 @@ export default function DropDown({ isHoverAbout }: DropDownProp) {
           </div>
         </Link>
         <Link
-          href="/LLMSearch"
+          href="/AiSearch"
           className="text-1xl flex h-10 content-center items-center pl-2 font-medium text-white"
         >
           <div className="flex h-9 w-37 items-center justify-center rounded-md border-0 hover:bg-[rgb(23,103,96)]">
-            LLM Search
+            Ai Search
           </div>
         </Link>
       </div>

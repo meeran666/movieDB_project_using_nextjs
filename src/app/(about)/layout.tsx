@@ -12,7 +12,7 @@ export default function Dashboard({
   const menuItems = [
     { path: "Introduction", name: "Introduction" },
     { path: "DatabaseDesign", name: "Database Design" },
-    { path: "LLMSearch", name: "LLM Search" },
+    { path: "AiSearch", name: "Ai Search" },
   ];
   const handleItemClick = (path: string) => {
     setActiveItem(path);
