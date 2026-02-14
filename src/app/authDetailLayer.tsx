@@ -1,13 +1,12 @@
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { CgLogOut } from "react-icons/cg";
-import { LatoFont } from "./fonts";
+import { LatoFont, OswaldFont } from "./fonts";
 
 export default function AuthDetailLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
   const { data, status } = useSession();
   const user = data?.user;
-  const id = user?.id;
   const name = user?.name;
   const nameFirstChar = name?.[0].toUpperCase();
   const email = user?.email;
@@ -26,15 +25,15 @@ export default function AuthDetailLayer() {
   return (
     <>
       <div
-        className={`grid overflow-hidden duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+        className={`grid overflow-hidden ${OswaldFont.className} duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="min-h-0 bg-slate-600 text-(--hamberger_child_color)">
           <div className="flex flex-col items-center p-4">
             <div className="flex flex-col items-center gap-2 pb-7">
-              <div className="flex h-18 w-18 items-center justify-center rounded-full bg-orange-700 pb-2">
-                <div className={`${LatoFont.className} text-5xl`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-700 pb-2">
+                <div className={`${LatoFont.className} text-3xl`}>
                   {nameFirstChar}
-                </div>{" "}
+                </div>
               </div>
               <div className="">{name}</div>
             </div>
@@ -55,7 +54,7 @@ export default function AuthDetailLayer() {
         onClick={() =>
           setIsAuthButtonClicked((isAuthButtonClicked) => !isAuthButtonClicked)
         }
-        className="flex py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
+        className="flex bg-linear-to-b from-gray-950 to-slate-950 py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
       >
         <button
           className={`${LatoFont.className} flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-orange-700 text-xl`}

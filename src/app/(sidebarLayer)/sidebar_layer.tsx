@@ -29,6 +29,7 @@ export default function SidebarLayer({
   const handleDropClick = () => {
     setDropClicked(!dropClicked);
   };
+
   return (
     <div
       ref={sidebarRef}
@@ -42,13 +43,13 @@ export default function SidebarLayer({
       </div>
       <ul className="flex grow flex-col pt-3">
         <a
-          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-slate-950"
+          className="block pl-7 text-2xl font-bold text-(--hamberger_child_color) no-underline hover:bg-slate-950"
           href={"/"}
         >
           Browse Movie
         </a>
         <a
-          className={`block pl-7 text-2xl text-(--hamberger_child_color) no-underline ${dropClicked ? "bg-slate-950" : "hover:bg-slate-950"}`}
+          className={`block pl-7 text-2xl font-bold text-(--hamberger_child_color) no-underline ${dropClicked ? "bg-slate-950" : "hover:bg-slate-950"}`}
           onClick={handleDropClick}
         >
           About
@@ -59,10 +60,10 @@ export default function SidebarLayer({
 
         <DropDown dropClicked={dropClicked} />
         <a
-          className="block pl-7 text-2xl text-(--hamberger_child_color) no-underline hover:bg-slate-950"
-          href=""
+          className="block pl-7 text-2xl font-bold text-(--hamberger_child_color) no-underline hover:bg-slate-950"
+          href="/Ai"
         >
-          test
+          Ai Search
         </a>
         <div className="block grow"></div>
 
@@ -80,6 +81,7 @@ export default function SidebarLayer({
         ) : (
           <AuthDetailLayer />
         )}
+        <div className="h-11 w-full bg-slate-950"></div>
       </ul>
     </div>
   );
