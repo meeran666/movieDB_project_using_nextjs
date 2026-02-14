@@ -6,7 +6,7 @@ import { useTopLoader } from "nextjs-toploader";
 import { toast } from "react-toastify";
 
 function SpaceBoard() {
-  return <div className="w-[100vw] grow bg-(--black_color)"></div>;
+  return <div className="w-dvw grow bg-(--black_color)"></div>;
 }
 function isApiResponse(data: unknown): data is WrappedMovieListType {
   return (
@@ -70,7 +70,7 @@ export default function Page() {
           className="flex w-[90vw] items-center gap-4 sm:w-[65vw] lg:w-[65vw]"
           onSubmit={handleSubmit}
         >
-          <div className="flex h-7 grow-1 items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
+          <div className="flex h-7 grow items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
             <input
               className="ml-4 border-none text-[1rem] outline-none"
               onChange={(e) => setSearch(e.target.value)}
@@ -83,8 +83,8 @@ export default function Page() {
           </div>
 
           <div className="relative z-0 inline-flex items-center justify-center">
-            <div className="absolute z-8 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,_#ff4545,_#00ff99,_#006aff,_#ff0095,_#ff4545)] opacity-50 blur-lg sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg lg:blur-xl" />
-            <div className="absolute z-9 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,_#ff4545,_#00ff99,_#006aff,_#ff0095,_#ff4545)] sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg" />
+            <div className="absolute z-8 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,#ff4545,#00ff99,#006aff,#ff0095,#ff4545)] opacity-50 blur-lg sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg lg:blur-xl" />
+            <div className="absolute z-9 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,#ff4545,#00ff99,#006aff,#ff0095,#ff4545)] sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg" />
             <button
               type="submit"
               className="relative z-9 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-bold text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"

@@ -1,10 +1,10 @@
 "use client";
 import AiLogo from "@/public/AiMagicIcon.svg";
 import { useTopLoader } from "nextjs-toploader";
-import { FormEvent, useEffect, useRef, useState } from "react";
-
+import { FormEvent, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+
 import ImageGrid from "./imageGrid";
 import TextResponse from "./textResponse";
 import BlinkBlur from "./blinkblur";
@@ -55,7 +55,6 @@ export default function AllAiApi() {
       if (isStreaming) {
         controllerRef.current?.abort();
         setIsStreaming(false);
-        setIsLoadingStart(false);
         return;
       }
       setIsStreaming(true);
@@ -105,7 +104,21 @@ export default function AllAiApi() {
         signal: controller.signal,
         headers: { "Content-Type": "text/plain" },
       });
+      if (!ai_response.ok) {
+        const error = await ai_response.json();
+        const errorMessage = error.error;
+        setIsFinishedWriting(true);
+        setIsStreaming(false);
+        setIsLoadingStart(false);
 
+        toast.error(errorMessage, {
+          position: "bottom-right",
+          autoClose: 5000,
+          theme: "colored",
+        });
+
+        return;
+      }
       // Stream text, not JSON
       const reader = ai_response.body?.getReader();
       if (!reader) {
@@ -122,6 +135,8 @@ export default function AllAiApi() {
           await onStreamFinished();
           setIsFinishedWriting(true);
           setIsStreaming(false);
+          setIsLoadingStart(false);
+
           break;
         }
         const chunk = decoder.decode(value, { stream: true });

@@ -1,4 +1,5 @@
 import { abbreviationTable, genreTable, mainTable } from "@/src/drizzle/models";
+import { RefObject } from "react";
 type MovieListTypeUnfilter = typeof mainTable.$inferSelect;
 type MovieListType = Pick<
   MovieListTypeUnfilter,
@@ -34,7 +35,12 @@ type SignupApiResponse = {
   success: boolean;
   message: string;
 };
-
+type SidebarLayerProp = {
+  onHambergerClick: () => void;
+  sidebarRef: RefObject<HTMLDivElement | null>;
+  isSidebarOpen: boolean;
+  buttonref: RefObject<HTMLDivElement | null>;
+};
 interface DuckDuckGoImage {
   thumbnail: string;
   image: string;
@@ -61,4 +67,5 @@ export type {
   PosterDetailType,
   WrappedPosterDetailType,
   DuckDuckGoImageResponse,
+  SidebarLayerProp,
 };

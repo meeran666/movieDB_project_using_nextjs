@@ -1,12 +1,18 @@
-import { signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { signOut } from "next-auth/react";
 import { CgLogOut } from "react-icons/cg";
 import { LatoFont, OswaldFont } from "./fonts";
+import { User } from "next-auth";
+import Image from "next/image";
 
-export default function AuthDetailLayer() {
-  const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
-  const { data, status } = useSession();
-  const user = data?.user;
+export default function AuthDetailLayer({
+  user,
+  isAuthButtonClicked,
+  status,
+}: {
+  user?: User;
+  isAuthButtonClicked: boolean;
+  status: "authenticated" | "loading" | "unauthenticated";
+}) {
   const name = user?.name;
   const nameFirstChar = name?.[0].toUpperCase();
   const email = user?.email;
@@ -23,45 +29,37 @@ export default function AuthDetailLayer() {
       </div>
     );
   return (
-    <>
-      <div
-        className={`grid overflow-hidden ${OswaldFont.className} duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="min-h-0 bg-slate-600 text-(--hamberger_child_color)">
-          <div className="flex flex-col items-center p-4">
-            <div className="flex flex-col items-center gap-2 pb-7">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-700 pb-2">
-                <div className={`${LatoFont.className} text-3xl`}>
-                  {nameFirstChar}
-                </div>
+    <div
+      className={`grid overflow-hidden ${OswaldFont.className} duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+    >
+      <div className="min-h-0 bg-slate-600 text-(--hamberger_child_color)">
+        <div className="flex flex-col items-center p-4">
+          <div className="flex flex-col items-center gap-2 pb-7">
+            <div className="flex h-13 w-13 items-center justify-center rounded-full bg-orange-700">
+              <div className={`${LatoFont.className} text-3xl`}>
+                {nameFirstChar}
               </div>
-              <div className="">{name}</div>
             </div>
-            <div className="">{email}</div>
-            <div className="">{`tokens: ${llmtoken}`}</div>
-            <div className="">{`no of requests: ${requests}`}</div>
-
-            <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
-              <CgLogOut className="" />
-              <div onClick={onSignout} className="">
-                logout
-              </div>
-            </button>
+            <div className="">{name}</div>
           </div>
+          <div>{email}</div>
+          <div>{`tokens: ${llmtoken}`}</div>
+          <div>{`no of requests: ${requests}`}</div>
+
+          <button className="mt-4 flex h-8 w-29 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
+            <Image
+              src="/login.png"
+              width={3}
+              height={3}
+              alt="login.png"
+              className="h-4 w-4 pr-2 text-white"
+            />{" "}
+            <div onClick={onSignout} className="">
+              logout
+            </div>
+          </button>
         </div>
       </div>
-      <div
-        onClick={() =>
-          setIsAuthButtonClicked((isAuthButtonClicked) => !isAuthButtonClicked)
-        }
-        className="flex bg-linear-to-b from-gray-950 to-slate-950 py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
-      >
-        <button
-          className={`${LatoFont.className} flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-orange-700 text-xl`}
-        >
-          {nameFirstChar}
-        </button>
-      </div>
-    </>
+    </div>
   );
 }

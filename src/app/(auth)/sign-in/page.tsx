@@ -1,5 +1,4 @@
 "use client";
-import { FcGoogle } from "react-icons/fc";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { signInSchema } from "@/src/schemas/signInSchema";
+import Image from "next/image";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function SignInForm() {
   };
   return (
     <div className="flex h-[94vh] items-center justify-center bg-[rgb(2,48,32)]">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 shadow-md md:rounded-lg">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Sign in to use AI
@@ -97,7 +97,7 @@ export default function SignInForm() {
               >
                 Forgot Password?
               </Link>
-              <div className="grow-1"></div>
+              <div className="grow"></div>
               <Link
                 href="/sign-up"
                 className="text-blue-600 hover:text-blue-800"
@@ -112,7 +112,13 @@ export default function SignInForm() {
           onClick={googleSignIn}
         >
           <div className="">
-            <FcGoogle className="h-10 w-10 pr-4" />
+            <Image
+              src="/google.png"
+              alt="google.png"
+              width={10}
+              height={10}
+              className="h-10 w-10"
+            />
           </div>
           Log in with Google
         </button>
@@ -120,14 +126,3 @@ export default function SignInForm() {
     </div>
   );
 }
-
-// export default function AuthFrontend({
-//   children,
-// }: Readonly<{ children: React.ReactNode }>) {
-//   return (
-//     <>
-//       {children}
-//       <div className="w-full bg-[rgb(2,48,32)]"></div>
-//     </>
-//   );
-// }

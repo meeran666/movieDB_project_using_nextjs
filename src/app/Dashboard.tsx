@@ -58,7 +58,6 @@ export default function Dashboard({
       <SessionProvider>
         <SidebarLayer
           onHambergerClick={handleHambergerButtonClick}
-          setIsSideBarOpen={setIsSidebarOpen}
           sidebarRef={sidebarRef}
           isSidebarOpen={isSidebarOpen}
           buttonref={buttonRef}

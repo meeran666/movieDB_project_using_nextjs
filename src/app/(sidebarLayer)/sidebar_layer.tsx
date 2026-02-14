@@ -1,35 +1,33 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdOutlineLogin } from "react-icons/md";
 
-import { RefObject, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import AuthDetailLayer from "../authDetailLayer";
 import { useSession } from "next-auth/react";
 import DropDown from "./dropdown";
 import CrossButton from "./crossButton";
-
-type SidebarLayerProp = {
-  onHambergerClick: () => void;
-  sidebarRef: RefObject<HTMLDivElement | null>;
-  isSidebarOpen: boolean;
-  buttonref: RefObject<HTMLDivElement | null>;
-  setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { LatoFont } from "../fonts";
+import { useRouter } from "next/navigation";
+import { SidebarLayerProp } from "@/types/types";
+import Image from "next/image";
 
 export default function SidebarLayer({
   onHambergerClick,
   sidebarRef,
   isSidebarOpen,
   buttonref,
-  setIsSideBarOpen,
 }: SidebarLayerProp) {
   const [dropClicked, setDropClicked] = useState(false);
-  const { status } = useSession();
-
+  const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
+  const router = useRouter();
   const handleDropClick = () => {
     setDropClicked(!dropClicked);
   };
-
+  const { data, status } = useSession();
+  const user = data?.user;
+  const name = user?.name;
+  const nameFirstChar = name?.[0].toUpperCase();
   return (
     <div
       ref={sidebarRef}
@@ -66,21 +64,42 @@ export default function SidebarLayer({
           Ai Search
         </a>
         <div className="block grow"></div>
-
-        {status === "unauthenticated" ? (
-          <Link
-            href="/sign-in"
-            onClick={() => {
-              setIsSideBarOpen((val: boolean) => !val);
-            }}
-            className="flex items-center gap-1.5 py-4 pl-7 text-2xl text-(--hamberger_child_color) no-underline"
-          >
-            <MdOutlineLogin />
-            login
-          </Link>
-        ) : (
-          <AuthDetailLayer />
-        )}
+        <AuthDetailLayer
+          user={user}
+          isAuthButtonClicked={isAuthButtonClicked}
+          status={status}
+        ></AuthDetailLayer>
+        <div className="flex h-14 items-center justify-center bg-linear-to-b from-gray-950 to-slate-950 text-2xl text-(--hamberger_child_color) no-underline">
+          {status === "unauthenticated" ? (
+            <Link
+              href="/sign-in"
+              onClick={() => {
+                router.replace("/sign-in");
+              }}
+              className="flex h-4 items-center gap-1.5 text-2xl no-underline"
+            >
+              <Image
+                src="/login.png"
+                width={3}
+                height={3}
+                alt="login.png"
+                className="h-6 w-6"
+              />
+              login
+            </Link>
+          ) : (
+            <button
+              onClick={() =>
+                setIsAuthButtonClicked(
+                  (isAuthButtonClicked) => !isAuthButtonClicked,
+                )
+              }
+              className={`${LatoFont.className} flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-orange-700 text-xl`}
+            >
+              {nameFirstChar}
+            </button>
+          )}
+        </div>
         <div className="h-11 w-full bg-slate-950"></div>
       </ul>
     </div>

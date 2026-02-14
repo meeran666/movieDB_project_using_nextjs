@@ -80,7 +80,7 @@ function documentation() {
             width={1920}
             height={1080}
             className="h-auto w-full"
-          />{" "}
+          />
         </div>
       </div>
       <div className="pb-15 text-3xl font-bold">Images</div>
