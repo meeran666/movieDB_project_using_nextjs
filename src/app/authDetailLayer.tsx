@@ -1,5 +1,4 @@
 import { signOut } from "next-auth/react";
-import { CgLogOut } from "react-icons/cg";
 import { LatoFont, OswaldFont } from "./fonts";
 import { User } from "next-auth";
 import Image from "next/image";
@@ -46,17 +45,18 @@ export default function AuthDetailLayer({
           <div>{`tokens: ${llmtoken}`}</div>
           <div>{`no of requests: ${requests}`}</div>
 
-          <button className="mt-4 flex h-8 w-29 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
+          <button
+            className="mt-4 flex h-8 w-29 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)"
+            onClick={onSignout}
+          >
             <Image
-              src="/login.png"
+              src="/logout.png"
               width={3}
               height={3}
-              alt="login.png"
-              className="h-4 w-4 pr-2 text-white"
-            />{" "}
-            <div onClick={onSignout} className="">
-              logout
-            </div>
+              alt="logout.png"
+              className="mr-1 h-3 w-3"
+            />
+            <div className="">logout</div>
           </button>
         </div>
       </div>

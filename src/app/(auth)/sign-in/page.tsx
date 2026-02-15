@@ -107,7 +107,7 @@ export default function SignInForm() {
             </div>
           </div>
         </form>
-        <button
+        {/* <button
           className="ring-offset-background focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-primary inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           onClick={googleSignIn}
         >
@@ -121,7 +121,7 @@ export default function SignInForm() {
             />
           </div>
           Log in with Google
-        </button>
+        </button> */}
       </div>
     </div>
   );

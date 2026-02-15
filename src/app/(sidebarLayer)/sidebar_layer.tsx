@@ -1,6 +1,3 @@
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { MdOutlineLogin } from "react-icons/md";
-
 import { useState } from "react";
 import Link from "next/link";
 import AuthDetailLayer from "../authDetailLayer";
@@ -51,8 +48,12 @@ export default function SidebarLayer({
           onClick={handleDropClick}
         >
           About
-          <RiArrowDropDownLine
-            className={`inline h-9 w-9 text-white ${dropClicked ? "rotate-180" : null}`}
+          <Image
+            src="/arrow_down.png"
+            alt="arrow_down.png"
+            width={2}
+            height={2}
+            className={`ml-2 inline h-4 w-4 text-white ${dropClicked ? "rotate-180" : null}`}
           />
         </a>
 
@@ -76,14 +77,14 @@ export default function SidebarLayer({
               onClick={() => {
                 router.replace("/sign-in");
               }}
-              className="flex h-4 items-center gap-1.5 text-2xl no-underline"
+              className="flex h-4 items-center gap-1.5 text-2xl text-blue-500 no-underline"
             >
               <Image
                 src="/login.png"
                 width={3}
                 height={3}
                 alt="login.png"
-                className="h-6 w-6"
+                className="h-5 w-5"
               />
               login
             </Link>

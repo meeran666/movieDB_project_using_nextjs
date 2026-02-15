@@ -1,9 +1,7 @@
-import axios from "axios";
-import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { CgLogOut } from "react-icons/cg";
 import { LatoFont, OswaldFont } from "../fonts";
+import Image from "next/image";
 
 export default function AuthDropdownLayer() {
   const [isAuthButtonClicked, setIsAuthButtonClicked] = useState(false);
@@ -62,11 +60,18 @@ export default function AuthDropdownLayer() {
             <div className="">{`tokens: ${llmtoken}`}</div>
             <div className="">{`no of requests: ${requests}`}</div>
 
-            <button className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)">
-              <CgLogOut className="" />
-              <div onClick={onSignout} className="">
-                logout
-              </div>
+            <button
+              onClick={onSignout}
+              className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)"
+            >
+              <Image
+                src="/logout.png"
+                width={3}
+                height={3}
+                alt="logout.png"
+                className="mr-2 h-3 w-3"
+              />
+              <div className="">logout</div>
             </button>
           </div>
         </div>

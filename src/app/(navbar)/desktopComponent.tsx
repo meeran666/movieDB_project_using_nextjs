@@ -2,10 +2,10 @@
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { MouseEvent, useRef, useState } from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import DropDown from "./dropdown";
 import AuthDropdownLayer from "./authDropdownLayer";
 import AuthNonDropdownLayer from "./authNonDropdownLayer";
+import Image from "next/image";
 
 function AuthWrapper() {
   const { status } = useSession();
@@ -101,8 +101,12 @@ export default function DesktopComponent() {
             >
               About
             </div>
-            <RiArrowDropDownLine
-              className={`text-4xl text-[white] ${isHoverAbout ? "rotate-180" : null}`}
+            <Image
+              src="/arrow_down.png"
+              alt="arrow_down.png"
+              width={2}
+              height={2}
+              className={`ml-2 h-5 w-3 ${isHoverAbout ? "rotate-180" : null}`}
             />
           </div>
         </div>
