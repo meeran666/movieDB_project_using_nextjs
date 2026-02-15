@@ -13,8 +13,8 @@ export default function FirstContainer({
   isMobile: boolean;
 }) {
   return (
-    <div className="flex w-[100%] pb-[3rem]">
-      <div className="pt-[5.7rem] pl-[1.5rem] md:pl-[3rem]">
+    <div className="flex w-full pb-12">
+      <div className="pt-23 pl-6 md:pl-12">
         {detail.posterPath == null ? (
           <div className="h-52 w-40 overflow-clip border-5 border-solid border-[white] p-[0.8vw] text-xl text-[blueviolet] md:h-[24vw] md:w-[19vw] lg:border-8 lg:text-[2.3vw] xl:h-80 xl:w-60">
             {detail.title}

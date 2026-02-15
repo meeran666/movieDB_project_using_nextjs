@@ -72,7 +72,7 @@ export default function Page() {
         >
           <div className="flex h-7 grow items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
             <input
-              className="ml-4 border-none text-[1rem] outline-none"
+              className="ml-4 border-none text-base outline-none"
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               name="title"

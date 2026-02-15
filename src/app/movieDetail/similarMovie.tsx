@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PosterDetailType } from "../../../types/types";
 function Poster({
   posterpath,
@@ -7,13 +8,15 @@ function Poster({
   postertitle: string | null;
 }) {
   const poster = posterpath ? (
-    <img
+    <Image
+      width={196}
+      height={225}
       alt="similarBoxPoster"
-      className="h-auto w-[12.3rem] border-[4px] border-solid border-white max-[1022px]:w-[10rem] min-[720px]:hover:border-(--border_color)"
+      className="h-auto w-40 border-4 border-solid border-white md:hover:border-(--border_color) lg:w-50"
       src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${posterpath}`}
     />
   ) : (
-    <div className="h-[18rem] w-[12.3rem] border-[4px] border-solid border-white p-[5%] text-[violet] hover:border-(--border_color) max-[1022px]:h-[15rem] max-[1022px]:w-[10rem] max-[1022px]:border-[4px] max-[1022px]:border-solid max-[1022px]:border-white max-[1022px]:p-[5%]">
+    <div className="h-60 w-40 border-4 border-solid border-white p-[5%] text-[violet] hover:border-(--border_color) lg:h-72 lg:w-49">
       {postertitle}
     </div>
   );
@@ -33,7 +36,7 @@ function SimilarMovie({ posterDetail }: { posterDetail: PosterDetailType[] }) {
           posterpath={posterDetail[i].posterPath}
           postertitle={posterDetail[i].title}
         />
-        <div className="h-[2.5rem] w-[12.3rem] overflow-x-hidden text-white max-[1022px]:w-[10rem] min-[720px]:hover:text-(--aqua_color_hover)">
+        <div className="h-10 w-40 overflow-x-hidden text-white md:hover:text-(--aqua_color_hover) lg:w-49">
           {posterDetail[i].title}
         </div>
       </a>
@@ -42,7 +45,7 @@ function SimilarMovie({ posterDetail }: { posterDetail: PosterDetailType[] }) {
   }
 
   return (
-    <div className="flex flex-wrap justify-start gap-[3.5rem] max-[1022px]:gap-[8.6vw]">
+    <div className="flex flex-wrap justify-start gap-[8.6vw] lg:gap-14">
       {container}
     </div>
   );
@@ -54,10 +57,8 @@ export default function SimilarMovieContainer({
   posterDetail: PosterDetailType[] | null;
 }) {
   return (
-    <div className="min-h-[30rem] pt-[4rem] pr-[2rem] pb-[2rem] pl-[2rem] max-[1022px]:pr-[1.5rem] max-[1022px]:pl-[1.5rem]">
-      <div className="pb-[2rem] text-[2rem] text-[white] max-[720px]:text-[1.5rem]">
-        similar movies
-      </div>
+    <div className="min-h-120 pt-16 pr-6 pb-8 pl-6 lg:pr-8 lg:pl-8">
+      <div className="pb-8 text-2xl text-white md:text-3xl">similar movies</div>
       {posterDetail ? <SimilarMovie posterDetail={posterDetail} /> : null}
     </div>
   );
