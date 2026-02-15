@@ -1,5 +1,4 @@
 "use client";
-import AiLogo from "@/public/AiMagicIcon.svg";
 import { useTopLoader } from "nextjs-toploader";
 import { FormEvent, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -93,6 +92,17 @@ export default function AllAiApi() {
           },
         },
       );
+      if (!image_response.ok) {
+        setIsFinishedWriting(true);
+        setIsStreaming(false);
+        setIsLoadingStart(false);
+        toast.error("Ai server is down", {
+          position: "bottom-right",
+          autoClose: 5000,
+          theme: "colored",
+        });
+        return;
+      }
       const images = await image_response.json();
 
       setImgLinks(images.links);
@@ -210,9 +220,15 @@ export default function AllAiApi() {
               width={"20"}
               height={"20"}
               className=""
-            ></Image>
+            />
           ) : (
-            <AiLogo className="h-8 w-8 text-black"></AiLogo>
+            <Image
+              src="/AiMagicIcon.svg"
+              className="mb-2 ml-2 h-6 w-6 text-black"
+              alt="AiMagicIcon.svg"
+              width={4}
+              height={4}
+            />
           )}
         </button>
       </form>

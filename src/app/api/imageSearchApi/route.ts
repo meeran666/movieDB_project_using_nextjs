@@ -26,9 +26,6 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("POST error:", error);
 
-    return NextResponse.json(
-      { error: "Failed to fetch images" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Ai server is down" }, { status: 500 });
   }
 }

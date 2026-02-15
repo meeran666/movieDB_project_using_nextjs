@@ -90,7 +90,7 @@ export default function SignupPage() {
   };
   return (
     <div className="flex h-[94vh] items-center justify-center bg-[rgb(2,48,32)]">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 shadow-md md:rounded-lg">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Join True AI journey
@@ -122,7 +122,7 @@ export default function SignupPage() {
               >
                 {usernameMessage}
               </p>
-            )}{" "}
+            )}
           </div>
           <div className="">
             <label htmlFor="email">Email</label>
@@ -132,7 +132,7 @@ export default function SignupPage() {
               id="email"
               {...register("email")}
             />
-            <p className="">{errors.email?.message}</p>
+            <p className="text-red-500">{errors.email?.message}</p>
           </div>
           <div className="">
             <label htmlFor="Password">Password</label>
@@ -142,7 +142,7 @@ export default function SignupPage() {
               id="Password"
               {...register("password")}
             />
-            <p className="">{errors.password?.message}</p>
+            <p className="text-red-500">{errors.password?.message}</p>
           </div>
           <button
             type="submit"

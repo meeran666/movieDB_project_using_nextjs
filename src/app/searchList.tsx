@@ -11,7 +11,7 @@ type Component = {
 function Component({ index, date, title, id, isMobile }: Component) {
   return (
     <div
-      className={`flex h-10 w-full items-center justify-center bg-gray-700 md:h-16 ${GerardSky.className}`}
+      className={`flex h-10 w-full items-center justify-center bg-gray-700 text-xs md:h-16 md:text-base ${GerardSky.className}`}
     >
       <a
         className="flex h-8/10 w-49/50 items-center rounded-sm bg-gray-600 pr-[3vw] pl-[3vw] text-white no-underline transition-transform duration-300 hover:h-full hover:w-full hover:bg-gray-800"
@@ -20,7 +20,7 @@ function Component({ index, date, title, id, isMobile }: Component) {
         <div className="pointer-events-none w-[6vw] grow-0 pr-2 pl-2 md:pr-0 md:pl-0">
           {index}
         </div>
-        <div className="pointer-events-none h-10 grow content-center overflow-hidden pr-2 pl-2 text-ellipsis md:h-12 md:w-20 md:pr-0 md:pl-0">
+        <div className="pointer-events-none h-8 grow content-center overflow-hidden pr-2 pl-2 text-ellipsis md:h-12 md:w-20 md:pr-0 md:pl-0">
           {title}
         </div>
         <div className="pointer-events-none grow-0 pr-2 pl-2 md:w-56 md:pr-0 md:pl-0">

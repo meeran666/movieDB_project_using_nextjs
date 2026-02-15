@@ -1,15 +1,14 @@
-import { Configuration } from "webpack";
 const nextConfig = {
-  webpack(config: Configuration) {
-    config.module?.rules?.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
+  // webpack(config: Configuration) {
+  //   config.module?.rules?.push({
+  //     test: /\.svg$/,
+  //     use: ["@svgr/webpack"],
+  //   });
 
-    return config;
-  },
+  //   return config;
+  // },
 
-  output: "standalone",
+  // output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
