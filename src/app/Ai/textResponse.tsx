@@ -5,8 +5,9 @@ import rehypeRaw from "rehype-raw";
 
 export default function TextResponse({ ai_data }: { ai_data: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [lastHeightRef, setLastHeightRef] = useState<number>(0);
-  const [shouldAutoScrollRef, setShouldAutoScrollRef] = useState<boolean>(true);
+  const lastHeightRef = useRef(0);
+
+  const shouldAutoScrollRef = useRef(true);
 
   // Detect if user manually scrolls away from bottom
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function TextResponse({ ai_data }: { ai_data: string }) {
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
 
-      setShouldAutoScrollRef(isAtBottom);
+      shouldAutoScrollRef.current = isAtBottom;
     };
 
     window.addEventListener("scroll", onScroll);
@@ -29,14 +30,14 @@ export default function TextResponse({ ai_data }: { ai_data: string }) {
     const observer = new ResizeObserver(() => {
       const newHeight = container.scrollHeight;
 
-      if (newHeight > lastHeightRef && shouldAutoScrollRef) {
+      if (newHeight > lastHeightRef.current && shouldAutoScrollRef) {
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
       }
 
-      setLastHeightRef(newHeight);
+      lastHeightRef.current = newHeight;
     });
 
     observer.observe(container);

@@ -84,7 +84,7 @@ export default function DesktopComponent() {
         className={`mr-2 content-center px-2 text-xl hover:bg-[rgb(25,25,54)] ${isHoverAiSearch ? "text-[cyan]" : "text-gray-500"}`}
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
-        href={"/"}
+        href={"/Ai"}
       >
         Ai Search
       </a>

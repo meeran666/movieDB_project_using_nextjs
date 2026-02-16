@@ -49,8 +49,8 @@ export default function SidebarLayer({
         >
           About
           <Image
-            src="/arrow_down.png"
-            alt="arrow_down.png"
+            src="/arrow_down_white.png"
+            alt="arrow_down_white.png"
             width={2}
             height={2}
             className={`ml-2 inline h-4 w-4 text-white ${dropClicked ? "rotate-180" : null}`}

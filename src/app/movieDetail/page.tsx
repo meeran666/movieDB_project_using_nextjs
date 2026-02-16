@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useRef } from "react";
 import Detail from "./detail.tsx";
 import { useTopLoader } from "nextjs-toploader";
 
@@ -33,13 +33,17 @@ function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const loader = useTopLoader();
+  const loaderRef = useRef(loader);
+  useEffect(() => {
+    loaderRef.current = loader;
+  }, [loader]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
         try {
-          loader.start();
-          loader.setProgress(0.5);
+          loaderRef.current.start();
+          loaderRef.current.setProgress(0.5);
 
           //1st response
           const response = await fetch(`api/movieDetail?id=${id}`, {
@@ -50,7 +54,7 @@ function Page() {
           });
           const data1: unknown = await response.json();
           if (isApiResponseofData1(data1)) {
-            loader.done();
+            loaderRef.current.done();
 
             //2nd response
             fetch(

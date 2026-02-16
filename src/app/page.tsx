@@ -1,10 +1,10 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { WrappedMovieListType } from "@/types/types.ts";
 import SearchList from "./searchList.tsx";
 import { useTopLoader } from "nextjs-toploader";
 import { toast } from "react-toastify";
-
+import { useRouter, useSearchParams } from "next/navigation";
 function SpaceBoard() {
   return <div className="w-dvw grow bg-(--black_color)"></div>;
 }
@@ -20,45 +20,65 @@ function isApiResponse(data: unknown): data is WrappedMovieListType {
 export default function Page() {
   const [search, setSearch] = useState<string>("");
   const [result, setResult] = useState<WrappedMovieListType | null>(null);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const loader = useTopLoader();
-  // const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    loader.start();
-    loader.setProgress(0.5);
-    try {
-      //request send with data
-      const response = await fetch(`/api/movieList?name=${search}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: { search } }),
-      });
+  const query = searchParams.get("q");
+  const loaderRef = useRef(loader);
 
-      //response result
-      const data: unknown = await response.json();
-      if (isApiResponse(data)) {
-        if (data.rowdata.length == 0) {
-          toast.warn("No such movie exist!", {
-            position: "bottom-right",
-            autoClose: 7000,
-          });
-        }
-        setResult(data);
-        loader.done();
-      } else {
-        console.error("Invalid API response structure");
-      }
-      if (response.ok) {
-        console.log("ok response");
-      } else {
-        console.error("bad response");
-      }
-    } catch (error) {
-      console.error("Error adding data:", error);
+  useEffect(() => {
+    loaderRef.current = loader;
+  }, [loader]);
+
+  // 🔥 Auto-fetch when URL changes
+  useEffect(() => {
+    if (!query) {
+      setResult(null);
+      return;
     }
+
+    const fetchData = async () => {
+      loaderRef.current.start();
+      loaderRef.current.setProgress(0.5);
+
+      try {
+        const response = await fetch(`/api/movieList?name=${query}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: { search: query } }),
+        });
+
+        const data: unknown = await response.json();
+
+        if (isApiResponse(data)) {
+          if (data.rowdata.length === 0) {
+            toast.warn("No such movie exist!", {
+              position: "bottom-right",
+              autoClose: 7000,
+            });
+          }
+          setResult(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        loaderRef.current.done();
+      }
+    };
+
+    setSearch(query); // restore input value
+    fetchData();
+  }, [query]);
+
+  // 🔥 Now submit only updates URL
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!search.trim()) return;
+
+    router.push(`/?q=${encodeURIComponent(search)}`);
   };
   return (
     <main className="flex grow flex-col">
