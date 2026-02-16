@@ -34,7 +34,7 @@ export default function Detail({
               />
             ) : null}
           </div>
-          <div className="z-1 flex w-auto flex-col bg-gradient-to-t from-(--full_opacity) to-transparent xl:w-326">
+          <div className="z-1 flex w-auto flex-col bg-linear-to-t from-(--full_opacity) to-transparent xl:w-326">
             <FirstContainer
               detail={detail}
               genre={genre}

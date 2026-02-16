@@ -67,24 +67,24 @@ export const authOptions: NextAuthOptions = {
             const requests = 5;
 
             // this is commentable for now
-            // const id = user[0].id;
-            // const exists_id = await redis.exists(id);
-            // if (!exists_id) {
-            //   const llmtoken = 2000;
-            //   const requests = 5;
-            //   const exists = await redis.exists(id);
+            const id = user[0].id;
+            const exists_id = await redis.exists(id);
+            if (!exists_id) {
+              const llmtoken = 2000;
+              const requests = 5;
+              const exists = await redis.exists(id);
 
-            //   if (!exists) {
-            //     await redis
-            //       .multi()
-            //       .hset(user[0].id, {
-            //         requests: requests,
-            //         tokens: llmtoken,
-            //       })
-            //       .expire(user[0].id, expire_time)
-            //       .exec();
-            //   }
-            // }
+              if (!exists) {
+                await redis
+                  .multi()
+                  .hset(user[0].id, {
+                    requests: requests,
+                    tokens: llmtoken,
+                  })
+                  .expire(user[0].id, expire_time)
+                  .exec();
+              }
+            }
 
             return {
               id: user[0].id,
@@ -104,20 +104,30 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    // async signIn({ account, profile }) {
-    //   console.log(account?.provider);
-    //   if (
-    //     account?.provider === "google" &&
-    //     profile?.name !== undefined &&
-    //     profile?.email !== undefined &&
-    //     profile?.exp !== undefined
-    //   ) {
-    //     return true;
-    //   }
-    // },
+    async signIn({ account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          if (profile?.email === undefined) {
+            return false;
+          }
+          await db
+            .insert(authTable)
+            .values({
+              googleAuthUsername: profile?.name,
+              email: profile.email,
+              isVerified: true,
+            })
+            .onConflictDoNothing();
+        } catch (error) {
+          console.error(error);
+        }
+        return true;
+      }
+      return false;
+    },
     async jwt({
       token,
-      account,
+      // account,
       user,
       trigger,
       session,
@@ -141,7 +151,6 @@ export const authOptions: NextAuthOptions = {
 
       //  Session update (useSession().update)
       if (trigger === "update" && session) {
-        console.log(session);
         token.llmTokens = session.llmTokens;
         token.requests = session.requests;
       }
@@ -149,24 +158,6 @@ export const authOptions: NextAuthOptions = {
       //  GUARANTEE fields always exist
       token.llmTokens ??= 0;
       token.requests ??= 0;
-      // console.log("trigger");
-      // console.log(trigger);
-      if (account?.provider === "google" && trigger === "signIn") {
-        try {
-          const date = new Date(Date.now() + 172800);
-          await db
-            .insert(authTable)
-            .values({
-              googleAuthUsername: token.name,
-              email: token.email,
-              verifyCodeExpiry: date.toISOString(),
-              isVerified: true,
-            })
-            .onConflictDoNothing();
-        } catch (error) {
-          console.error(error);
-        }
-      }
 
       return token;
     },
