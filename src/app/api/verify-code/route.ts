@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       .from(authTable)
       .where(eq(columnbName, decodedValue));
 
-    if (user.length === 0) {
+    if (user.length === 0 || user[0].verifyCodeExpiry === null) {
       const message = username
         ? "User not found, please first register your self"
         : "this Email is not registered, please first register the email";
@@ -23,8 +23,10 @@ export async function POST(request: Request) {
     }
 
     // Check if the code is correct and not expired
+
     const isCodeValid = user[0]?.verifyCode === code;
-    const isCodeNotExpired = new Date(user[0]?.verifyCodeExpiry) > new Date();
+
+    const isCodeNotExpired = new Date(user[0].verifyCodeExpiry) > new Date();
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       await db

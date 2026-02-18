@@ -1,5 +1,77 @@
+# name: moviemania
+# services:
+#   cache:
+#     image: redis:latest
+#     container_name: redis_moviedb
+#     volumes:
+#       - ./redis.conf:/usr/local/etc/redis/redis.conf
+#       - redis_data_volume:/data
+#     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+#     ports:
+#       - "6379:6379"
+#     restart: unless-stopped
+#   db:
+#     image: postgres:latest
+#     container_name: pg_moviedb
+#     env_file: ".env"
+#     volumes:
+#       - ../largeFile/pg_dump_moviedb1.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb1.sql
+#       - pg_data_volume:/var/lib/postgresql/18/main
+#     ports:
+#       - "5500:5432"
+#     restart: unless-stopped
+# networks:
+#   default:
+#     name: docker_network
+# volumes:
+#   pg_data_volume:
+#     name: movieapp_data
+#   redis_data_volume:
+#     name: redis_data
+
+# services:
+#   app:
+#     image: nextjs_movieapp_image:0.0.1
+#     container_name: nextjs_movieapp
+#     # build:
+#     #   context: .
+#     # dockerfile: Dockerfile
+#     ports:
+#       - "3005:3000"
+#     depends_on:
+#       - db
+#     command: ["bun", "server.js"]
+#     env_file: "prod.env"
+#   db:
+#     image: postgres:latest
+#     container_name: pg_moviedb
+#     env_file: "dbcontainer.env"
+#     volumes:
+#       - ~/pg_moviedb_backup.sql:/docker-entrypoint-initdb.d/pg_moviedb_backup.sql
+#       - pg_data:/var/lib/postgresql/data
+#     ports:
+#       - "5500:5432"
+# networks:
+#   docker_network:
+#     driver: bridge
+# volumes:
+#   pg_data:
+#     name: movieapp_data
+
 name: moviemania
 services:
+  app:
+    image: nextjs_movieapp_image:0.0.1
+    container_name: nextjs_movieapp
+    build:
+      context: .
+    # dockerfile: Dockerfile
+    ports:
+      - "3005:3000"
+    depends_on:
+      - db
+    command: ["bun", "server.js"]
+    env_file: ".env"
   cache:
     image: redis:latest
     container_name: redis_moviedb
@@ -15,7 +87,7 @@ services:
     container_name: pg_moviedb
     env_file: ".env"
     volumes:
-      - ../largeFile/pg_dump_moviedb1.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb1.sql
+      - ../largeFile/pg_dump_moviedb.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb.sql
       - pg_data_volume:/var/lib/postgresql/18/main
     ports:
       - "5500:5432"
