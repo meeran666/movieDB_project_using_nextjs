@@ -5,7 +5,7 @@ export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
   // Redirect to dashboard if the user is already authenticated

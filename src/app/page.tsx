@@ -1,123 +1,14 @@
 "use client";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import type { WrappedMovieListType } from "@/types/types.ts";
-import SearchList from "./searchList.tsx";
-import { useTopLoader } from "nextjs-toploader";
-import { toast } from "react-toastify";
-import { useRouter, useSearchParams } from "next/navigation";
-function SpaceBoard() {
-  return <div className="w-dvw grow bg-(--black_color)"></div>;
-}
-function isApiResponse(data: unknown): data is WrappedMovieListType {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    "rowdata" in data &&
-    Array.isArray(data.rowdata)
-  );
-}
+
+import { Suspense } from "react";
+import Homepage from "./homepage";
 
 export default function Page() {
-  const [search, setSearch] = useState<string>("");
-  const [result, setResult] = useState<WrappedMovieListType | null>(null);
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const loader = useTopLoader();
-
-  const query = searchParams.get("q");
-  const loaderRef = useRef(loader);
-
-  useEffect(() => {
-    loaderRef.current = loader;
-  }, [loader]);
-
-  // 🔥 Auto-fetch when URL changes
-  useEffect(() => {
-    if (!query) {
-      setResult(null);
-      return;
-    }
-
-    const fetchData = async () => {
-      loaderRef.current.start();
-      loaderRef.current.setProgress(0.5);
-
-      try {
-        const response = await fetch(`/api/movieList?name=${query}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data: { search: query } }),
-        });
-
-        const data: unknown = await response.json();
-
-        if (isApiResponse(data)) {
-          if (data.rowdata.length === 0) {
-            toast.warn("No such movie exist!", {
-              position: "bottom-right",
-              autoClose: 7000,
-            });
-          }
-          setResult(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        loaderRef.current.done();
-      }
-    };
-
-    setSearch(query); // restore input value
-    fetchData();
-  }, [query]);
-
   // 🔥 Now submit only updates URL
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
 
-    if (!search.trim()) return;
-
-    router.push(`/?q=${encodeURIComponent(search)}`);
-  };
   return (
-    <main className="flex grow flex-col">
-      <div className="flex h-67 w-dvw flex-col items-center justify-center bg-(--black_color)">
-        <div className="mb-2 ml-2 w-[90vw] text-xl font-bold text-[red] sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
-          Search Movie:
-        </div>
-        <form
-          className="flex w-[90vw] items-center gap-4 sm:w-[65vw] lg:w-[65vw]"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex h-7 grow items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
-            <input
-              className="ml-4 border-none text-base outline-none"
-              onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              name="title"
-              id="title"
-              value={search}
-              placeholder="search movie"
-            />
-          </div>
-
-          <div className="relative z-0 inline-flex items-center justify-center">
-            <div className="absolute z-8 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,#ff4545,#00ff99,#006aff,#ff0095,#ff4545)] opacity-50 blur-lg sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg lg:blur-xl" />
-            <div className="absolute z-9 h-8 w-18 rounded-sm bg-[conic-gradient(from_0deg,#ff4545,#00ff99,#006aff,#ff0095,#ff4545)] sm:h-9 sm:w-19 lg:h-10 lg:w-27 lg:rounded-lg" />
-            <button
-              type="submit"
-              className="relative z-9 h-7 w-17 cursor-pointer rounded-sm border-none bg-(--violet_color) pl-1 font-bold text-(--button_color) outline-none sm:h-8 sm:w-18 lg:h-9 lg:w-26 lg:rounded-lg"
-            >
-              Search
-            </button>
-          </div>
-        </form>
-      </div>
-      {result ? (
-        <SearchList rowdata={result.rowdata} rowdate={result.rowdate} />
-      ) : null}
-      <SpaceBoard />
-    </main>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Homepage></Homepage>
+    </Suspense>
   );
 }

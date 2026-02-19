@@ -1,18 +1,22 @@
-// "use client";
+"use client";
 import NextTopLoader from "nextjs-toploader";
 import SidebarLayer from "./(sidebarLayer)/sidebar_layer";
 import Navbar from "./(navbar)/navbar";
 import { SessionProvider } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import Footer from "./footer";
 
 export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
+  const isFooter = pathname !== "/movieDetail" && pathname !== "/Ai";
 
   const handleHambergerButtonClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -76,6 +80,7 @@ export default function Dashboard({
 
           <ToastContainer />
         </div>
+        {isFooter && <Footer />}
       </SessionProvider>
     </>
   );
