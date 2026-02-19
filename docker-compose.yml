@@ -42,7 +42,7 @@ services:
     depends_on:
       - db
     command: ["bun", "server.js"]
-    env_file: ".env.production"
+    env_file: ".env"
   cache:
     image: redis:latest
     container_name: redis_moviedb

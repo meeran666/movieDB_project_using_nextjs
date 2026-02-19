@@ -1,0 +1,10 @@
+services:
+  app:
+    image: nextjs_movieapp_image:0.0.1
+    container_name: nextjs_movieapp
+    ports:
+      - "3005:3000"
+    depends_on:
+      - db
+    command: ["bun", "server.js"]
+    env_file: ".env.production"
