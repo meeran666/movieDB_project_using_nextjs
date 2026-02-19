@@ -8,7 +8,7 @@ const nextConfig = {
   //   return config;
   // },
 
-  // output: "standalone",
+  output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

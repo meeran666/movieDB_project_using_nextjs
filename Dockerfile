@@ -27,3 +27,4 @@ WORKDIR /home/node/app
 # Copy only the built files from the builder stage
 COPY --from=builder /home/node/app/.next/standalone ./
 COPY --from=builder /home/node/app/.next/static ./.next/static
+COPY --from=builder /home/node/app/public ./public

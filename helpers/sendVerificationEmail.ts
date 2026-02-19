@@ -1,7 +1,6 @@
 import { Resend } from "resend";
 import VerificationEmail from "./verificationEmail";
 import { SignupApiResponse } from "@/types/types";
-export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendVerificationEmail(
   email: string,
@@ -9,6 +8,7 @@ export async function sendVerificationEmail(
   verifyCode: string,
 ): Promise<SignupApiResponse> {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: "onboarding@resend.dev",
       // from: "support@moviemania.example.com",
