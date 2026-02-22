@@ -1,48 +1,5 @@
-# name: moviemania
-# services:
-#   cache:
-#     image: redis:latest
-#     container_name: redis_moviedb
-#     volumes:
-#       - ./redis.conf:/usr/local/etc/redis/redis.conf
-#       - redis_data_volume:/data
-#     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-#     ports:
-#       - "6379:6379"
-#     restart: unless-stopped
-#   db:
-#     image: postgres:latest
-#     container_name: pg_moviedb
-#     env_file: ".env"
-#     volumes:
-#       - ../largeFile/pg_dump_moviedb1.sql:/docker-entrypoint-initdb.d/pg_dump_moviedb1.sql
-#       - pg_data_volume:/var/lib/postgresql/18/main
-#     ports:
-#       - "5500:5432"
-#     restart: unless-stopped
-# networks:
-#   default:
-#     name: docker_network
-# volumes:
-#   pg_data_volume:
-#     name: movieapp_data
-#   redis_data_volume:
-#     name: redis_data
-
 name: moviemania
 services:
-  app:
-    image: nextjs_movieapp_image:0.0.1
-    container_name: nextjs_movieapp
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3005:3000"
-    depends_on:
-      - db
-    command: ["bun", "server.js"]
-    env_file: ".env"
   cache:
     image: redis:latest
     container_name: redis_moviedb
@@ -50,8 +7,12 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
       - redis_data_volume:/data
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    env_file: ".env.production"
     ports:
       - "6379:6379"
+    networks:
+      - proxy
+
     restart: unless-stopped
   db:
     image: postgres:latest
@@ -62,12 +23,16 @@ services:
       - pg_data_volume:/var/lib/postgresql/18/main
     ports:
       - "5500:5432"
+    networks:
+      - proxy
+
     restart: unless-stopped
-networks:
-  default:
-    name: docker_network
 volumes:
   pg_data_volume:
     name: movieapp_data
   redis_data_volume:
     name: redis_data
+
+networks:
+  proxy:
+    external: true
