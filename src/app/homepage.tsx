@@ -81,7 +81,7 @@ export default function Homepage() {
 
   return (
     <main className="flex grow flex-col">
-      <div className="flex h-67 w-dvw flex-col items-center justify-center bg-(--black_color)">
+      <div className="flex h-80 w-dvw flex-col items-center justify-center bg-(--black_color)">
         <div className="mb-2 ml-2 w-[90vw] text-xl font-bold text-[red] sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
           Search Movie:
         </div>
