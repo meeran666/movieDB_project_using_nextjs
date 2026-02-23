@@ -35,10 +35,10 @@ export default function AuthDropdownLayer() {
         onClick={() =>
           setIsAuthButtonClicked((isAuthButtonClicked) => !isAuthButtonClicked)
         }
-        className="flex h-15.5 items-center py-3 text-2xl text-(--hamberger_child_color) no-underline"
+        className="flex h-20 items-center py-3 text-(--hamberger_child_color) no-underline"
       >
         <button
-          className={`${LatoFont.className} flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-orange-700 text-xl`}
+          className={`${LatoFont.className} flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-orange-700 text-2xl`}
         >
           {nameFirstChar}
         </button>
