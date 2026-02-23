@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import Dashboard from "./Dashboard";
-import Footer from "./footer";
 
 export default function DashboardLayout({
   children,

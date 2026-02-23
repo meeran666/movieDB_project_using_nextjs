@@ -11,9 +11,11 @@ services:
     depends_on:
       - db
     command: ["bun", "server.js"]
-    env_file: ".env.production"
+    env_file: ".env.development"
     networks:
       - proxy
+  db:
+    ports: []
 
 networks:
   proxy:

@@ -2,14 +2,16 @@ services:
   app:
     image: nextjs_image
     container_name: nextjs_movieapp
-    ports:
-      - "3005:3000"
     depends_on:
       - db
     command: ["bun", "server.js"]
     env_file: ".env.production"
     networks:
       - proxy
+  db:
+    ports: []
+  cache:
+    ports: []
 
 networks:
   proxy:
