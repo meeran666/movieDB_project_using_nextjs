@@ -68,4 +68,5 @@ export type {
   WrappedPosterDetailType,
   DuckDuckGoImageResponse,
   SidebarLayerProp,
+  DuckDuckGoImage,
 };

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ImageExtractor } from "./image_extractor_testapi.ts";
-// import { ImageExtractor } from "./image_extractor.ts";
+// import { ImageExtractor } from "./image_extractor_testapi.ts";
+import { ImageExtractor } from "./image_extractor.ts";
+
 export async function POST(request: NextRequest) {
   try {
     // const url = new URL(request.url);
