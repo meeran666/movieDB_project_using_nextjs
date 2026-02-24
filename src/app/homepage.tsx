@@ -82,7 +82,7 @@ export default function Homepage() {
   return (
     <main className="flex grow flex-col">
       <div className="flex h-80 w-dvw flex-col items-center justify-center bg-(--black_color)">
-        <div className="mb-2 ml-2 w-[90vw] text-xl font-bold text-[red] sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
+        <div className="mb-2 ml-2 w-[90vw] text-xl font-bold text-pink-500 sm:w-[65vw] lg:ml-4 lg:w-[65vw] lg:text-xl">
           Search Movie:
         </div>
         <form
@@ -91,7 +91,7 @@ export default function Homepage() {
         >
           <div className="flex h-7 grow items-center overflow-hidden rounded-sm bg-white sm:h-8 lg:h-10 lg:rounded-xl">
             <input
-              className="ml-4 border-none text-base outline-none"
+              className="ml-4 flex grow border-none text-base outline-none"
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               name="title"

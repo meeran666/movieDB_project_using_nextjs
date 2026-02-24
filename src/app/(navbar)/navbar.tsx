@@ -1,17 +1,8 @@
 "use client";
 import MobileComponent from "./mobileComponent";
 import DesktopComponent from "./desktopComponent";
-import { RefObject } from "react";
 import Image from "next/image";
-
-type HambergerClick = {
-  onHambergerClick: () => void;
-};
-
-type NavbarProp = HambergerClick & {
-  isMobile: boolean;
-  buttonref: RefObject<HTMLDivElement | null>;
-};
+import { NavbarProp } from "@/types/types";
 
 export default function Navbar({
   onHambergerClick,

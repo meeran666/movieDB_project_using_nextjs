@@ -16,6 +16,13 @@ type AllType = typeof genreTable.$inferSelect &
 type AllTypeFilter = Omit<AllType, "originalLanguage"> & {
   originalLanguage: string | null;
 };
+type HambergerClick = {
+  onHambergerClick: () => void;
+};
+type NavbarProp = HambergerClick & {
+  isMobile: boolean;
+  buttonref: RefObject<HTMLDivElement | null>;
+};
 
 type WrappedAllTypeFilter = {
   detail: AllTypeFilter;
@@ -69,4 +76,5 @@ export type {
   DuckDuckGoImageResponse,
   SidebarLayerProp,
   DuckDuckGoImage,
+  NavbarProp,
 };

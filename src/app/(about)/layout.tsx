@@ -8,8 +8,7 @@ export default function Dashboard({
   const pathname = usePathname().split("/")[1];
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
-  console.log("pathname");
-  console.log(pathname);
+
   const menuItems = [
     { path: "Introduction", name: "Introduction" },
     { path: "DatabaseDesign", name: "Database Design" },

@@ -240,11 +240,11 @@ export default function AllAiApi() {
             <ImageGrid imgLinks={imgLinks}></ImageGrid>
           )}
           {isLoadedLink && <TextResponse ai_data={ai_data}></TextResponse>}
-          {/* {isFinishedWriting && embedUrl && (
+          {isFinishedWriting && embedUrl && (
             <div className="mt-15 mb-55 aspect-video w-full max-w-3xl">
               <Youtube embedUrl={embedUrl}></Youtube>
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>

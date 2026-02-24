@@ -25,7 +25,7 @@ export default function AuthDropdownLayer() {
   };
   if (status === "loading")
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
       </div>
     );
@@ -62,7 +62,7 @@ export default function AuthDropdownLayer() {
 
             <button
               onClick={onSignout}
-              className="mt-4 flex h-8 w-24 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)"
+              className="mt-4 flex h-9 w-29 cursor-pointer items-center justify-center rounded-full bg-(--violet_color)"
             >
               <Image
                 src="/logout.png"
@@ -71,7 +71,7 @@ export default function AuthDropdownLayer() {
                 alt="logout.png"
                 className="mr-2 h-3 w-3"
               />
-              <div className="">logout</div>
+              <div className="h-9">logout</div>
             </button>
           </div>
         </div>

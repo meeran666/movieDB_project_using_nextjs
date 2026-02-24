@@ -9,21 +9,9 @@ export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
 
-  // if (
-  //   (!token && url.pathname.startsWith("/Introduction")) ||
-  //   url.pathname.startsWith("/movieDetail") ||
-  //   url.pathname.startsWith("/Ai")
-  // ) {
-  //   return NextResponse.redirect(new URL("/sign-in", request.url));
-  // }
-
-  // if (
-  //   (!token && url.pathname.startsWith("/Ai")) ||
-  //   url.pathname.startsWith("/movieDetail") ||
-  //   url.pathname.startsWith("/Ai")
-  // ) {
-  //   return NextResponse.redirect(new URL("/sign-in", request.url));
-  // }
+  if (!token && url.pathname.startsWith("/Ai")) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
 
   if (
     token &&

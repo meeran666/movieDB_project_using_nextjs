@@ -9,14 +9,13 @@ import Image from "next/image";
 
 function AuthWrapper() {
   const { status } = useSession();
-  {
-    if (status === "loading")
-      return (
-        <div className="flex h-screen items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        </div>
-      );
-  }
+
+  if (status === "loading")
+    return (
+      <div className="flex items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
+      </div>
+    );
 
   return (
     <>
@@ -69,7 +68,7 @@ export default function DesktopComponent() {
     }
   };
   return (
-    <div className="flex grow-0 text-xl 2xl:text-2xl">
+    <div className="flex grow-0 text-xl 2xl:h-21 2xl:text-2xl">
       <a
         ref={browseRef}
         className={`mr-7 ml-3 content-center px-2 hover:bg-[rgb(25,25,54)] ${isHoverBrowse ? "text-[cyan]" : "text-gray-500"}`}
@@ -94,7 +93,7 @@ export default function DesktopComponent() {
         ref={aboutRef}
         className="cursor-pointer"
       >
-        <div className="mr-4 flex h-15.5 hover:bg-[rgb(25,25,54)] 2xl:h-22">
+        <div className="mr-4 flex h-15.5 hover:bg-[rgb(25,25,54)] 2xl:h-21">
           <div className="flex items-center px-8">
             <div
               className={` ${isHoverAbout ? "text-[cyan]" : "text-gray-500"}`}
