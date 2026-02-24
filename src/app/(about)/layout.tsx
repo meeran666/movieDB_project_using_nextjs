@@ -1,21 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Sidebar from "./sidebar";
 export default function Dashboard({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const pathname = usePathname().split("/")[1];
   const [isMobile, setIsMobile] = useState(false);
-
-  const [activeItem, setActiveItem] = useState<string | undefined>(pathname);
+  const router = useRouter();
+  console.log("pathname");
+  console.log(pathname);
   const menuItems = [
     { path: "Introduction", name: "Introduction" },
     { path: "DatabaseDesign", name: "Database Design" },
     { path: "AiSearch", name: "Ai Search" },
   ];
   const handleItemClick = (path: string) => {
-    setActiveItem(path);
+    router.push(`/${encodeURIComponent(path)}`);
   };
   useEffect(() => {
     const checkScreenSize = () => {
@@ -38,7 +39,7 @@ export default function Dashboard({
           <Sidebar
             menuItems={menuItems}
             handleItemClick={handleItemClick}
-            activeItem={activeItem}
+            activeItem={pathname}
           />
         )}
       </div>

@@ -1,5 +1,4 @@
 "use client";
-import Logo from "@/public/logo.svg";
 import MobileComponent from "./mobileComponent";
 import DesktopComponent from "./desktopComponent";
 import { RefObject } from "react";

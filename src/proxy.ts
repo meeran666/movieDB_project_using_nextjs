@@ -8,11 +8,23 @@ export const config = {
 export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request });
   const url = request.nextUrl;
-  // Redirect to dashboard if the user is already authenticated
-  // and trying to access sign-in, sign-up, or home page
-  // console.log("token");
-  // console.log(token);
-  // console.log(url.pathname);
+
+  // if (
+  //   (!token && url.pathname.startsWith("/Introduction")) ||
+  //   url.pathname.startsWith("/movieDetail") ||
+  //   url.pathname.startsWith("/Ai")
+  // ) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.url));
+  // }
+
+  // if (
+  //   (!token && url.pathname.startsWith("/Ai")) ||
+  //   url.pathname.startsWith("/movieDetail") ||
+  //   url.pathname.startsWith("/Ai")
+  // ) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.url));
+  // }
+
   if (
     token &&
     (url.pathname.startsWith("/sign-in") ||
@@ -23,8 +35,5 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!token && url.pathname.startsWith("/Introduction")) {
-    return NextResponse.redirect(new URL("/sign-in", request.url));
-  }
   return NextResponse.next();
 }
