@@ -13,11 +13,9 @@ export async function ImageExtractor(
   request_signal: AbortSignal,
 ): Promise<string[]> {
   try {
-    query = "batman movie poster";
     const query_result = await redis.get(query);
     if (query_result !== null) {
       const images = JSON.parse(query_result);
-      console.log("images");
       return images;
     }
     const filePath = path.join(process.cwd(), "global.json");

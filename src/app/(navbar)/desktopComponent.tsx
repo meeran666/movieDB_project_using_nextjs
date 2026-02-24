@@ -10,13 +10,7 @@ import Image from "next/image";
 function AuthWrapper() {
   const { status } = useSession();
 
-  if (status === "loading")
-    return (
-      <div className="flex items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-      </div>
-    );
-
+  if (status === "loading") return null;
   return (
     <>
       {status === "authenticated" ? (
@@ -33,7 +27,6 @@ export default function DesktopComponent() {
   const [isHoverBrowse, setisHoverBrowse] = useState(false);
   const [isHoverAiSearch, setIsHoverAiSearch] = useState(false);
 
-  // const [isDropped, setIsDropped] = useState(false);
   const browseRef = useRef<HTMLAnchorElement>(null);
   const aboutRef = useRef<HTMLButtonElement>(null);
   const AiSearchRef = useRef<HTMLAnchorElement>(null);

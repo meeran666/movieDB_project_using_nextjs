@@ -23,12 +23,7 @@ export default function AuthDropdownLayer() {
   const onSignout = async () => {
     signOut();
   };
-  if (status === "loading")
-    return (
-      <div className="flex items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-      </div>
-    );
+  if (status === "loading") return null;
   return (
     <div className="">
       <div
@@ -57,8 +52,8 @@ export default function AuthDropdownLayer() {
               <div className="">{name}</div>
             </div>
             <div className="pb-3">{email}</div>
-            <div className="">{`tokens: ${llmtoken}`}</div>
-            <div className="">{`no of requests: ${requests}`}</div>
+            <div className="">{`tokens left: ${llmtoken}`}</div>
+            <div className="">{`no of requests left: ${requests}`}</div>
 
             <button
               onClick={onSignout}

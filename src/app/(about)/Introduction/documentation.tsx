@@ -34,14 +34,16 @@ function Documentation() {
       <div className="flex items-center justify-center pb-4">
         <div className="w-[min(40rem,100%)] items-center justify-center pb-7"></div>
       </div>
-      <div className="flex items-center justify-center pb-15">
-        <Image
-          src="/desktop_home.png"
-          alt="Desktop Home Screenshot"
-          width={1920}
-          height={1080}
-          className="h-auto w-full"
-        />
+      <div className="flex items-center justify-center px-1 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7">
+          <Image
+            src="/image1.png"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />
+        </div>
       </div>
       <div className="pb-7">
         When you click or touch on search box you can put title or name of
@@ -64,36 +66,38 @@ function Documentation() {
         All rows are links by clicking or touching the rows lets you reach to
         detail page route of that movie
       </div>
-      <div className="flex items-center justify-center p-15">
-        <div className="w-[min(40rem,100%)] items-center justify-center pb-7">
+      <div className="flex items-center justify-center px-1 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7">
           <Image
-            src="/desktop_home.png"
+            src="/image2.png"
             alt="Desktop Home Screenshot"
             width={1920}
             height={1080}
             className="h-auto w-full"
-          />{" "}
+          />
         </div>
-      </div>{" "}
-      <div className="flex items-center justify-center pb-20">
-        <Image
-          src="/desktop_home.png"
-          alt="Desktop Home Screenshot"
-          width={1920}
-          height={1080}
-          className="h-auto w-full"
-        />{" "}
+      </div>
+      <div className="flex items-center justify-center px-15 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7 md:w-[min(14rem,100%)]">
+          <Image
+            src="/image3.png"
+            alt="Desktop Home Screenshot"
+            width={30}
+            height={60}
+            className="h-auto w-full"
+          />
+        </div>
       </div>
       <div className="pb-7 text-3xl font-bold">Detail Page</div>
       <div className="pb-7">
-        Opening the detail page route of a particular movie such as{" "}
+        Opening the detail page route of a particular movie such as
         {`'The
             lord of the rings'`}
         contain four sections of info.
       </div>
       <div className="pb-7">
         First section contain original title of movie, release date, genre, is
-        movie adult or not (if not Adult {`'PG'`} will be written if Adult then{" "}
+        movie adult or not (if not Adult {`'PG'`} will be written if Adult then
         {`'Adult'`} will be written), Poster of movie.
       </div>
       <div className="pb-7">
@@ -111,45 +115,49 @@ function Documentation() {
         detail page. When you click on any poster or below title part it will
         take you to detail page.
       </div>
-      <div className="flex items-center justify-center">
-        <div className="w-[min(40rem,100%)] items-center justify-center pb-15">
+      <div className="flex items-center justify-center px-1 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7">
           <Image
-            src="/desktop_home.png"
+            src="/image4.png"
             alt="Desktop Home Screenshot"
             width={1920}
             height={1080}
             className="h-auto w-full"
-          />{" "}
+          />
         </div>
-      </div>{" "}
-      <div className="flex items-center justify-center pb-7">
-        <Image
-          src="/desktop_home.png"
-          alt="Desktop Home Screenshot"
-          width={1920}
-          height={1080}
-          className="h-auto w-full"
-        />{" "}
       </div>
-      <div className="flex items-center justify-center">
-        <div className="w-[min(40rem,100%)] items-center justify-center pb-7">
+      <div className="flex items-center justify-center px-15 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7 md:w-[min(14rem,100%)]">
           <Image
-            src="/desktop_home.png"
+            src="/image5.png"
+            alt="Desktop Home Screenshot"
+            width={30}
+            height={60}
+            className="h-auto w-full"
+          />
+        </div>
+      </div>
+      <div className="flex items-center justify-center px-1 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7">
+          <Image
+            src="/image6.png"
             alt="Desktop Home Screenshot"
             width={1920}
             height={1080}
             className="h-auto w-full"
-          />{" "}
+          />
         </div>
-      </div>{" "}
-      <div className="flex items-center justify-center pb-15">
-        <Image
-          src="/desktop_home.png"
-          alt="Desktop Home Screenshot"
-          width={1920}
-          height={1080}
-          className="h-auto w-full"
-        />{" "}
+      </div>
+      <div className="flex items-center justify-center px-15 py-15">
+        <div className="w-[min(52rem,100%)] items-center justify-center pb-7 md:w-[min(14rem,100%)]">
+          <Image
+            src="/image7.png"
+            alt="Desktop Home Screenshot"
+            width={1920}
+            height={1080}
+            className="h-auto w-full"
+          />
+        </div>
       </div>
     </>
   );

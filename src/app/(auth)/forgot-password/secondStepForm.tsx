@@ -9,7 +9,6 @@ import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SecondStepForm({ email }: { email: string }) {
-  // email = "meeran.equebal@gmail.com";
   const formCode = useForm<z.infer<typeof sendPasswordSchema>>({
     resolver: zodResolver(sendPasswordSchema),
     defaultValues: {
@@ -59,7 +58,6 @@ export default function SecondStepForm({ email }: { email: string }) {
     const password2 = event.target.value;
     const splitlength = password2.length;
     if (password1.substring(0, splitlength) !== password2) {
-      console.log("okwow");
       setIsPasswordSame(false);
     } else {
       setIsPasswordSame(true);

@@ -29,10 +29,10 @@ async function search_contain(
       })
       .from(mainTable)
       .where(
-        and(
-          ilike(mainTable.title, wrapped_title),
-          isNotNull(mainTable.releaseDate),
-        ),
+        // and(
+        ilike(mainTable.title, wrapped_title),
+        // isNotNull(mainTable.releaseDate),
+        // ),
       )
       .orderBy(
         sql`CASE WHEN main_table.title ilike ${title} THEN 1 ELSE 2 END ASC`,

@@ -21,12 +21,8 @@ export default function AuthDetailLayer({
   const onSignout = async () => {
     signOut();
   };
-  if (status === "loading")
-    return (
-      <div className="flex items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-      </div>
-    );
+  if (status === "loading") return null;
+
   return (
     <div
       className={`grid overflow-hidden ${OswaldFont.className} duration-300 ease-in-out ${isAuthButtonClicked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}

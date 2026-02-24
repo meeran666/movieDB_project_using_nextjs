@@ -131,7 +131,6 @@ async function search_exact_id(id: number): Promise<AllTypeFilter[]> {
       .innerJoin(genreTable, eq(mainTable.id, genreTable.id))
       .where(eq(mainTable.id, id))
       .execute();
-    // result[0].;
     return result;
   } catch (err) {
     console.log(err);

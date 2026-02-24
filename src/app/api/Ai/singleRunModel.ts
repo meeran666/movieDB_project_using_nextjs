@@ -3,21 +3,6 @@ import { ChatOpenAI } from "@langchain/openai";
 
 export default async function SingleRunModel(title: string) {
   const encoder = new TextEncoder();
-  // const parser = new StringOutputParser();
-  // const ReviewSchema = z.object({
-  //   development: z.string().describe("Note on development of {title} movie"),
-  //   writing: z.string().describe("Note on writing of {title} movie"),
-  //   filming: z.string().describe("Note on filming of {title} movie"),
-  //   post_production: z
-  //     .string()
-  //     .describe("Note on post-production of {title} movie"),
-  //   visual_effects: z
-  //     .string()
-  //     .describe("Note on visual effects of {title} movie"),
-  //   plot: z.string().describe("Note on plot of {title} movie"),
-  //   cast: z.string().describe("Note on cast of {title} movie"),
-  // });
-  // const parser = StructuredOutputParser.fromZodSchema(ReviewSchema);
   const tokenLength = Math.random() * (50 - 35) + 35;
 
   const prompt_template = new PromptTemplate({

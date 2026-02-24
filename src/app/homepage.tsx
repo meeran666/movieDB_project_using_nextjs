@@ -39,7 +39,7 @@ export default function Homepage() {
     loaderRef.current = loader;
   }, [loader]);
 
-  // 🔥 Auto-fetch when URL changes
+  // Auto-fetch when URL changes
   useEffect(() => {
     if (!query) {
       setResult(null);

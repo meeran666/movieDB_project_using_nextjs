@@ -3,7 +3,6 @@ import redis from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 import MultipleRunModel from "./multipleRunModel";
 
-// import SingleModel from "./single_model";
 async function daily_request_no_update() {
   const request_count_key = "request_count";
   const day_passed = Date.now() % 86400000;

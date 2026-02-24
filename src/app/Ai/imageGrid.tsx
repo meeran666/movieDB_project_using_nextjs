@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 function ImageTag(imageLink: string, i: number) {
-  // imageLink = "/image.jpg";
   return (
     <Image
       key={i}

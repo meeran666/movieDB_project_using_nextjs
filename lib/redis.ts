@@ -9,7 +9,6 @@ const redis = new Redis({
 
 redis.on("error", (error) => {
   console.error("Redis error encountered:", error);
-  // Implement logic to handle the error (e.g., logging, retrying)
 });
 
 export default redis;
