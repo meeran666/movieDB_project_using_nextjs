@@ -185,7 +185,7 @@ return result;
 
       <div className="pb-7 text-3xl font-bold">Movie Detail Query</div>
       <div className="pb-7">
-        {`'select()', `}this keyword is for selecting the columns from table.{" "}
+        {`'select()', `}this keyword is for selecting the columns from table.
         {`'from(mainTable)', `} this keyword is use for selecting main table.
       </div>
       <div className="pb-7">

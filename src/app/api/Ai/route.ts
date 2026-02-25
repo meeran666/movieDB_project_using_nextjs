@@ -2,6 +2,7 @@ import { getToken, JWT } from "next-auth/jwt";
 import redis from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 import MultipleRunModel from "./multipleRunModel";
+import { tokenObjtype } from "@/types/types";
 
 async function daily_request_no_update() {
   const request_count_key = "request_count";
@@ -16,18 +17,13 @@ async function daily_request_no_update() {
 
   return usage;
 }
-type tokenObjtype =
-  | {
-      ok: true;
-      id: string;
-      llmTokens: number;
-      requests: number;
-    }
-  | { ok: false };
+
 async function user_token_no_update(token: JWT): Promise<tokenObjtype> {
   const day_passed = Date.now() % 86400000;
   const day_left = 86400000 - day_passed;
-  const expire_time = Math.round(day_left / 1000);
+  let expire_time = Math.round(day_left / 1000);
+  expire_time = expire_time + 86400;
+
   const id = token.id;
   const exists_id = await redis.exists(id);
   if (!exists_id) {

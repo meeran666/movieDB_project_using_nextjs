@@ -62,9 +62,17 @@ interface DuckDuckGoImageResponse {
   results: DuckDuckGoImage[];
   next?: string;
 }
-
+type tokenObjtype =
+  | {
+      ok: true;
+      id: string;
+      llmTokens: number;
+      requests: number;
+    }
+  | { ok: false };
 type ForgotPasswordApiResponse = SignupApiResponse;
 export type {
+  tokenObjtype,
   SignupApiResponse,
   ForgotPasswordApiResponse,
   MovieListType,

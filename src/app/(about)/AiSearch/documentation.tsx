@@ -66,6 +66,23 @@ function documentation() {
   return (
     <>
       <div className="pb-20 text-4xl font-bold">AI Search</div>
+      <div className="mb-4 flex bg-blue-900 p-5">
+        <div className="mt-1">
+          <Image
+            src="/exclimation_mark.png"
+            alt="Desktop Home Screenshot"
+            width={5}
+            height={5}
+            className="mx-2 h-auto w-4"
+          />
+        </div>
+
+        <div className="">
+          Note: Tokens and request for the Ai search will reset after every two
+          days. After every two days you will get new 2000 tokens and 5
+          requests.
+        </div>
+      </div>
       <div className="pb-15">
         This Ai search has 3 distinct parts. First part is showcasing six images
         of movie posters in grid like pattern. Second part is LLM text output
@@ -125,7 +142,7 @@ function documentation() {
       <br />
       <br />
       {`"token_number"`} and {`"max_token_number"`} are the variables which
-      filled in prompt dynamically during execution, so the values of{" "}
+      filled in prompt dynamically during execution, so the values of
       {`"token_number"`} and {`"max_token_number"`} is varies randomly between
       35 to 50 and 85 to 100 respectively.
       <br />

@@ -62,7 +62,8 @@ export const authOptions: NextAuthOptions = {
           if (isPasswordCorrect) {
             const day_passed = Date.now() % 86400000;
             const day_left = 86400000 - day_passed;
-            const expire_time = Math.round(day_left / 1000);
+            let expire_time = Math.round(day_left / 1000);
+            expire_time = expire_time + 86400;
             const llmtoken = 2000;
             const requests = 5;
 

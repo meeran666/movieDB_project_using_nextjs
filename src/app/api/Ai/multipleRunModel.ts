@@ -77,7 +77,7 @@ Make sure the response is at least ${token_number} tokens long, but does not exc
             ],
           });
 
-          const formattedPrompt = await prompt_template.format({
+          const formattedPrompt = await prompt_template.format({ 
             title,
             topic: topics[topicIndex],
           });

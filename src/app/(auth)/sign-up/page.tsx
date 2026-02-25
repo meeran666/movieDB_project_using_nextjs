@@ -161,7 +161,7 @@ export default function SignupPage() {
         </form>
         <div className="mt-4 text-center">
           <p>
-            Already a member?{" "}
+            Already a member?
             <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
               Sign in
             </Link>
