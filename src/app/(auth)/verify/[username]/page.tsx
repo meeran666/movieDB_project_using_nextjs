@@ -24,7 +24,7 @@ export default function VerifyAccount() {
         code: data.code,
       });
 
-      toast.warn(response.data.message, {
+      toast.success(response.data.message, {
         position: "bottom-right",
         autoClose: 7000,
       });
@@ -66,7 +66,7 @@ export default function VerifyAccount() {
           </div>
           <button
             type="submit"
-            className="ring-offset-background focus-visible:rinsrc/app/(auth)/sign-instify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+            className="ring-offset-background focus-visible:rinsrc/app/(auth)/sign-instify-center rounded-md bg-black px-4 py-2 text-sm font-bold whitespace-nowrap text-white transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           >
             verify
           </button>

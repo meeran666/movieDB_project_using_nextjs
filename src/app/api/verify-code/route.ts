@@ -4,20 +4,25 @@ import { eq } from "drizzle-orm";
 
 export async function POST(request: Request) {
   try {
-    const { username, email, code } = await request.json();
-    const decodedValue = decodeURIComponent(username ? username : email);
-    const columnbName = username ? authTable.username : authTable.email;
+    const { username, code } = await request.json();
+    const decodedValue = decodeURIComponent(username);
+    const columnbName = authTable.username;
+
     const user = await db
       .select()
       .from(authTable)
       .where(eq(columnbName, decodedValue));
-
     if (user.length === 0 || user[0].verifyCodeExpiry === null) {
-      const message = username
-        ? "User not found, please first register your self"
-        : "this Email is not registered, please first register the email";
+      console.error(`user does not exist with this username: ${username}`);
+
+      return Response.json({ success: false }, { status: 400 });
+    }
+    if (user[0].isVerified) {
       return Response.json(
-        { success: false, message: message },
+        {
+          success: false,
+          message: "User already exists with this email",
+        },
         { status: 400 },
       );
     }
@@ -27,6 +32,7 @@ export async function POST(request: Request) {
     const isCodeValid = user[0]?.verifyCode === code;
 
     const isCodeNotExpired = new Date(user[0].verifyCodeExpiry) > new Date();
+
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       await db
@@ -50,6 +56,7 @@ export async function POST(request: Request) {
       );
     } else {
       // Code is incorrect
+
       return Response.json(
         { success: false, message: "Incorrect verification code" },
         { status: 400 },

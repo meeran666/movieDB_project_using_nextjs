@@ -122,7 +122,7 @@ export default function VerificationEmail({
                       align="center"
                       style={{ paddingTop: "35px", fontSize: "12px" }}
                     >
-                      This code will expire in 1 day. Please do not disclose
+                      This code will expire in 1 hour. Please do not disclose
                       this code to others.
                       <br />
                       If you did not make this request, please disregard this

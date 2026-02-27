@@ -109,9 +109,7 @@ export async function POST(request: NextRequest) {
 
     return new Response(stream, {
       headers: {
-        "Content-Type": "text/plain",
-        "Transfer-Encoding": "chunked",
-        "Cache-Control": "no-cache",
+        "Content-Type": "text/plain; charset = utf-8",
       },
     });
   } catch (error) {

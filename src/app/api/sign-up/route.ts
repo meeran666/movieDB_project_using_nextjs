@@ -45,15 +45,7 @@ export async function POST(request: Request) {
       .where(eq(authTable.email, email));
 
     if (existingUserByEmail.length !== 0) {
-      if (existingUserByEmail[0].isVerified) {
-        return Response.json(
-          {
-            success: false,
-            message: "User already exists with this email",
-          },
-          { status: 400 },
-        );
-      } else {
+      if (!existingUserByEmail[0].isVerified) {
         const date = new Date(Date.now() + 3600000);
         await db
           .update(authTable)

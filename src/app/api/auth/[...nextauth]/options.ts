@@ -35,6 +35,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials) return null;
         try {
           const { identifier, password } = credentials;
+
           const user = await db
             .select()
             .from(authTable)
@@ -44,7 +45,6 @@ export const authOptions: NextAuthOptions = {
                 eq(authTable.username, identifier),
               ),
             );
-
           if (user.length === 0) {
             throw new Error("No user found with this email");
           }
@@ -70,6 +70,7 @@ export const authOptions: NextAuthOptions = {
             // this is commentable for now
             const id = user[0].id;
             const exists_id = await redis.exists(id);
+
             if (!exists_id) {
               const llmtoken = 2000;
               const requests = 5;
@@ -124,7 +125,8 @@ export const authOptions: NextAuthOptions = {
         }
         return true;
       }
-      return false;
+
+      return true;
     },
     async jwt({
       token,

@@ -11,7 +11,7 @@ export async function sendVerificationEmail(
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       // from: "onboarding@resend.dev",
-      from: "support@moviemania.example.com",
+      from: "support@moviemania.club",
       to: email,
       subject: "Mystery Message Verification Code",
       react: VerificationEmail({ username, otp: verifyCode }),
