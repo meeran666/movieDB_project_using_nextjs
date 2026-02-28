@@ -8,9 +8,11 @@ export async function POST(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
   if (!token) {
+    const message = "Unauthorized, accessing token is not allowed";
+    console.error(message);
     return NextResponse.json(
       {
-        error: "Unauthorized, accessing token is not allowed",
+        error: message,
       },
       { status: 401 },
     );
@@ -25,7 +27,7 @@ export async function POST(request: NextRequest) {
     });
   }
   return NextResponse.json({
-    llmTokens: credit.tokens,
-    requests: credit.requests,
+    llmTokens: Number(credit.tokens),
+    requests: Number(credit.requests),
   });
 }

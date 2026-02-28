@@ -27,15 +27,18 @@ export async function POST(request: Request) {
       if (existingVerifiedUserByUsername.length !== 0) {
         // if not unique username comming from request.json is verified
         //not updateing the username row
+        const message = "Username is already taken";
+        console.error(message);
         return Response.json(
           {
             success: false,
-            message: "Username is already taken",
+            message: message,
           },
           { status: 400 },
         );
       }
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -89,10 +92,12 @@ export async function POST(request: Request) {
       verifyCode,
     );
     if (!emailResponse.success) {
+      const message = emailResponse.message;
+      console.error(message);
       return Response.json(
         {
           success: false,
-          message: emailResponse.message,
+          message: message,
         },
         { status: 500 },
       );

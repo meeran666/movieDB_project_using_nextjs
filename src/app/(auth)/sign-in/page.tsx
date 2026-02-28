@@ -30,10 +30,13 @@ export default function SignInForm() {
     });
     if (result?.error) {
       if (result.error === "CredentialsSignin") {
-        toast.warn("Incorrect username or password", {
-          position: "bottom-right",
-          autoClose: 7000,
-        });
+        toast.warn(
+          "Your password is incorrect or this account doesn't exist. Please check and try again",
+          {
+            position: "bottom-right",
+            autoClose: 7000,
+          },
+        );
       } else {
         toast.warn(result.error, {
           position: "bottom-right",
@@ -55,7 +58,7 @@ export default function SignInForm() {
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Sign in to use AI
           </h1>
-          <p className="mb-4">Sign in to continue your secret conversations</p>
+          <p className="mb-4">Sign in to continue your Ai search</p>
         </div>
         <form className="space-y-6" action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">

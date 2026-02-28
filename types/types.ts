@@ -62,6 +62,10 @@ interface DuckDuckGoImageResponse {
   results: DuckDuckGoImage[];
   next?: string;
 }
+type LoginCredentials = {
+  identifier: string;
+  password: string;
+};
 type tokenObjtype =
   | {
       ok: true;
@@ -85,4 +89,5 @@ export type {
   SidebarLayerProp,
   DuckDuckGoImage,
   NavbarProp,
+  LoginCredentials,
 };

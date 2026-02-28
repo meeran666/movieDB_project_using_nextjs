@@ -6,14 +6,8 @@ import { db } from "@/lib/db";
 import redis from "@/lib/redis";
 import { authTable } from "@/src/drizzle/models";
 import { eq, or } from "drizzle-orm";
-
-// import Google from "next-auth/providers/google";
+import { LoginCredentials } from "@/types/types";
 import GoogleProvider from "next-auth/providers/google";
-// const db = await getDatabaseConection();
-type LoginCredentials = {
-  identifier: string;
-  password: string;
-};
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -45,6 +39,7 @@ export const authOptions: NextAuthOptions = {
                 eq(authTable.username, identifier),
               ),
             );
+
           if (user.length === 0) {
             throw new Error("No user found with this email");
           }
@@ -60,77 +55,82 @@ export const authOptions: NextAuthOptions = {
             user[0].password,
           );
           if (isPasswordCorrect) {
-            const day_passed = Date.now() % 86400000;
-            const day_left = 86400000 - day_passed;
-            let expire_time = Math.round(day_left / 1000);
-            expire_time = expire_time + 86400;
-            const llmtoken = 2000;
-            const requests = 5;
-
-            // this is commentable for now
-            const id = user[0].id;
-            const exists_id = await redis.exists(id);
-
-            if (!exists_id) {
-              const llmtoken = 2000;
-              const requests = 5;
-              const exists = await redis.exists(id);
-
-              if (!exists) {
-                await redis
-                  .multi()
-                  .hset(user[0].id, {
-                    requests: requests,
-                    tokens: llmtoken,
-                  })
-                  .expire(user[0].id, expire_time)
-                  .exec();
-              }
-            }
-
             return {
               id: user[0].id,
               email: user[0].email,
               name: user[0].username ?? user[0].googleAuthUsername ?? undefined,
-              llmTokens: llmtoken,
-              requests: requests,
             };
           } else {
-            throw new Error("Incorrect password");
+            throw new Error("rect password");
           }
         } catch (err: any) {
-          throw new Error(err);
+          console.error(err);
+          return null;
         }
       },
     }),
   ],
 
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ account, profile, user }) {
+      let id: string = "";
+      id = user.id;
+
       if (account?.provider === "google") {
         try {
           if (profile?.email === undefined) {
             return false;
           }
-          await db
+          const inserted = await db
             .insert(authTable)
             .values({
               googleAuthUsername: profile?.name,
               email: profile.email,
               isVerified: true,
             })
-            .onConflictDoNothing();
+            .onConflictDoUpdate({
+              target: authTable.email,
+              set: {
+                googleAuthUsername: profile?.name,
+                isVerified: true,
+              },
+            })
+            .returning({ id: authTable.id });
+          id = inserted[0].id;
+          user.id = id;
         } catch (error) {
           console.error(error);
+          return false;
         }
-        return true;
       }
 
+      const day_passed = Date.now() % 86400000;
+      const day_left = 86400000 - day_passed;
+      let expire_time = Math.round(day_left / 1000);
+      expire_time = expire_time + 86400;
+
+      const exists_key = await redis.hgetall(id);
+      if (Object.keys(exists_key).length === 0) {
+        const requests = 5;
+        const llmTokens = 2000;
+        await redis
+          .multi()
+          .hset(id, {
+            requests: requests,
+            tokens: llmTokens,
+          })
+          .expire(user.id, expire_time)
+          .exec();
+        user.requests = requests;
+        user.llmTokens = llmTokens;
+      } else {
+        user.llmTokens = Number(exists_key.tokens);
+        user.requests = Number(exists_key.requests);
+      }
       return true;
     },
     async jwt({
       token,
-      // account,
       user,
       trigger,
       session,
@@ -148,8 +148,8 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
-        token.llmTokens = user.llmTokens;
-        token.requests = user.requests;
+        token.llmTokens = user.llmTokens ?? 1900;
+        token.requests = user.requests ?? 4;
       }
 
       //  Session update (useSession().update)
@@ -157,10 +157,6 @@ export const authOptions: NextAuthOptions = {
         token.llmTokens = session.llmTokens;
         token.requests = session.requests;
       }
-
-      //  GUARANTEE fields always exist
-      token.llmTokens ??= 0;
-      token.requests ??= 0;
 
       return token;
     },

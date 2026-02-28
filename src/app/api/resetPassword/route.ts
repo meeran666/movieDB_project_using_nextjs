@@ -13,10 +13,9 @@ export async function POST(request: Request) {
       .set({ password: hashedPassword })
       .where(and(eq(authTable.email, email), eq(authTable.isVerified, true)))
       .returning();
-    return Response.json(
-      { success: false, message: "reset password succesfull" },
-      { status: 200 },
-    );
+    const message = "reset password succesfully";
+    console.error(message);
+    return Response.json({ success: false, message: message }, { status: 200 });
   } catch (error) {
     console.error("Error reseting password: ", error);
     return Response.json(

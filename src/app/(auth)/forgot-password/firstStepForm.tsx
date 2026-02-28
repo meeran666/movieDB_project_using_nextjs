@@ -92,6 +92,7 @@ export default function FirstStepForm({
       const response = await axios.post<SignupApiResponse>(`/api/verify-code`, {
         code: data.code,
         email: email,
+        trigger: "forgot-password",
       });
       setValueCode("code", "");
       setIsCodeVerified(true);

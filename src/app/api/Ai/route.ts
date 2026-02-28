@@ -19,33 +19,8 @@ async function daily_request_no_update() {
 }
 
 async function user_token_no_update(token: JWT): Promise<tokenObjtype> {
-  const day_passed = Date.now() % 86400000;
-  const day_left = 86400000 - day_passed;
-  let expire_time = Math.round(day_left / 1000);
-  expire_time = expire_time + 86400;
-
   const id = token.id;
-  const exists_id = await redis.exists(id);
-  if (!exists_id) {
-    const token_no = 2000;
-    const requests = 5;
-    const exists = await redis.exists(id);
-
-    if (!exists) {
-      await redis
-        .multi()
-        .hset(id, {
-          requests: requests,
-          tokens: token_no,
-        })
-        .expire(id, expire_time)
-        .exec();
-    }
-    return { ok: true, id: id, llmTokens: token_no, requests: requests };
-  }
-
   const credit = await redis.hgetall(id);
-
   if (Number(credit.tokens) <= 0 || Number(credit.requests) <= 0) {
     return { ok: false };
   }
@@ -71,7 +46,6 @@ export async function POST(request: NextRequest) {
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const title = searchParams.get("title");
-  // title = "deadpool";
   if (title === null) {
     console.error("title is null");
     return NextResponse.json("Error");
@@ -81,10 +55,13 @@ export async function POST(request: NextRequest) {
     // daily request no value update
     const usage = await daily_request_no_update();
     if (usage >= 40) {
+      console.error(
+        "request connection reached the limit for LLM for whole system",
+      );
+      const message = "Ai server is down";
       return NextResponse.json(
         {
-          error:
-            "request connection reached the limit for LLM for whole system",
+          error: message,
         },
         { status: 429 },
       );
@@ -93,10 +70,9 @@ export async function POST(request: NextRequest) {
 
     const user_token = await user_token_no_update(token);
     if (!user_token.ok) {
-      return NextResponse.json(
-        { error: "your credits for LLM ended" },
-        { status: 402 },
-      );
+      const message = "your credits for LLM ended";
+      console.error(message);
+      return NextResponse.json({ error: message }, { status: 402 });
     }
 
     const tokenObj = {
@@ -109,7 +85,8 @@ export async function POST(request: NextRequest) {
 
     return new Response(stream, {
       headers: {
-        "Content-Type": "text/plain; charset = utf-8",
+        // "Content-Type": "text/plain; charset = utf-8",
+        "Content-Type": "text/plain",
       },
     });
   } catch (error) {

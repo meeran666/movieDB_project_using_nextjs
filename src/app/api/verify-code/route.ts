@@ -4,10 +4,11 @@ import { eq } from "drizzle-orm";
 
 export async function POST(request: Request) {
   try {
-    const { username, code } = await request.json();
-    const decodedValue = decodeURIComponent(username);
-    const columnbName = authTable.username;
+    const { username, email, code, trigger } = await request.json();
+    // const searchParams = useSearchParams();
 
+    const decodedValue = decodeURIComponent(username ? username : email);
+    const columnbName = username ? authTable.username : authTable.email;
     const user = await db
       .select()
       .from(authTable)
@@ -17,7 +18,8 @@ export async function POST(request: Request) {
 
       return Response.json({ success: false }, { status: 400 });
     }
-    if (user[0].isVerified) {
+
+    if (trigger === "sign-up" && user[0].isVerified) {
       return Response.json(
         {
           success: false,
@@ -26,13 +28,10 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-
     // Check if the code is correct and not expired
 
     const isCodeValid = user[0]?.verifyCode === code;
-
     const isCodeNotExpired = new Date(user[0].verifyCodeExpiry) > new Date();
-
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       await db

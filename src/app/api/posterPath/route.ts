@@ -46,8 +46,10 @@ export async function POST(request: NextRequest) {
     const title = searchParams.get("title");
     const selfid = searchParams.get("selfid");
     if (title === null || selfid === null) {
+      const message = "title or selfid is missing";
+      console.error(message);
       return NextResponse.json(
-        { error: "title or selfid is missing" },
+        { error: message },
         { status: 400 }, // Bad Request
       );
     }
@@ -65,7 +67,6 @@ export async function POST(request: NextRequest) {
     };
     // Cache result in Redis
     await redis.set(finalkey, JSON.stringify(responseData), "EX", 60 * 5);
-
     return NextResponse.json(responseData);
   } catch (error) {
     console.log(error);

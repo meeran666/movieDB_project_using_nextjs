@@ -12,12 +12,13 @@ export async function POST(request: Request) {
       .where(and(eq(authTable.email, email), eq(authTable.isVerified, true)));
 
     if (existingUser.length === 0) {
+      console.error("This Email is not registered");
       return Response.json(
         {
-          success: false,
-          message: "This Email is not registered",
+          success: true,
+          message: "Code has been sent to your email",
         },
-        { status: 400 },
+        { status: 200 },
       );
     }
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -57,7 +58,8 @@ export async function POST(request: Request) {
       { status: 200 },
     );
   } catch (error) {
-    // console.error("Error checking email:", error);
+    console.error("Error checking email:", error);
+
     return Response.json(
       {
         success: false,

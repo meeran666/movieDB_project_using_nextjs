@@ -40,15 +40,15 @@ export default function AllAiApi() {
       headers: { "Content-Type": "text/plain" },
     });
     const usageObj = await resUsage.json();
-    const updated_requests = usageObj.requests - 1;
     await update({
       llmTokens: usageObj.llmTokens,
-      requests: updated_requests,
+      requests: usageObj.requests,
     });
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (search === "") return;
 
     try {
       if (isStreaming) {
@@ -64,7 +64,6 @@ export default function AllAiApi() {
       setAi_data("");
       setFound(false);
 
-      if (search === "") return;
       const controller = new AbortController();
       controllerRef.current = controller;
 
@@ -82,6 +81,19 @@ export default function AllAiApi() {
 
       // request to send the images
       setIsLoadingStart(true);
+
+      //test for non commentable
+      // const images = [
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      // ];
+      // setImgLinks(images);
+
+      // production based code
       const image_response = await fetch(
         `/api/imageSearchApi?title=${search}`,
         {
@@ -104,10 +116,9 @@ export default function AllAiApi() {
         return;
       }
       const images = await image_response.json();
-
       setImgLinks(images.links);
-      setIsLoadedLink(true);
 
+      setIsLoadedLink(true);
       //ai response
       const ai_response = await fetch(`/api/Ai?title=${search}`, {
         method: "POST",
@@ -150,19 +161,8 @@ export default function AllAiApi() {
           break;
         }
         const chunk = decoder.decode(value, { stream: true });
-
         buffer = buffer + chunk;
 
-        if (buffer.includes("not found in first section")) {
-          // setAi_data("movie does not exist");
-          const errorMessage = "this movie does not exist";
-          toast.error(errorMessage, {
-            position: "bottom-right",
-            autoClose: 5000,
-            theme: "colored",
-          });
-          break;
-        }
         if (buffer.includes("not found")) {
           const startIndex = buffer.lastIndexOf("<div style");
           const endIndex = buffer.indexOf("not found");
@@ -179,7 +179,6 @@ export default function AllAiApi() {
       }
 
       if (ai_response.ok) {
-        console.log("ok response");
         loader.done();
       } else {
         console.error("bad response");
