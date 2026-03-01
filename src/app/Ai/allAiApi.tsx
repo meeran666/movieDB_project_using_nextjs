@@ -82,41 +82,41 @@ export default function AllAiApi() {
       // request to send the images
       setIsLoadingStart(true);
 
-      //test for non commentable
-      // const images = [
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      // ];
-      // setImgLinks(images);
+      // test for non commentable
+      const images = [
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+        "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
+      ];
+      setImgLinks(images);
 
       // production based code
-      const image_response = await fetch(
-        `/api/imageSearchApi?title=${search}`,
-        {
-          method: "POST",
-          signal: controller.signal,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      if (!image_response.ok) {
-        setIsFinishedWriting(true);
-        setIsStreaming(false);
-        setIsLoadingStart(false);
-        toast.error("Ai server is down", {
-          position: "bottom-right",
-          autoClose: 5000,
-          theme: "colored",
-        });
-        return;
-      }
-      const images = await image_response.json();
-      setImgLinks(images.links);
+      // const image_response = await fetch(
+      //   `/api/imageSearchApi?title=${search}`,
+      //   {
+      //     method: "POST",
+      //     signal: controller.signal,
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   },
+      // );
+      // if (!image_response.ok) {
+      //   setIsFinishedWriting(true);
+      //   setIsStreaming(false);
+      //   setIsLoadingStart(false);
+      //   toast.error("Ai server is down", {
+      //     position: "bottom-right",
+      //     autoClose: 5000,
+      //     theme: "colored",
+      //   });
+      //   return;
+      // }
+      // const images = await image_response.json();
+      // setImgLinks(images.links);
 
       setIsLoadedLink(true);
       //ai response

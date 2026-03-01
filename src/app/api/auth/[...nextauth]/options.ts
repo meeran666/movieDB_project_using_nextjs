@@ -9,6 +9,9 @@ import { eq, or } from "drizzle-orm";
 import { LoginCredentials } from "@/types/types";
 import GoogleProvider from "next-auth/providers/google";
 
+console.log("process.env.NEXTAUTH_URL");
+console.log(process.env.NEXTAUTH_URL);
+
 export const authOptions: NextAuthOptions = {
   providers: [
     // Google,
@@ -81,6 +84,7 @@ export const authOptions: NextAuthOptions = {
           if (profile?.email === undefined) {
             return false;
           }
+          console.log();
           const inserted = await db
             .insert(authTable)
             .values({
