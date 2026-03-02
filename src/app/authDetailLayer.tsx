@@ -47,8 +47,8 @@ export default function AuthDetailLayer({
           >
             <Image
               src="/logout.png"
-              width={3}
-              height={3}
+              width={512}
+              height={512}
               alt="logout.png"
               className="mr-1 h-3 w-3"
             />

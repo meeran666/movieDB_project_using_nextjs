@@ -71,8 +71,8 @@ function documentation() {
           <Image
             src="/exclimation_mark.png"
             alt="Desktop Home Screenshot"
-            width={5}
-            height={5}
+            width={512}
+            height={512}
             className="mx-2 h-auto w-4"
           />
         </div>

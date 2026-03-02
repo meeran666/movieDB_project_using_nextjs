@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM oven/bun:alpine AS builder
+FROM oven/bun:latest AS builder
 
 # Set the working directory
 WORKDIR /home/node/app
@@ -18,7 +18,7 @@ COPY . .
 RUN bun run build
 
 # Stage 2: Create the final image
-FROM oven/bun:alpine AS runner
+FROM oven/bun:latest AS runner
 
 
 # Set the working directory

@@ -5,8 +5,8 @@ function ImageTag(imageLink: string, i: number) {
     <Image
       key={i}
       src={`${imageLink}`}
-      width={30}
-      height={50}
+      width={658}
+      height={1000}
       alt={`Image ${i}`}
       className="h-full w-full object-cover"
     />

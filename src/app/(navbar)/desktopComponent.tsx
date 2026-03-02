@@ -96,8 +96,8 @@ export default function DesktopComponent() {
             <Image
               src="/arrow_down.png"
               alt="arrow_down.png"
-              width={2}
-              height={2}
+              width={512}
+              height={512}
               className={`ml-2 h-4 w-3 ${isHoverAbout ? "rotate-180" : null}`}
             />
           </div>

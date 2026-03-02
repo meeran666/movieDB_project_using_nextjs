@@ -9,8 +9,8 @@ function Poster({
 }) {
   const poster = posterpath ? (
     <Image
-      width={196}
-      height={225}
+      width={300}
+      height={450}
       alt="similarBoxPoster"
       className="h-auto w-40 border-4 border-solid border-white md:hover:border-(--border_color) lg:w-50"
       src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${posterpath}`}

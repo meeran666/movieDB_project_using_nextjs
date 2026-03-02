@@ -118,8 +118,8 @@ export default function SignInForm() {
             <Image
               src="/google.png"
               alt="google.png"
-              width={10}
-              height={10}
+              width={512}
+              height={512}
               className="h-10 w-10"
             />
           </div>

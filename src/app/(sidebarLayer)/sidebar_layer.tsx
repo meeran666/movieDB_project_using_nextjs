@@ -51,8 +51,8 @@ export default function SidebarLayer({
           <Image
             src="/arrow_down_white.png"
             alt="arrow_down_white.png"
-            width={2}
-            height={2}
+            width={512}
+            height={512}
             className={`ml-2 inline h-4 w-4 text-white ${dropClicked ? "rotate-180" : null}`}
           />
         </a>
@@ -81,8 +81,8 @@ export default function SidebarLayer({
             >
               <Image
                 src="/login.png"
-                width={3}
-                height={3}
+                width={30}
+                height={30}
                 alt="login.png"
                 className="h-5 w-5"
               />

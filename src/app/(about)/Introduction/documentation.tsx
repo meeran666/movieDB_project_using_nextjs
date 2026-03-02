@@ -39,8 +39,8 @@ function Documentation() {
           <Image
             src="/image1.png"
             alt="Desktop Home Screenshot"
-            width={1920}
-            height={1080}
+            width={2345}
+            height={1351}
             className="h-auto w-full"
           />
         </div>
@@ -71,8 +71,8 @@ function Documentation() {
           <Image
             src="/image2.png"
             alt="Desktop Home Screenshot"
-            width={1920}
-            height={1080}
+            width={2345}
+            height={1351}
             className="h-auto w-full"
           />
         </div>
@@ -82,8 +82,8 @@ function Documentation() {
           <Image
             src="/image3.png"
             alt="Desktop Home Screenshot"
-            width={30}
-            height={60}
+            width={428}
+            height={927}
             className="h-auto w-full"
           />
         </div>
@@ -120,8 +120,8 @@ function Documentation() {
           <Image
             src="/image4.png"
             alt="Desktop Home Screenshot"
-            width={1920}
-            height={1080}
+            width={2345}
+            height={1351}
             className="h-auto w-full"
           />
         </div>
@@ -131,8 +131,8 @@ function Documentation() {
           <Image
             src="/image5.png"
             alt="Desktop Home Screenshot"
-            width={30}
-            height={60}
+            width={428}
+            height={927}
             className="h-auto w-full"
           />
         </div>
@@ -142,8 +142,8 @@ function Documentation() {
           <Image
             src="/image6.png"
             alt="Desktop Home Screenshot"
-            width={1920}
-            height={1080}
+            width={2345}
+            height={1351}
             className="h-auto w-full"
           />
         </div>
@@ -153,8 +153,8 @@ function Documentation() {
           <Image
             src="/image7.png"
             alt="Desktop Home Screenshot"
-            width={1920}
-            height={1080}
+            width={428}
+            height={927}
             className="h-auto w-full"
           />
         </div>

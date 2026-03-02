@@ -23,7 +23,7 @@ export default function FirstContainer({
           <Image
             alt="imageMovie"
             width={300}
-            height={500}
+            height={450}
             className="h-auto w-40 border-8 border-solid border-white md:w-[19vw] md:hover:border-(--border_color) xl:w-60"
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
           />

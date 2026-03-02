@@ -17,8 +17,8 @@ export default function SecondGroup({ detail }: { detail: AllTypeFilter }) {
         <Image
           src="/star.svg"
           alt="star.svg"
-          width={3}
-          height={3}
+          width={24}
+          height={24}
           className="inline h-4 w-4"
         />
       </div>

@@ -27,8 +27,8 @@ export default function Detail({
             {detail.posterPath ? (
               <Image
                 alt="backgroundImage"
-                width={1304}
-                height={1600}
+                width={300}
+                height={450}
                 className="absolute -top-4 z-0 h-400 w-326 bg-cover bg-center opacity-30"
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${detail.posterPath}`}
               />

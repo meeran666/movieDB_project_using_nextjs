@@ -17,8 +17,8 @@ export default function Navbar({
             src="/logo.png"
             className="h-6 w-auto md:h-10"
             alt="logo.png"
-            width={4}
-            height={4}
+            width={512}
+            height={512}
           />
           <div className="text-2xl text-(--violet_color) md:text-4xl 2xl:text-5xl">
             Moviemania
