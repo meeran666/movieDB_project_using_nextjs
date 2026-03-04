@@ -46,7 +46,10 @@ export default function TextResponse({ ai_data }: { ai_data: string }) {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full text-xs sm:px-5 sm:text-base">
+    <div
+      ref={containerRef}
+      className="mb-40 w-full text-xs sm:px-5 sm:text-base"
+    >
       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
         {ai_data}
       </ReactMarkdown>

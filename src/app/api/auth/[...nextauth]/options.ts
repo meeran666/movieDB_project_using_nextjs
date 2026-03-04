@@ -80,7 +80,6 @@ export const authOptions: NextAuthOptions = {
           if (profile?.email === undefined) {
             return false;
           }
-          console.log();
           const inserted = await db
             .insert(authTable)
             .values({

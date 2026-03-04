@@ -82,16 +82,22 @@ export default function AllAiApi() {
       // request to send the images
       setIsLoadingStart(true);
 
-      // test for non commentable
-      // const images = [
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      //   "https://m.media-amazon.com/images/I/81Bivc7COzL._AC_UF894,1000_QL80_.jpg",
-      // ];
-      // setImgLinks(images);
+      // development based code
+      // const images = {
+      //   links: [
+      //     "https://static.wikia.nocookie.net/total-movies/images/2/2f/Forrest_Gump_poster.png/revision/latest?cb=20131121203323",
+      //     "https://static.wikia.nocookie.net/total-movies/images/2/2f/Forrest_Gump_poster.png/revision/latest?cb=20131121203323",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://static.wikia.nocookie.net/total-movies/images/2/2f/Forrest_Gump_poster.png/revision/latest?cb=20131121203323",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //     "https://public-website-assets.paramountpictures.com/paramount2025/s3fs-public/styles/poster_medium/public/forrestgump_2019update_en_800x1200.jpg?itok=wqyuMS2H",
+      //   ],
+      // };
+      // end development
 
       // production based code
       const image_response = await fetch(
@@ -116,7 +122,63 @@ export default function AllAiApi() {
         return;
       }
       const images = await image_response.json();
-      setImgLinks(images.links);
+      // end production
+
+      //filterization of images url
+      const bannedPatterns = [
+        "/revision/latest",
+        "/scale-to-width-down/",
+        "/thumbnail/",
+        "/crop/",
+      ];
+
+      function shouldSkipImage(url: string): boolean {
+        return bannedPatterns.some((pattern) => url.includes(pattern));
+      }
+      function checkImage(url: string): Promise<string | null> {
+        return new Promise<string | null>((resolve) => {
+          const img: HTMLImageElement = new window.Image();
+          img.src = url;
+          img.onload = () => {
+            if (img.complete && img.naturalWidth !== 0) {
+              if (shouldSkipImage(url)) {
+                resolve(null);
+              }
+              resolve(url);
+            } else {
+              resolve(null);
+            }
+          };
+          img.onerror = () => {
+            return resolve(null);
+          };
+        });
+      }
+      async function findValidImages(images: string[]): Promise<void> {
+        const valid: string[] = [];
+
+        for (const url of images as string[]) {
+          if (valid.length === 6) break;
+
+          const result = await checkImage(url);
+
+          if (result) {
+            valid.push(result);
+          }
+        }
+        if (valid.length === 0) {
+          return;
+        }
+        if (valid.length < 6) {
+          const last_element = valid[valid.length - 1];
+          while (valid.length === 6) {
+            valid.push(last_element);
+          }
+        }
+        setImgLinks(valid);
+      }
+      findValidImages(images.links);
+      //end of filterization of images url
 
       setIsLoadedLink(true);
       //ai response
@@ -240,7 +302,7 @@ export default function AllAiApi() {
           )}
           {isLoadedLink && <TextResponse ai_data={ai_data}></TextResponse>}
           {isFinishedWriting && embedUrl && (
-            <div className="mt-15 mb-55 aspect-video w-full max-w-3xl">
+            <div className="mb-55 aspect-video w-full max-w-3xl">
               <Youtube embedUrl={embedUrl}></Youtube>
             </div>
           )}

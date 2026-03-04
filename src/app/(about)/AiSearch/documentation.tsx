@@ -33,7 +33,6 @@ function documentation() {
             {
               handleLLMNewToken(token: string) {
                 buffer += token;
-                console.log(token);
                 controller.enqueue(encoder.encode(token));
               },
             },

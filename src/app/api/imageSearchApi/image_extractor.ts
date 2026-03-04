@@ -7,9 +7,8 @@ import {
 import redis from "@/lib/redis";
 // Type for each image item from DuckDuckGo
 
-export async function ImageExtractor(
+export async function ImageSearchApi(
   query: string,
-  no_of_image: number,
   request_signal: AbortSignal,
 ): Promise<string[]> {
   try {
@@ -41,7 +40,6 @@ export async function ImageExtractor(
     if (API_CONNECTION_NO === 0) {
       //serp api
       const res = await fetch(url1, { signal: request_signal });
-
       if (!res.ok) {
         // connecting to scrapingdog api
         const jsonString = JSON.stringify({ api_connection_no: 1 }, null, 2);
@@ -58,9 +56,10 @@ export async function ImageExtractor(
       if (data.error) {
         throw new Error(data.error);
       }
-      images = data.images_results
-        ?.map((img: { original: string }) => img.original)
-        .slice(0, no_of_image);
+      images =
+        data.images_results?.map((img: { original: string }) => img.original) ??
+        [];
+
       await redis.set(query, JSON.stringify(images), "EX", 2589000);
     } else if (API_CONNECTION_NO === 1) {
       //scrapingdog api
@@ -135,9 +134,7 @@ export async function ImageExtractor(
       const data: DuckDuckGoImageResponse = await res2.json();
 
       //  Return only thumbnails as string[]
-      images = data.results
-        .map((img: DuckDuckGoImage) => img.thumbnail)
-        .slice(0, no_of_image);
+      images = data.results.map((img: DuckDuckGoImage) => img.thumbnail);
     }
 
     await redis.set(query, JSON.stringify(images), "EX", 2589000);
